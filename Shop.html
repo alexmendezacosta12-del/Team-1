@@ -3,24 +3,440 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Sport Shop @ Clerks UK | Bold. Fast. Fearless.</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
-  <body>
+  <body class="page-enter">
     <header>
       <h1><a href="index.html">C L E R K S.</a></h1>
       <nav class="navbar">
         <ul>
-          <li><a href="Shop.html">Shop</a></li>
+          <li><a href="Shop.html">Sport</a></li>
+          <li><a href="sport-wishlist.html">Wishlist ♡</a></li>
+          <li id="s-nav-orders-li" style="display:none;"><a href="sport-orders.html">My Orders</a></li>
+          <li><a href="FormalShop.html">Formal</a></li>
           <li><a href="About.html">About Us</a></li>
           <li><a href="Contact.html">Contact</a></li>
         </ul>
       </nav>
+      <!-- Search bar -->
+      <div class="search-wrapper">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+        </svg>
+        <input
+          type="search"
+          id="sport-search-input"
+          class="sport-search-input"
+          placeholder="Search shoes, colours…"
+          autocomplete="off"
+        />
+      </div>
+      <button id="cart-btn" class="cart-button" aria-label="Shopping basket">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M9 2L7 6H3L6 20H18L21 6H17L15 2H9Z" />
+          <path d="M9 10V14" />
+          <path d="M15 10V14" />
+        </svg>
+        <span id="cart-count" class="cart-badge">0</span>
+      </button>
+      <button id="auth-signin-btn" class="auth-header-btn">Sign In</button>
     </header>
-    <h1>Shop</h1>
+
+    <main class="shop-container">
+      <!-- Filter Sidebar -->
+      <aside class="filter-sidebar">
+        <div class="filter-header">
+          <h2>Filters <span id="filter-count"></span></h2>
+          <button id="clear-filters" class="btn-clear">Clear All</button>
+        </div>
+
+        <!-- Color Filter -->
+        <div class="filter-section">
+          <h3>Color</h3>
+          <div class="filter-options">
+            <label class="filter-option">
+              <input type="checkbox" class="color-filter" value="White/Navy" />
+              <span>White/Navy</span>
+            </label>
+            <label class="filter-option">
+              <input type="checkbox" class="color-filter" value="Black/White" />
+              <span>Black/White</span>
+            </label>
+            <label class="filter-option">
+              <input type="checkbox" class="color-filter" value="Navy/White" />
+              <span>Navy/White</span>
+            </label>
+            <label class="filter-option">
+              <input type="checkbox" class="color-filter" value="Orange/Grey" />
+              <span>Orange/Grey</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Size Filter -->
+        <div class="filter-section">
+          <h3>UK Size</h3>
+          <div class="filter-options size-grid">
+            <label class="filter-option size-option">
+              <input type="checkbox" class="size-filter" value="6" />
+              <span>6</span>
+            </label>
+            <label class="filter-option size-option">
+              <input type="checkbox" class="size-filter" value="7" />
+              <span>7</span>
+            </label>
+            <label class="filter-option size-option">
+              <input type="checkbox" class="size-filter" value="8" />
+              <span>8</span>
+            </label>
+            <label class="filter-option size-option">
+              <input type="checkbox" class="size-filter" value="9" />
+              <span>9</span>
+            </label>
+            <label class="filter-option size-option">
+              <input type="checkbox" class="size-filter" value="10" />
+              <span>10</span>
+            </label>
+            <label class="filter-option size-option">
+              <input type="checkbox" class="size-filter" value="11" />
+              <span>11</span>
+            </label>
+            <label class="filter-option size-option">
+              <input type="checkbox" class="size-filter" value="12" />
+              <span>12</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Price Range Filter -->
+        <div class="filter-section">
+          <h3>Price Range</h3>
+          <div class="price-inputs">
+            <div class="price-input-group">
+              <label for="min-price">Min</label>
+              <input
+                type="number"
+                id="min-price"
+                value="79"
+                min="79"
+                max="129"
+              />
+            </div>
+            <span class="price-separator">-</span>
+            <div class="price-input-group">
+              <label for="max-price">Max</label>
+              <input
+                type="number"
+                id="max-price"
+                value="129"
+                min="79"
+                max="129"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Size Chart Button -->
+        <button id="size-chart-btn" class="btn-secondary">
+          📏 View Size Chart
+        </button>
+
+        <!-- AI Recommendation Section -->
+        <div class="filter-section ai-section">
+          <h3>🤖 AI Shoe Finder</h3>
+          <p class="ai-description">Get personalized recommendations</p>
+
+          <form id="recommendation-form">
+            <div class="form-group">
+              <label for="height">Height (cm)</label>
+              <input
+                type="number"
+                id="height"
+                placeholder="170"
+                min="140"
+                max="220"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="weight">Weight (kg)</label>
+              <input
+                type="number"
+                id="weight"
+                placeholder="70"
+                min="40"
+                max="150"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="color-preference">Color Preference</label>
+              <select id="color-preference" required>
+                <option value="any">Any</option>
+                <option value="light">Light Colors</option>
+                <option value="dark">Dark Colors</option>
+                <option value="bold">Bold Colors</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Foot Type</label>
+              <div class="radio-group">
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="foot-type"
+                    value="narrow"
+                    required
+                  />
+                  <span>Narrow</span>
+                </label>
+                <label class="radio-option">
+                  <input
+                    type="radio"
+                    name="foot-type"
+                    value="regular"
+                    checked
+                  />
+                  <span>Regular</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="foot-type" value="wide" />
+                  <span>Wide</span>
+                </label>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary">Find My Shoe</button>
+          </form>
+
+          <div id="recommendation-results" style="display: none"></div>
+        </div>
+      </aside>
+
+      <!-- Product Grid Section -->
+      <section class="product-section">
+        <div class="product-header">
+          <div class="product-title">
+            <h2>All Shoes</h2>
+            <span id="result-count" class="result-count"></span>
+          </div>
+          <div class="sort-container">
+            <label for="sort-select">Sort by:</label>
+            <select id="sort-select">
+              <option value="newest">Newest</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="product-grid" class="product-grid">
+          <!-- Products will be dynamically inserted here -->
+        </div>
+      </section>
+    </main>
+
+    <!-- Size Chart Modal -->
+    <div id="size-chart-modal" class="modal">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <h2>Size Conversion Chart</h2>
+        <table class="size-chart-table">
+          <thead>
+            <tr>
+              <th>UK</th>
+              <th>US</th>
+              <th>EU</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>6</td>
+              <td>7</td>
+              <td>40</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>8</td>
+              <td>41</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>9</td>
+              <td>42</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>10</td>
+              <td>43</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>11</td>
+              <td>44</td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>12</td>
+              <td>45</td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>13</td>
+              <td>46</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Size Selection Modal -->
+    <div id="size-selection-modal" class="modal">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <h2>Select Your Size</h2>
+        <div id="size-grid" class="size-selection-grid">
+          <!-- Size options will be dynamically inserted here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cart-modal" class="modal">
+      <div class="modal-content cart-modal-content">
+        <button class="modal-close">&times;</button>
+        <h2>Your Basket</h2>
+
+        <div id="cart-items-container" class="cart-items-container">
+          <!-- Cart items will be dynamically inserted here -->
+        </div>
+
+        <div class="cart-footer">
+          <div class="cart-total-row">
+            <span class="cart-total-label">Total:</span>
+            <span id="cart-total" class="cart-total-price">£0.00</span>
+          </div>
+          <a href="sport-cart.html" class="btn-primary" style="display:block;text-align:center;text-decoration:none;margin-top:15px;margin-bottom:10px;padding:12px;border-radius:8px;">View Full Basket</a>
+          <button class="btn-primary btn-checkout">Proceed to Checkout</button>
+          <button class="btn-secondary" onclick="cart.clearCart(); cart.renderCartModal();">
+            Clear Basket
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="modal">
+      <div class="modal-content checkout-modal-content">
+        <button class="modal-close">&times;</button>
+        <h2>Checkout</h2>
+
+        <p class="checkout-summary-title">Order Summary</p>
+        <div id="checkout-summary"></div>
+
+        <!-- Delivery options -->
+        <div class="cv-delivery-section" id="s-delivery-section">
+          <span class="cv-delivery-label">Delivery Method</span>
+          <div class="cv-delivery-options">
+            <label class="cv-delivery-option">
+              <input type="radio" name="sdelivery" value="standard" data-cost="1.99" />
+              <div class="cv-delivery-text"><div class="cv-delivery-name">Standard Delivery</div><div class="cv-delivery-desc">3–5 working days</div></div>
+              <span class="cv-delivery-price">£1.99</span>
+            </label>
+            <label class="cv-delivery-option">
+              <input type="radio" name="sdelivery" value="fast" data-cost="2.99" />
+              <div class="cv-delivery-text"><div class="cv-delivery-name">Fast Delivery</div><div class="cv-delivery-desc">1–2 working days</div></div>
+              <span class="cv-delivery-price">£2.99</span>
+            </label>
+            <label class="cv-delivery-option">
+              <input type="radio" name="sdelivery" value="next-day" data-cost="4.99" />
+              <div class="cv-delivery-text"><div class="cv-delivery-name">Next-Day Delivery</div><div class="cv-delivery-desc">Order before 2pm</div></div>
+              <span class="cv-delivery-price">£4.99</span>
+            </label>
+          </div>
+        </div>
+
+        <hr class="checkout-divider" />
+        <div class="cv-checkout-delivery-row"><span>Delivery</span><span class="cv-checkout-delivery-cost">—</span></div>
+        <div class="cv-checkout-grand-total-row"><span>Total</span><span class="cv-checkout-grand-total">£0.00</span></div>
+        <hr class="checkout-divider" style="margin:12px 0 0;" />
+
+        <form id="checkout-form" novalidate>
+          <div class="checkout-form-grid">
+            <div class="checkout-form-group"><label>First Name</label><input type="text" id="s-first-name" placeholder="John" required autocomplete="given-name" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group"><label>Last Name</label><input type="text" id="s-last-name" placeholder="Smith" required autocomplete="family-name" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group checkout-full"><label>Email</label><input type="email" id="s-email" placeholder="john@example.com" required autocomplete="email" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group checkout-full"><label>Phone Number</label><input type="tel" id="s-phone" placeholder="+44 7700 900123" required autocomplete="tel" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group checkout-full"><label>Address</label><input type="text" id="s-address" placeholder="123 High Street" required autocomplete="street-address" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group"><label>Town / City</label><input type="text" id="s-city" placeholder="London" required autocomplete="address-level2" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group"><label>County (optional)</label><input type="text" id="s-county" placeholder="Greater London" autocomplete="address-level1" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group"><label>Postcode</label><input type="text" id="s-postcode" placeholder="SW1A 1AA" required autocomplete="postal-code" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group checkout-full"><label>Cardholder Name</label><input type="text" id="s-card-holder" placeholder="John Smith" required autocomplete="cc-name" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group checkout-full"><label>Card Number</label><input type="text" id="s-card" placeholder="•••• •••• •••• ••••" maxlength="19" required autocomplete="cc-number" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group"><label>Expiry</label><input type="text" id="s-expiry" placeholder="MM/YY" maxlength="5" required autocomplete="cc-exp" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group"><label>CVV</label><input type="text" id="s-cvv" placeholder="•••" maxlength="4" required autocomplete="cc-csc" /><span class="cv-error"></span></div>
+          </div>
+          <button type="submit" class="btn-primary checkout-submit-btn">Place Order</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Order Confirmation Modal -->
+    <div id="confirm-modal" class="modal">
+      <div class="modal-content confirm-modal-content">
+        <button class="modal-close">&times;</button>
+        <div class="confirm-icon">✓</div>
+        <h2>Order Placed!</h2>
+        <p class="confirm-msg">Thank you for your purchase. A confirmation has been sent to your email. Your Clerks shoes are on their way.</p>
+        <p id="s-confirm-order-ref" style="font-size:13px;color:#ff5f23;font-weight:700;margin:8px 0 0;"></p>
+        <button class="btn-primary" onclick="document.getElementById('confirm-modal').classList.remove('active')">Continue Shopping</button>
+        <button class="btn-primary" style="margin-top:8px;" onclick="document.getElementById('confirm-modal').classList.remove('active');window.location.href='sport-orders.html'">View My Orders</button>
+      </div>
+    </div>
+
+    <footer>
+      <p id="footer">
+        © 2026 Clerks UK. All rights reserved. | Step Into Your Next Chapter &nbsp;|&nbsp;
+        <a href="FormalShop.html" style="color:#ff5f23;text-decoration:none;">Formal Collection →</a>
+      </p>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="js/auth.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/recommendations.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/checkout-validation.js"></script>
+    <script src="js/shop.js"></script>
+
+    <!-- Smooth page-leave transitions -->
+    <script>
+      document.addEventListener('click', function (e) {
+        const link = e.target.closest('a[href]');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('javascript') || link.target === '_blank') return;
+        e.preventDefault();
+        document.body.classList.add('page-leaving');
+        setTimeout(function () { window.location.href = href; }, 300);
+      });
+    </script>
   </body>
-  <footer>
-    <p id="footer">Footer content.</p>
-  </footer>
 </html>

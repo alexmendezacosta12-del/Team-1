@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Wishlist — Clerks UK Sport</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .wl-page { max-width: 1100px; margin: 0 auto; padding: 48px 24px 80px; }
+      .wl-title { font-family: "IBM Plex Sans", sans-serif; font-size: 36px; font-weight: 700; font-style: italic; color: #ff5f23; margin: 0 0 6px; }
+      .wl-subtitle { font-family: "IBM Plex Sans", sans-serif; font-size: 14px; color: #7886a0; margin-bottom: 36px; }
+
+      .wl-empty { text-align: center; padding: 80px 20px; }
+      .wl-empty h2 { font-family: "IBM Plex Sans", sans-serif; color: #7886a0; font-size: 22px; margin-bottom: 12px; }
+      .wl-empty p { color: #7886a0; font-size: 14px; margin-bottom: 28px; font-family: "IBM Plex Sans", sans-serif; }
+      .wl-empty a { background: #ff5f23; color: #fff; text-decoration: none; padding: 12px 28px; border-radius: 8px; font-family: "IBM Plex Sans", sans-serif; font-weight: 600; font-size: 14px; }
+      .wl-empty a:hover { background: #e54d1a; }
+
+      .wl-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 24px;
+      }
+
+      .wl-card {
+        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(120,134,160,0.15);
+        border-radius: 12px;
+        overflow: hidden;
+        transition: border-color 0.2s, transform 0.2s;
+        cursor: pointer;
+      }
+      .wl-card:hover { border-color: #ff5f23; transform: translateY(-4px); }
+      .wl-card-img-wrap { aspect-ratio: 1/1; background: rgba(255,95,35,0.06); display: flex; align-items: center; justify-content: center; padding: 16px; }
+      .wl-card-img { width: 100%; height: 100%; object-fit: contain; }
+      .wl-card-body { padding: 16px 18px; }
+      .wl-card-badge { display: inline-block; background: rgba(255,95,35,0.1); border: 1px solid rgba(255,95,35,0.3); color: #ff5f23; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; font-family: "IBM Plex Sans", sans-serif; }
+      .wl-card-name { font-family: "IBM Plex Sans", sans-serif; font-size: 15px; font-weight: 700; color: #ffffff; margin-bottom: 4px; line-height: 1.3; }
+      .wl-card-colorway { font-size: 13px; color: #ff5f23; font-family: "IBM Plex Sans", sans-serif; margin-bottom: 12px; }
+      .wl-card-footer { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+      .wl-card-price { font-family: "IBM Plex Sans", sans-serif; font-size: 18px; font-weight: 700; color: #ffffff; }
+      .wl-card-remove { background: none; border: 1px solid rgba(120,134,160,0.3); color: #7886a0; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; font-family: "IBM Plex Sans", sans-serif; transition: all 0.2s; white-space: nowrap; }
+      .wl-card-remove:hover { border-color: #a70404; color: #a70404; }
+      .wl-card-shop { background: #ff5f23; border: none; color: #ffffff; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; font-family: "IBM Plex Sans", sans-serif; transition: background 0.2s; white-space: nowrap; }
+      .wl-card-shop:hover { background: #e54d1a; }
+    </style>
+  </head>
+
+  <body class="page-enter">
+    <header>
+      <h1><a href="SportIndex.html">C L E R K S.</a></h1>
+      <nav class="navbar">
+        <ul>
+          <li><a href="Shop.html">Sport Shop</a></li>
+          <li><a href="sport-wishlist.html" style="color:#ff5f23;">Wishlist ♡</a></li>
+          <li><a href="About.html">About Us</a></li>
+          <li><a href="Contact.html">Contact</a></li>
+          <li><a href="FormalIndex.html" style="color:#c48080;">Formal ↗</a></li>
+        </ul>
+      </nav>
+      <button id="cart-btn" class="cart-button" aria-label="Shopping basket">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 2L7 6H3L6 20H18L21 6H17L15 2H9Z" />
+          <path d="M9 10V14" /><path d="M15 10V14" />
+        </svg>
+        <span id="cart-count" class="cart-badge">0</span>
+      </button>
+      <button id="auth-signin-btn" class="auth-header-btn">Sign In</button>
+    </header>
+
+    <main class="wl-page">
+      <h1 class="wl-title">Your Wishlist</h1>
+      <p class="wl-subtitle" id="wl-subtitle">Loading saved items…</p>
+
+      <div id="wl-empty" class="wl-empty" style="display:none;">
+        <h2>Your wishlist is empty</h2>
+        <p>Browse the shop and tap ♡ Favourite on any shoe to save it here.</p>
+        <a href="Shop.html">Browse Sport Collection</a>
+      </div>
+
+      <div id="wl-grid" class="wl-grid"></div>
+    </main>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal">
+      <div class="modal-content cart-modal-content">
+        <button class="modal-close">&times;</button>
+        <h2>Your Basket</h2>
+        <div id="cart-items-container" class="cart-items-container"></div>
+        <div class="cart-footer">
+          <div class="cart-total-row">
+            <span class="cart-total-label">Total:</span>
+            <span id="cart-total" class="cart-total-price">£0.00</span>
+          </div>
+          <a href="sport-cart.html" class="btn-primary" style="display:block;text-align:center;text-decoration:none;margin-bottom:10px;">View Full Basket</a>
+          <button class="btn-secondary" onclick="cart.clearCart(); cart.renderCartModal();">Clear Basket</button>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p id="footer">© 2026 Clerks UK. All rights reserved. | Step Into Your Next Chapter &nbsp;|&nbsp;
+        <a href="FormalIndex.html" style="color:#ff5f23;text-decoration:none;">Formal Collection →</a>
+      </p>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+      function getWishlist() {
+        return JSON.parse(localStorage.getItem('clerks_sport_wishlist') || '[]');
+      }
+      function saveWishlist(list) {
+        localStorage.setItem('clerks_sport_wishlist', JSON.stringify(list));
+      }
+      function removeFromWishlist(productId) {
+        let list = getWishlist();
+        list = list.filter(item => item.id !== productId);
+        saveWishlist(list);
+        renderWishlist();
+      }
+
+      function renderWishlist() {
+        const list = getWishlist();
+        const grid = document.getElementById('wl-grid');
+        const empty = document.getElementById('wl-empty');
+        const subtitle = document.getElementById('wl-subtitle');
+
+        if (list.length === 0) {
+          grid.style.display = 'none';
+          empty.style.display = 'block';
+          subtitle.textContent = '';
+          return;
+        }
+
+        grid.style.display = 'grid';
+        empty.style.display = 'none';
+        subtitle.textContent = `${list.length} saved item${list.length !== 1 ? 's' : ''}`;
+
+        grid.innerHTML = '';
+        list.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'wl-card';
+          const displayPrice = (typeof getDisplayPrice === 'function') ? getDisplayPrice(item.price) : item.price;
+          const priceHtml = displayPrice < item.price
+            ? `<span style="color:#22c55e;font-weight:700;">£${displayPrice.toFixed(2)}</span> <span style="color:#7886a0;font-size:13px;text-decoration:line-through;">£${item.price}</span>`
+            : `£${item.price}`;
+
+          card.innerHTML = `
+            <div class="wl-card-img-wrap">
+              <img class="wl-card-img" src="${item.image}" alt="${item.name}" />
+            </div>
+            <div class="wl-card-body">
+              <div class="wl-card-badge">Sport</div>
+              <div class="wl-card-name">${item.name}</div>
+              <div class="wl-card-colorway">${item.colorway}</div>
+              <div class="wl-card-footer">
+                <div class="wl-card-price">${priceHtml}</div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                  <button class="wl-card-shop" data-id="${item.id}">Shop Now</button>
+                  <button class="wl-card-remove" data-remove="${item.id}">Remove</button>
+                </div>
+              </div>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+
+        // Event delegation
+        grid.addEventListener('click', function(e) {
+          const shopBtn = e.target.closest('[data-id]');
+          if (shopBtn) {
+            window.location.href = `sport-product.html?id=${shopBtn.dataset.id}`;
+          }
+          const removeBtn = e.target.closest('[data-remove]');
+          if (removeBtn) {
+            removeFromWishlist(parseInt(removeBtn.dataset.remove));
+          }
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', function() {
+        cart = new ShoppingCart();
+        renderWishlist();
+
+        document.getElementById('cart-btn').addEventListener('click', () => {
+          cart.renderCartModal();
+          document.getElementById('cart-modal').classList.add('active');
+        });
+        document.querySelectorAll('.modal-close').forEach(btn => {
+          btn.addEventListener('click', function () { this.closest('.modal').classList.remove('active'); });
+        });
+        document.querySelectorAll('.modal').forEach(m => {
+          m.addEventListener('click', function (e) { if (e.target === this) this.classList.remove('active'); });
+        });
+      });
+    </script>
+    <script>
+      document.addEventListener('click', function (e) {
+        const link = e.target.closest('a[href]');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('javascript') || link.target === '_blank') return;
+        e.preventDefault();
+        document.body.classList.add('page-leaving');
+        setTimeout(function () { window.location.href = href; }, 300);
+      });
+    </script>
+  </body>
+</html>

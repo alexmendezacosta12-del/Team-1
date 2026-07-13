@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formal Product — Clerks UK</title>
+    <link rel="stylesheet" href="formal-style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ── Formal Product Detail Page ── */
+      .fpd-page { max-width: 1200px; margin: 0 auto; padding: 40px 24px 80px; }
+      .fpd-breadcrumb { font-size: 12px; color: #7A6060; font-family: "IBM Plex Sans",sans-serif; margin-bottom: 28px; }
+      .fpd-breadcrumb a { color: #7A6060; text-decoration: none; }
+      .fpd-breadcrumb a:hover { color: #5C1A1A; }
+      .fpd-breadcrumb span { margin: 0 6px; }
+
+      .fpd-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+      @media (max-width: 900px) { .fpd-layout { grid-template-columns: 1fr; gap: 32px; } }
+
+      /* Image area */
+      .fpd-images { position: sticky; top: 90px; }
+      .fpd-main-image {
+        background: linear-gradient(135deg, #F8F4F2, #EDE3DF);
+        border-radius: 10px;
+        overflow: hidden;
+        aspect-ratio: 1 / 1;
+        display: flex; align-items: center; justify-content: center;
+        border: 1px solid #D4C4C4;
+      }
+      .fpd-main-image img { width: 100%; height: 100%; object-fit: contain; padding: 20px; }
+      .fpd-thumb-row { display: flex; gap: 10px; margin-top: 12px; }
+      .fpd-thumb {
+        width: 72px; height: 72px; border-radius: 6px;
+        background: #F8F4F2;
+        border: 2px solid #D4C4C4;
+        overflow: hidden; cursor: pointer; flex-shrink: 0;
+        transition: border-color 0.2s;
+      }
+      .fpd-thumb.active, .fpd-thumb:hover { border-color: #5C1A1A; }
+      .fpd-thumb img { width: 100%; height: 100%; object-fit: contain; padding: 4px; background: #F8F4F2; }
+
+      /* Info area */
+      .fpd-info { padding-top: 4px; }
+      .fpd-category { font-family: "IBM Plex Sans",sans-serif; font-size: 12px; font-weight: 600; color: #7A6060; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+      .fpd-title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: #1A0A0A; margin: 0 0 8px; line-height: 1.2; font-style: italic; }
+      .fpd-colorway { font-family: "IBM Plex Sans",sans-serif; font-size: 14px; color: #5C1A1A; margin-bottom: 16px; }
+      .fpd-price-row { margin-bottom: 20px; }
+      .fpd-price { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: #1A0A0A; }
+      .fpd-price-member { color: #1a7a40; font-size: 28px; font-weight: 700; font-family: 'Playfair Display', serif; }
+      .fpd-price-original { color: #7A6060; font-size: 16px; text-decoration: line-through; margin-left: 8px; font-family: "IBM Plex Sans",sans-serif; }
+
+      /* Rating strip */
+      .fpd-rating-row { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid #E8DEDE; }
+      .fpd-stars { display: flex; gap: 2px; }
+      .fpd-star { font-size: 18px; color: #5C1A1A; }
+      .fpd-star.half { position: relative; display: inline-block; color: #D4C4C4; }
+      .fpd-star.half::before { content: '★'; position: absolute; left: 0; width: 50%; overflow: hidden; color: #5C1A1A; }
+      .fpd-rating-text { font-family: "IBM Plex Sans",sans-serif; font-size: 14px; color: #7A6060; }
+      .fpd-rating-link { color: #5C1A1A; font-size: 13px; text-decoration: none; font-family: "IBM Plex Sans",sans-serif; }
+      .fpd-rating-link:hover { text-decoration: underline; }
+
+      /* Size section */
+      .fpd-size-label { font-family: "IBM Plex Sans",sans-serif; font-size: 14px; font-weight: 600; color: #1A0A0A; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+      .fpd-size-guide-link { font-size: 12px; color: #7A6060; text-decoration: none; font-weight: 400; background: none; border: none; cursor: pointer; padding: 0; font-family: "IBM Plex Sans",sans-serif; }
+      .fpd-size-guide-link:hover { color: #5C1A1A; }
+      .fpd-size-fit { font-size: 12px; color: #7A6060; margin-bottom: 12px; font-family: "IBM Plex Sans",sans-serif; font-style: italic; }
+      .fpd-size-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 24px; }
+      .fpd-size-btn {
+        background: #FFFFFF; border: 2px solid #D4C4C4;
+        color: #1A0A0A; padding: 14px 8px; border-radius: 6px; cursor: pointer;
+        font-family: "IBM Plex Sans",sans-serif; font-size: 14px; font-weight: 600;
+        transition: all 0.2s; text-align: center;
+      }
+      .fpd-size-btn:hover { border-color: #5C1A1A; background: rgba(92,26,26,0.05); }
+      .fpd-size-btn.selected { border-color: #5C1A1A; background: #5C1A1A; color: #ffffff; }
+
+      /* CTA buttons */
+      .fpd-cta-row { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+      .fpd-add-btn {
+        background: #1A0A0A; border: none; color: #ffffff; padding: 16px;
+        border-radius: 50px; font-family: "IBM Plex Sans",sans-serif; font-size: 16px;
+        font-weight: 700; cursor: pointer; transition: background-color 0.2s, transform 0.15s;
+        letter-spacing: 0.5px;
+      }
+      .fpd-add-btn:hover { background: #5C1A1A; transform: translateY(-2px); }
+      .fpd-add-btn:disabled { background: rgba(26,10,10,0.25); cursor: not-allowed; transform: none; }
+      .fpd-fav-btn {
+        background: none; border: 2px solid #D4C4C4; color: #7A6060; padding: 14px;
+        border-radius: 50px; font-family: "IBM Plex Sans",sans-serif; font-size: 15px;
+        font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px;
+      }
+      .fpd-fav-btn:hover { border-color: #5C1A1A; color: #5C1A1A; }
+      .fpd-fav-btn.active { border-color: #5C1A1A; color: #5C1A1A; background: rgba(92,26,26,0.06); }
+
+      /* Description */
+      .fpd-desc-section { border-top: 1px solid #E8DEDE; padding-top: 24px; margin-bottom: 24px; }
+      .fpd-desc-title { font-family: "IBM Plex Sans",sans-serif; font-size: 11px; font-weight: 700; color: #7A6060; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
+      .fpd-desc-text { font-family: "IBM Plex Sans",sans-serif; font-size: 14px; color: #3A2020; line-height: 1.8; margin-bottom: 16px; }
+      .fpd-details-list { list-style: disc; padding-left: 20px; }
+      .fpd-details-list li { font-family: "IBM Plex Sans",sans-serif; font-size: 13px; color: #7A6060; margin-bottom: 6px; line-height: 1.6; }
+
+      /* Reviews */
+      .fpd-reviews-section { padding-top: 40px; border-top: 2px solid #5C1A1A; margin-top: 40px; }
+      .fpd-reviews-header { display: flex; align-items: flex-start; gap: 40px; margin-bottom: 32px; flex-wrap: wrap; }
+      .fpd-reviews-score { flex-shrink: 0; }
+      .fpd-score-num { font-family: 'Playfair Display', serif; font-size: 56px; font-weight: 700; color: #1A0A0A; line-height: 1; margin-bottom: 8px; }
+      .fpd-score-label { font-size: 13px; color: #7A6060; font-family: "IBM Plex Sans",sans-serif; margin-bottom: 12px; }
+      .fpd-reviews-meta { flex: 1; display: flex; flex-direction: column; gap: 10px; justify-content: center; }
+      .fpd-reviews-count { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; font-style: italic; color: #1A0A0A; margin-bottom: 4px; }
+
+      /* Individual review */
+      .fpd-review-card { background: #F8F4F2; border: 1px solid #D4C4C4; border-radius: 8px; padding: 20px 22px; margin-bottom: 16px; }
+      .fpd-review-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; flex-wrap: wrap; gap: 8px; }
+      .fpd-reviewer { font-family: "IBM Plex Sans",sans-serif; font-size: 14px; font-weight: 700; color: #1A0A0A; }
+      .fpd-review-date { font-family: "IBM Plex Sans",sans-serif; font-size: 12px; color: #7A6060; }
+      .fpd-review-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; font-style: italic; color: #5C1A1A; margin-bottom: 8px; }
+      .fpd-review-body { font-family: "IBM Plex Sans",sans-serif; font-size: 14px; color: #3A2020; line-height: 1.7; }
+      .fpd-review-verified { font-size: 11px; color: #1a7a40; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-top: 10px; font-family: "IBM Plex Sans",sans-serif; }
+
+      /* Size Guide Modal */
+      .fsg-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
+      .fsg-modal.active { display: flex; }
+      .fsg-content { background: #FFFFFF; border: 1px solid #D4C4C4; border-radius: 10px; padding: 36px; max-width: 560px; width: 100%; position: relative; max-height: 80vh; overflow-y: auto; box-shadow: 0 16px 48px rgba(92,26,26,0.1); }
+      .fsg-close { position: absolute; top: 14px; right: 16px; background: none; border: none; color: #7A6060; font-size: 24px; cursor: pointer; }
+      .fsg-close:hover { color: #5C1A1A; }
+      .fsg-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; font-style: italic; color: #1A0A0A; margin-bottom: 6px; }
+      .fsg-sub { font-size: 13px; color: #7A6060; margin-bottom: 20px; font-family: "IBM Plex Sans",sans-serif; }
+      .fsg-table { width: 100%; border-collapse: collapse; font-family: "IBM Plex Sans",sans-serif; }
+      .fsg-table th { background: rgba(92,26,26,0.07); color: #5C1A1A; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 10px 14px; text-align: center; border-bottom: 1px solid #D4C4C4; }
+      .fsg-table td { padding: 10px 14px; text-align: center; color: #3A2020; font-size: 14px; border-bottom: 1px solid #E8DEDE; }
+      .fsg-table tr:hover td { background: rgba(92,26,26,0.03); }
+      .fsg-note { margin-top: 16px; font-size: 12px; color: #7A6060; font-family: "IBM Plex Sans",sans-serif; font-style: italic; }
+
+      /* Toast */
+      .fpd-toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%); background: #5C1A1A; color: #fff; padding: 12px 24px; border-radius: 50px; font-family: "IBM Plex Sans",sans-serif; font-size: 14px; font-weight: 600; z-index: 4000; opacity: 0; transition: opacity 0.3s; pointer-events: none; white-space: nowrap; }
+      .fpd-toast.show { opacity: 1; }
+    </style>
+  </head>
+
+  <body class="f-body f-page-enter">
+    <header class="f-header">
+      <a href="FormalIndex.html" class="f-logo">C L E R K S.</a>
+      <nav>
+        <ul class="f-nav">
+          <li><a href="FormalShop.html">Shop</a></li>
+          <li><a href="formal-wishlist.html">Wishlist ♡</a></li>
+          <li id="f-nav-orders-li" style="display:none;"><a href="formal-orders.html">My Orders</a></li>
+          <li><a href="FormalAbout.html">About Us</a></li>
+          <li><a href="FormalContact.html">Contact</a></li>
+          <li><a href="index.html" class="f-nav-switch">Sport ↗</a></li>
+        </ul>
+      </nav>
+      <div class="f-header-search">
+        <button id="f-cart-btn" class="f-cart-button" aria-label="Shopping basket">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 2L7 6H3L6 20H18L21 6H17L15 2H9Z"/>
+            <path d="M9 10V14"/><path d="M15 10V14"/>
+          </svg>
+          <span id="f-cart-count" class="f-cart-badge">0</span>
+        </button>
+        <button id="f-auth-signin-btn" class="f-auth-header-btn">Sign In</button>
+      </div>
+    </header>
+
+    <main class="fpd-page">
+      <div class="fpd-breadcrumb">
+        <a href="FormalShop.html">Formal Collection</a>
+        <span>›</span>
+        <span id="fpd-breadcrumb-name">Loading…</span>
+      </div>
+
+      <div class="fpd-layout">
+        <!-- Images -->
+        <div class="fpd-images">
+          <div class="fpd-main-image">
+            <img id="fpd-main-img" src="" alt="Product Image" />
+          </div>
+          <div class="fpd-thumb-row" id="fpd-thumbs"></div>
+        </div>
+
+        <!-- Info -->
+        <div class="fpd-info">
+          <p class="fpd-category" id="fpd-category">Men's Formal Shoes</p>
+          <h1 class="fpd-title" id="fpd-title">Loading…</h1>
+          <p class="fpd-colorway" id="fpd-colorway"></p>
+
+          <div class="fpd-price-row">
+            <span id="fpd-price-display"></span>
+          </div>
+
+          <div class="fpd-rating-row">
+            <div class="fpd-stars">
+              <span class="fpd-star">★</span>
+              <span class="fpd-star">★</span>
+              <span class="fpd-star">★</span>
+              <span class="fpd-star">★</span>
+              <span class="fpd-star half">★</span>
+            </div>
+            <span class="fpd-rating-text">4.5 out of 5</span>
+            <a href="#reviews" class="fpd-rating-link">3 Reviews</a>
+          </div>
+
+          <div>
+            <div class="fpd-size-label">
+              <span>Select Size</span>
+              <button class="fpd-size-guide-link" id="fpd-size-guide-btn">📏 Size Guide</button>
+            </div>
+            <p class="fpd-size-fit">True to size — order your usual size.</p>
+            <div class="fpd-size-grid" id="fpd-size-grid"></div>
+          </div>
+
+          <div class="fpd-cta-row">
+            <button class="fpd-add-btn" id="fpd-add-btn" disabled>Select a size to add to bag</button>
+            <button class="fpd-fav-btn" id="fpd-fav-btn">Favourite ♡</button>
+          </div>
+
+          <!-- Description -->
+          <div class="fpd-desc-section">
+            <p class="fpd-desc-title">About this shoe</p>
+            <p class="fpd-desc-text" id="fpd-description"></p>
+            <ul class="fpd-details-list" id="fpd-details"></ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reviews -->
+      <div class="fpd-reviews-section" id="reviews">
+        <div class="fpd-reviews-header">
+          <div class="fpd-reviews-score">
+            <div class="fpd-score-num">4.5</div>
+            <div class="fpd-stars" style="margin-bottom:6px;">
+              <span class="fpd-star">★</span>
+              <span class="fpd-star">★</span>
+              <span class="fpd-star">★</span>
+              <span class="fpd-star">★</span>
+              <span class="fpd-star half">★</span>
+            </div>
+            <div class="fpd-score-label">out of 5 stars</div>
+          </div>
+          <div class="fpd-reviews-meta">
+            <div class="fpd-reviews-count">3 Reviews</div>
+          </div>
+        </div>
+        <div id="fpd-reviews-list"></div>
+      </div>
+    </main>
+
+    <!-- Size Guide Modal -->
+    <div id="fsg-modal" class="fsg-modal">
+      <div class="fsg-content">
+        <button class="fsg-close" id="fsg-close">&times;</button>
+        <h2 class="fsg-title">Size Guide</h2>
+        <p class="fsg-sub">Clerks formal shoes fit true to size. Use the chart below to find your perfect fit.</p>
+        <table class="fsg-table">
+          <thead>
+            <tr><th>UK</th><th>EU</th><th>US</th><th>Foot Length (cm)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>6</td><td>40</td><td>7</td><td>24.5</td></tr>
+            <tr><td>7</td><td>41</td><td>8</td><td>25.5</td></tr>
+            <tr><td>8</td><td>42</td><td>9</td><td>26.5</td></tr>
+            <tr><td>9</td><td>43</td><td>10</td><td>27.5</td></tr>
+            <tr><td>10</td><td>44</td><td>11</td><td>28.5</td></tr>
+            <tr><td>11</td><td>45</td><td>12</td><td>29.5</td></tr>
+            <tr><td>12</td><td>46</td><td>13</td><td>30.5</td></tr>
+          </tbody>
+        </table>
+        <p class="fsg-note">For leather formal shoes, we recommend your exact size. Leather naturally moulds to your foot after a few wears.</p>
+      </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="f-cart-modal" class="modal f-modal">
+      <div class="f-modal-content f-cart-modal-content">
+        <button class="f-modal-close">&times;</button>
+        <h2>Your Basket</h2>
+        <div id="f-cart-items-container" class="f-cart-items-container"></div>
+        <div class="f-cart-footer">
+          <div class="f-cart-total-row">
+            <span class="f-cart-total-label">Total:</span>
+            <span id="f-cart-total" class="f-cart-total-price">£0.00</span>
+          </div>
+          <a href="formal-cart.html" class="f-btn-primary" style="display:block;text-align:center;text-decoration:none;margin-bottom:10px;">View Full Basket</a>
+          <button class="f-btn-secondary" id="fpd-clear-cart">Clear Basket</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="f-checkout-modal" class="modal f-modal">
+      <div class="f-modal-content f-checkout-modal-content">
+        <button class="f-modal-close">&times;</button>
+        <h2>Checkout</h2>
+        <p class="f-checkout-summary-title">Order Summary</p>
+        <div id="f-checkout-summary"></div>
+        <hr class="f-checkout-divider" />
+        <!-- Delivery options -->
+        <div class="cv-delivery-section" id="f-delivery-section">
+          <span class="cv-delivery-label">Delivery Method</span>
+          <div class="cv-delivery-options">
+            <label class="cv-delivery-option"><input type="radio" name="fdelivery" value="standard" data-cost="1.99" /><div class="cv-delivery-text"><div class="cv-delivery-name">Standard Delivery</div><div class="cv-delivery-desc">3–5 working days</div></div><span class="cv-delivery-price">£1.99</span></label>
+            <label class="cv-delivery-option"><input type="radio" name="fdelivery" value="fast" data-cost="2.99" /><div class="cv-delivery-text"><div class="cv-delivery-name">Fast Delivery</div><div class="cv-delivery-desc">1–2 working days</div></div><span class="cv-delivery-price">£2.99</span></label>
+            <label class="cv-delivery-option"><input type="radio" name="fdelivery" value="next-day" data-cost="4.99" /><div class="cv-delivery-text"><div class="cv-delivery-name">Next-Day Delivery</div><div class="cv-delivery-desc">Order before 2pm</div></div><span class="cv-delivery-price">£4.99</span></label>
+          </div>
+        </div>
+        <div class="cv-checkout-delivery-row"><span>Delivery</span><span class="cv-checkout-delivery-cost">—</span></div>
+        <div class="cv-checkout-grand-total-row"><span>Total</span><span class="cv-checkout-grand-total">£0.00</span></div>
+        <hr class="f-checkout-divider" style="margin:10px 0 0;" />
+        <form id="f-checkout-form" novalidate>
+          <div class="f-checkout-form-grid">
+            <div class="f-form-group"><label>First Name</label><input type="text" id="f-first-name" placeholder="John" required autocomplete="given-name" /><span class="cv-error"></span></div>
+            <div class="f-form-group"><label>Last Name</label><input type="text" id="f-last-name" placeholder="Smith" required autocomplete="family-name" /><span class="cv-error"></span></div>
+            <div class="f-form-group f-form-full"><label>Email</label><input type="email" id="f-email" placeholder="john@example.com" required autocomplete="email" /><span class="cv-error"></span></div>
+            <div class="f-form-group f-form-full"><label>Phone Number</label><input type="tel" id="f-phone" placeholder="+44 7700 900123" required autocomplete="tel" /><span class="cv-error"></span></div>
+            <div class="f-form-group f-form-full"><label>Address</label><input type="text" id="f-address" placeholder="123 High Street" required autocomplete="street-address" /><span class="cv-error"></span></div>
+            <div class="f-form-group"><label>Town / City</label><input type="text" id="f-city" placeholder="London" required autocomplete="address-level2" /><span class="cv-error"></span></div>
+            <div class="f-form-group"><label>County (optional)</label><input type="text" id="f-county" placeholder="Greater London" autocomplete="address-level1" /><span class="cv-error"></span></div>
+            <div class="f-form-group"><label>Postcode</label><input type="text" id="f-postcode" placeholder="SW1A 1AA" required autocomplete="postal-code" /><span class="cv-error"></span></div>
+            <div class="f-form-group f-form-full"><label>Cardholder Name</label><input type="text" id="f-card-holder" placeholder="John Smith" required autocomplete="cc-name" /><span class="cv-error"></span></div>
+            <div class="f-form-group f-form-full"><label>Card Number</label><input type="text" id="f-card" placeholder="•••• •••• •••• ••••" maxlength="19" required autocomplete="cc-number" /><span class="cv-error"></span></div>
+            <div class="f-form-group"><label>Expiry</label><input type="text" id="f-expiry" placeholder="MM/YY" maxlength="5" required autocomplete="cc-exp" /><span class="cv-error"></span></div>
+            <div class="f-form-group"><label>CVV</label><input type="text" id="f-cvv" placeholder="•••" maxlength="4" required autocomplete="cc-csc" /><span class="cv-error"></span></div>
+          </div>
+          <button type="submit" class="f-btn-primary">Place Order</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Confirm Modal -->
+    <div id="f-confirm-modal" class="modal f-modal">
+      <div class="f-modal-content f-confirm-modal-content">
+        <button class="f-modal-close">&times;</button>
+        <div class="f-confirm-icon">✓</div>
+        <h2>Order Placed!</h2>
+        <p id="f-confirm-msg">Thank you! Your Clerks formal shoes are on their way.</p>
+        <p id="f-confirm-order-ref" style="font-size:13px;color:#5C1A1A;font-weight:600;"></p>
+        <button class="f-btn-primary" onclick="document.getElementById('f-confirm-modal').classList.remove('active')">Continue Shopping</button>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="fpd-toast" id="fpd-toast"></div>
+
+    <footer class="f-footer">
+      <p>© 2026 Clerks UK. All rights reserved. | Step Into Your Next Chapter</p>
+      <p style="margin-top:8px;">
+        <a href="FormalShop.html">Shop</a> &nbsp;·&nbsp;
+        <a href="FormalAbout.html">About</a> &nbsp;·&nbsp;
+        <a href="FormalContact.html">Contact</a> &nbsp;·&nbsp;
+        <a href="index.html">Switch to Sport</a>
+      </p>
+    </footer>
+
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/formal-products.js"></script>
+    <script src="js/formal-shop.js"></script>
+    <script src="js/checkout-validation.js"></script>
+    <script src="js/order-email.js"></script>
+    <style>
+      .cv-error { display:none; color:#C0392B; font-size:11px; font-family:'IBM Plex Sans',sans-serif; margin-top:3px; }
+      .auth-field-error { display:none; color:#C0392B; font-size:11px; font-family:'IBM Plex Sans',sans-serif; margin-top:3px; }
+      .auth-pw-hint { display:block; font-size:11px; color:#7A6060; font-family:'IBM Plex Sans',sans-serif; margin-top:3px; }
+      .cv-delivery-section { margin:14px 0 8px; }
+      .cv-delivery-label { font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#7A6060; margin-bottom:8px; display:block; font-family:'IBM Plex Sans',sans-serif; }
+      .cv-delivery-options { display:flex; flex-direction:column; gap:7px; }
+      .cv-delivery-option { display:flex; align-items:center; gap:10px; border:1px solid #D4C4C4; border-radius:6px; padding:9px 12px; cursor:pointer; transition:border-color 0.2s; }
+      .cv-delivery-option:hover,.cv-delivery-option:has(input:checked) { border-color:#5C1A1A; background:rgba(92,26,26,0.05); }
+      .cv-delivery-option input[type="radio"] { accent-color:#5C1A1A; width:14px; height:14px; flex-shrink:0; }
+      .cv-delivery-text { flex:1; }
+      .cv-delivery-name { font-family:'IBM Plex Sans',sans-serif; font-size:12px; font-weight:700; color:#1A0A0A; }
+      .cv-delivery-desc { font-family:'IBM Plex Sans',sans-serif; font-size:11px; color:#7A6060; }
+      .cv-delivery-price { font-family:'Playfair Display',serif; font-size:12px; font-weight:700; color:#1A0A0A; }
+      .cv-checkout-delivery-row { display:flex; justify-content:space-between; font-size:12px; color:#3A2020; margin-top:4px; font-family:'IBM Plex Sans',sans-serif; }
+      .cv-checkout-grand-total-row { display:flex; justify-content:space-between; font-size:16px; font-weight:700; color:#1A0A0A; margin-top:8px; padding-top:8px; border-top:1px solid #D4C4C4; font-family:'Playfair Display',serif; }
+    </style>
+    <script>
+      // ── Per-product reviews for all 10 formal shoes ───────────────────────────
+      // Each product has 3 reviews averaging 4.5★ (5+5+3 = 13/3 ≈ 4.33 displayed as 4.5)
+      const formalReviewsData = {
+        101: [
+          { name: "Edward C.", date: "March 2026", stars: 5, title: "Exceptional craftsmanship in the Hartfield", body: "The tan leather on the Hartfield Brogue is rich and supple — it develops a beautiful patina after just a few wears. I wore these to a City dinner and received four separate compliments. The broguing detail is sharp and the fit was perfect straight from the box.", verified: true },
+          { name: "Sophia M.", date: "February 2026", stars: 5, title: "A wedding shoe that truly delivers", body: "Bought the Hartfield for my husband's wedding — they photographed beautifully and he wore them on the dance floor all evening without a single complaint. The leather quality is miles ahead of what I expected. The tan/chestnut combination is timeless.", verified: true },
+          { name: "Thomas B.", date: "January 2026", stars: 3, title: "Beautiful shoe, slight sizing advice", body: "The Hartfield is genuinely beautiful — the cognac colourway has incredible richness and the sole is proper leather. I would recommend going half a size up as mine felt slightly narrow initially, though they softened considerably with wear. Quality is undeniable.", verified: false },
+        ],
+        102: [
+          { name: "William H.", date: "April 2026", stars: 5, title: "The Nightfield is pure elegance", body: "The mirror polish on the Nightfield is something else — I can practically see my reflection. No ornamentation, just flawless lines. These are the shoe for those who know that true confidence is understated. I've worn them to three separate interviews and three job offers.", verified: true },
+          { name: "Charlotte P.", date: "March 2026", stars: 5, title: "Gifted to my father — he hasn't taken them off", body: "I bought these for my father's 60th and he has worn them nearly every day since. He works in the City and says they're the smartest plain-toe Derby he's ever owned. The Clerks monogram on the heel is a discreet but elegant touch that he loves.", verified: true },
+          { name: "Oliver N.", date: "February 2026", stars: 3, title: "Excellent quality, needs proper polish from day one", body: "The Nightfield is as sleek as advertised but I'd recommend having proper shoe polish ready before your first wear — the leather benefits hugely from conditioning out of the box. Once you do that, the shine is absolutely extraordinary. Very happy overall.", verified: false },
+        ],
+        103: [
+          { name: "James V.", date: "April 2026", stars: 5, title: "The Aldgate is my finest formal purchase", body: "I have a serious shoe collection and the Aldgate Cap-Toe Oxford has earned a prominent place in it. The cognac leather has depth and warmth that photographs cannot capture. The cap detailing is immaculate and the leather sole is proper quality. Worth every penny.", verified: true },
+          { name: "Isabella T.", date: "March 2026", stars: 5, title: "Perfect for our wedding — bride approved", body: "My fiancé wore the Aldgate to our wedding and they were the most complimented item of his entire outfit. The cognac and tan combination is sophisticated and the leather construction is genuinely exceptional. They arrived quickly and the packaging was beautiful.", verified: true },
+          { name: "Freddie L.", date: "February 2026", stars: 3, title: "Superb shoe, takes time to break in fully", body: "The Aldgate is exactly as described and the quality is excellent. However the Oxford construction is firmer than a Derby and I found it took about a week of regular wear to fully break in. After that, they're incredibly comfortable and the leather has softened beautifully.", verified: false },
+        ],
+        104: [
+          { name: "Arthur M.", date: "May 2026", stars: 5, title: "Dark mahogany — absolute sophistication", body: "The Brompton in Dark Brown/Mahogany is the kind of shoe that makes a tailored suit look ten times better. The burnished finish catches the light beautifully and the cap-toe detailing is clean and sharp. I wear these to board meetings and they command respect.", verified: true },
+          { name: "Eleanor S.", date: "April 2026", stars: 5, title: "Bought for my partner — he's thrilled", body: "I bought the Brompton as an anniversary gift and my partner was overwhelmed. The leather quality is outstanding and the dark brown colourway is incredibly versatile — he's worn them with grey suits, navy suits and even dark chinos. An investment well made.", verified: true },
+          { name: "Henry B.", date: "March 2026", stars: 3, title: "Great shoe, leather sole needs conditioning", body: "The Brompton is a very handsome cap-toe Oxford. My only practical note is that the leather sole needs conditioning immediately — I'd recommend using shoe conditioner before the first wear. The upper leather is superb and the fit was spot on for my usual size.", verified: false },
+        ],
+        105: [
+          { name: "Rupert F.", date: "May 2026", stars: 5, title: "The Indigocraft is genuinely bold", body: "I ordered the Indigocraft Navy Derby on a whim and it's now the most talked-about shoe in my wardrobe. The navy is deep and saturated, the ivory sole provides the perfect contrast, and the fit was ideal. Worn with stone chinos and a white shirt — perfect.", verified: true },
+          { name: "Vivienne K.", date: "April 2026", stars: 5, title: "Smart casual perfection", body: "I bought these for my husband who had been looking for something between a trainer and a full Oxford. The Indigocraft hits that sweet spot perfectly. The navy leather is rich, the construction is solid and the ivory sole is a brilliant design choice. He loves them.", verified: true },
+          { name: "George T.", date: "March 2026", stars: 3, title: "Bold choice — not for the conservative wardrobe", body: "The Indigocraft is beautifully made and the navy is a rich, genuine colour. It's a bold choice that I'd only recommend to those comfortable with a statement shoe. The ivory sole can show marks more easily than a darker sole. But the quality is unquestionable.", verified: false },
+        ],
+        106: [
+          { name: "Philip D.", date: "June 2026", stars: 5, title: "The Blackmoor loafer is effortless elegance", body: "I've been looking for a quality moc-toe loafer for years and the Blackmoor is it. The apron stitching is immaculate, the leather lining is buttery, and the slip-on fit is perfect. I wear them to client dinners and they always prompt conversation about the brand.", verified: true },
+          { name: "Catherine R.", date: "May 2026", stars: 5, title: "Birthday gift — absolutely loved", body: "Bought the Blackmoor for my brother's birthday and he called me immediately to say they were the best shoes he'd received as a gift. The black polish is flawless and the leather sole has a satisfying sound when he walks. Highly recommend for any occasion.", verified: true },
+          { name: "Simon W.", date: "April 2026", stars: 3, title: "Excellent loafer, slip-on sizing note", body: "The Blackmoor is a genuinely impressive loafer — the moc-toe detailing and leather lining elevate it far beyond most slip-ons at this price. I'd advise ordering half a size down as the slip-on construction fits slightly loose. Once I got the right size, they were perfect.", verified: false },
+        ],
+        107: [
+          { name: "Benedict A.", date: "June 2026", stars: 5, title: "The Barlow is a loafer done properly", body: "The Barlow Penny Loafer has the kind of quality that you feel the moment you hold it. The saddle strap is perfectly proportioned, the dark brown leather develops a gorgeous patina, and the cognac lining is a wonderful surprise. These are a genuine long-term investment.", verified: true },
+          { name: "Rosie P.", date: "May 2026", stars: 5, title: "Smart casual benchmark — exactly right", body: "I bought the Barlow for my husband who lives in chinos and tailored trousers. The fit was perfect, the leather quality is exceptional, and the cognac lining peeks out beautifully when he crosses his legs. Several of his colleagues have since ordered their own pair.", verified: true },
+          { name: "Connor M.", date: "April 2026", stars: 3, title: "Great penny loafer, takes 2-3 wears to settle", body: "The Barlow is excellent quality — the penny slot detailing is crisp and the leather is genuinely full-grain. It needed a couple of wears to fully settle and mould to my foot, but once broken in it's remarkably comfortable. I'd recommend buying these slightly early before a big event.", verified: false },
+        ],
+        108: [
+          { name: "Sebastian T.", date: "June 2026", stars: 5, title: "Oceanside — smart casual at its finest", body: "The Oceanside is the kind of shoe that makes you rethink the formal/casual divide. Navy leather with ivory sole and moc-toe detailing — it looks as good at a rooftop bar as it does in the office. I've had more comments on this shoe than any other in my collection.", verified: true },
+          { name: "Alexandra H.", date: "May 2026", stars: 5, title: "Perfect gift for a style-conscious man", body: "I bought the Oceanside Navy for my partner and he wore them on our anniversary dinner the same evening. The navy leather is rich and deep, the ivory sole is beautifully clean, and the apron-toe stitching is immaculate. An exceptional shoe at a genuinely fair price.", verified: true },
+          { name: "Patrick K.", date: "April 2026", stars: 3, title: "Great design, ivory sole needs care", body: "The Oceanside is beautifully constructed and the moc-toe detailing is genuinely elegant. My practical note: the ivory sole shows scuffs more readily than a darker alternative, so I'd recommend a rubber sole protector. The leather upper and construction quality are excellent.", verified: false },
+        ],
+        109: [
+          { name: "Dominic F.", date: "July 2026", stars: 5, title: "The Nocturne is the finest black brogue I've owned", body: "I've tried many black brogues over the years and the Clerks Nocturne is categorically the best. The wingtip perforations are surgical in their precision, the medallion is deeply embossed, and the high-shine finish is extraordinary. These are a black-tie calibre shoe.", verified: true },
+          { name: "Harriet L.", date: "June 2026", stars: 5, title: "Bought for a black-tie gala — perfect choice", body: "My husband wore the Nocturne to a black-tie gala last month and was repeatedly complimented by gentlemen with far more expensive shoes on their feet. The construction quality speaks for itself and the blind-embossed Clerks seal on the toe box is a beautiful touch.", verified: true },
+          { name: "Roland T.", date: "May 2026", stars: 3, title: "Exceptional shoe, stiff initially", body: "The Nocturne is genuinely extraordinary in quality — the wingtip perforation work is as good as shoes twice the price. The Oxford construction is quite firm initially and I'd recommend wearing them for shorter periods at first. After the break-in period they fit like they were made for me.", verified: false },
+        ],
+        110: [
+          { name: "Marcus W.", date: "July 2026", stars: 5, title: "The Greyford is desk-to-dinner versatility", body: "The Greyford has become the shoe I reach for most often — the espresso leather is rich and warm, the moc-toe detailing gives it character, and the elasticated gusset means I can slip them on in seconds. From the office to evening drinks without changing. Brilliant.", verified: true },
+          { name: "Laura H.", date: "June 2026", stars: 5, title: "Gifted for Father's Day — loved immediately", body: "I bought the Greyford for my father on Father's Day and he wore them to dinner that same evening. The espresso leather is a beautiful warm brown and the slip-on fit was perfect for his size. He said they were the most comfortable formal shoes he'd ever worn. Will order again.", verified: true },
+          { name: "Daniel K.", date: "May 2026", stars: 3, title: "Excellent versatile shoe, watch the sizing", body: "The Greyford is exactly the versatile smart-casual shoe I was looking for. I'd recommend ordering half a size down — the elasticated gusset means the slip-on fit is slightly generous. Once I sorted my size, they were incredibly comfortable and genuinely stylish.", verified: false },
+        ],
+      };
+
+      // ── Render stars ─────────────────────────────────────────────────────────
+      function renderFormalStars(n) {
+        let html = '';
+        for (let i = 1; i <= 5; i++) {
+          if (i <= Math.floor(n)) html += '<span class="fpd-star">★</span>';
+          else if (i - 0.5 <= n) html += '<span class="fpd-star half">★</span>';
+          else html += '<span class="fpd-star" style="color:#D4C4C4">★</span>';
+        }
+        return html;
+      }
+
+      // ── Toast helper ─────────────────────────────────────────────────────────
+      function showFpdToast(msg) {
+        const t = document.getElementById('fpd-toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2800);
+      }
+
+      // ── Wishlist helpers ─────────────────────────────────────────────────────
+      function getFormalWishlist() {
+        return JSON.parse(localStorage.getItem('clerks_formal_wishlist') || '[]');
+      }
+      function saveFormalWishlist(list) {
+        localStorage.setItem('clerks_formal_wishlist', JSON.stringify(list));
+      }
+      function isFormalWishlisted(productId) {
+        return getFormalWishlist().some(item => item.id === productId);
+      }
+      function toggleFormalWishlist(product) {
+        let list = getFormalWishlist();
+        const idx = list.findIndex(item => item.id === product.id);
+        if (idx === -1) {
+          list.push({ id: product.id, name: product.name, colorway: product.colorway, price: product.price, image: product.image });
+          saveFormalWishlist(list);
+          return true;
+        } else {
+          list.splice(idx, 1);
+          saveFormalWishlist(list);
+          return false;
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const params = new URLSearchParams(window.location.search);
+        const id = parseInt(params.get('id'));
+        const product = formalProducts.find(p => p.id === id) || formalProducts[0];
+
+        // Breadcrumb / title
+        document.getElementById('fpd-breadcrumb-name').textContent = product.name;
+        document.title = product.name + ' — Clerks UK Formal';
+
+        // Image
+        const mainImg = document.getElementById('fpd-main-img');
+        mainImg.src = product.image;
+        mainImg.alt = product.name;
+
+        // Thumbnails
+        const thumbRow = document.getElementById('fpd-thumbs');
+        for (let i = 0; i < 3; i++) {
+          const t = document.createElement('div');
+          t.className = 'fpd-thumb' + (i === 0 ? ' active' : '');
+          t.innerHTML = `<img src="${product.image}" alt="${product.name}" />`;
+          t.addEventListener('click', () => {
+            mainImg.src = product.image;
+            document.querySelectorAll('.fpd-thumb').forEach(x => x.classList.remove('active'));
+            t.classList.add('active');
+          });
+          thumbRow.appendChild(t);
+        }
+
+        // Info
+        document.getElementById('fpd-title').textContent = product.name;
+        document.getElementById('fpd-colorway').textContent = product.colorway;
+        document.getElementById('fpd-category').textContent = product.category + " — Men's Formal";
+
+        // Price
+        const basePrice = product.price;
+        const displayPrice = (typeof getDisplayPrice === 'function') ? getDisplayPrice(basePrice) : basePrice;
+        const priceEl = document.getElementById('fpd-price-display');
+        if (displayPrice < basePrice) {
+          priceEl.innerHTML = `<span class="fpd-price-member">£${displayPrice.toFixed(2)}</span><span class="fpd-price-original">£${basePrice}</span>`;
+        } else {
+          priceEl.innerHTML = `<span class="fpd-price">£${basePrice}</span>`;
+        }
+
+        // Description
+        document.getElementById('fpd-description').textContent = product.description;
+        const detailsList = document.getElementById('fpd-details');
+        const details = [
+          `Colourway: ${product.colorway}`,
+          `Category: ${product.category}`,
+          'Full-grain leather upper with hand-finished detailing',
+          'Leather insole with Clerks crest engraving',
+          'Durable leather and rubber combination sole',
+          `Style Code: CLRK-FORMAL-${String(product.id).padStart(3,'0')}`,
+        ];
+        details.forEach(d => {
+          const li = document.createElement('li');
+          li.textContent = d;
+          detailsList.appendChild(li);
+        });
+
+        // Size grid
+        let selectedSize = null;
+        const sizeGrid = document.getElementById('fpd-size-grid');
+        const addBtn = document.getElementById('fpd-add-btn');
+        product.sizes.forEach(size => {
+          const btn = document.createElement('button');
+          btn.className = 'fpd-size-btn';
+          btn.textContent = `UK ${size}`;
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('.fpd-size-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedSize = size;
+            addBtn.disabled = false;
+            addBtn.textContent = 'Add to Bag';
+          });
+          sizeGrid.appendChild(btn);
+        });
+
+        addBtn.addEventListener('click', () => {
+          if (!selectedSize) return;
+          formalCart.addItem(product, selectedSize);
+          addBtn.textContent = '✓ Added to Bag!';
+          setTimeout(() => { addBtn.textContent = 'Add to Bag'; }, 2000);
+        });
+
+        // Favourite button
+        const favBtn = document.getElementById('fpd-fav-btn');
+        function updateFavBtn() {
+          const fav = isFormalWishlisted(product.id);
+          favBtn.textContent = fav ? 'Favourited ♥' : 'Favourite ♡';
+          favBtn.classList.toggle('active', fav);
+        }
+        updateFavBtn();
+        favBtn.addEventListener('click', () => {
+          const added = toggleFormalWishlist(product);
+          updateFavBtn();
+          showFpdToast(added ? `Added to Wishlist — ${product.name}` : `Removed from Wishlist`);
+        });
+
+        // Size Guide
+        document.getElementById('fpd-size-guide-btn').addEventListener('click', () => {
+          document.getElementById('fsg-modal').classList.add('active');
+        });
+        document.getElementById('fsg-close').addEventListener('click', () => {
+          document.getElementById('fsg-modal').classList.remove('active');
+        });
+        document.getElementById('fsg-modal').addEventListener('click', (e) => {
+          if (e.target === document.getElementById('fsg-modal')) {
+            document.getElementById('fsg-modal').classList.remove('active');
+          }
+        });
+
+        // Cart button
+        document.getElementById('f-cart-btn').addEventListener('click', () => {
+          formalCart.renderCartModal();
+          document.getElementById('f-cart-modal').classList.add('active');
+        });
+
+        // Clear cart
+        document.getElementById('fpd-clear-cart').addEventListener('click', () => {
+          formalCart.clearCart();
+          formalCart.renderCartModal();
+        });
+
+        // Close modals
+        document.querySelectorAll('.f-modal-close').forEach(btn => {
+          btn.addEventListener('click', function () {
+            this.closest('.modal').classList.remove('active');
+          });
+        });
+        document.querySelectorAll('.modal').forEach(modal => {
+          modal.addEventListener('click', function (e) {
+            if (e.target === this) this.classList.remove('active');
+          });
+        });
+
+        // Checkout form — validation runs first in capture phase via checkout-validation.js
+        const checkoutForm = document.getElementById('f-checkout-form');
+        if (checkoutForm) {
+          checkoutForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Collect customer details for the email
+            const firstName  = (document.getElementById('f-first-name')?.value || '').trim();
+            const lastName   = (document.getElementById('f-last-name')?.value  || '').trim();
+            const emailAddr  = (document.getElementById('f-email')?.value       || '').trim();
+            const isLoggedIn = (typeof Auth !== 'undefined') && Auth.isLoggedIn();
+
+            // Send confirmation email (non-blocking)
+            if (typeof sendOrderConfirmationEmail === 'function') {
+              sendOrderConfirmationEmail({
+                firstName,
+                lastName,
+                email:      emailAddr,
+                items:      formalCart.items.slice(),
+                total:      formalCart.getTotalPrice(),
+                isLoggedIn,
+              });
+            }
+
+            document.getElementById('f-checkout-modal').classList.remove('active');
+            formalCart.clearCart();
+
+            const confirmModal = document.getElementById('f-confirm-modal');
+            if (confirmModal) {
+              const orderRefEl = document.getElementById('f-confirm-order-ref');
+              if (orderRefEl && window._lastOrderNumber) {
+                orderRefEl.textContent = 'Order reference: ' + window._lastOrderNumber;
+              }
+              confirmModal.classList.add('active');
+            }
+          });
+        }
+
+        // Reviews
+        const reviewsData = formalReviewsData[product.id] || formalReviewsData[101];
+        const reviewsList = document.getElementById('fpd-reviews-list');
+        reviewsData.forEach(r => {
+          const card = document.createElement('div');
+          card.className = 'fpd-review-card';
+          card.innerHTML = `
+            <div class="fpd-review-top">
+              <div>
+                <div class="fpd-reviewer">${r.name}</div>
+                <div class="fpd-stars" style="margin-top:4px;">${renderFormalStars(r.stars)}</div>
+              </div>
+              <div class="fpd-review-date">${r.date}</div>
+            </div>
+            <div class="fpd-review-title">${r.title}</div>
+            <div class="fpd-review-body">${r.body}</div>
+            ${r.verified ? '<div class="fpd-review-verified">✓ Verified Purchase</div>' : ''}
+          `;
+          reviewsList.appendChild(card);
+        });
+      });
+    </script>
+    <script>
+      document.addEventListener('click', function (e) {
+        const link = e.target.closest('a[href]');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('javascript') || link.target === '_blank') return;
+        e.preventDefault();
+        document.body.classList.add('f-page-leaving');
+        setTimeout(function () { window.location.href = href; }, 300);
+      });
+    </script>
+  </body>
+</html>

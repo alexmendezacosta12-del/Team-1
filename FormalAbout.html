@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Clerks UK Formal | Refined. Timeless. Elegant.</title>
+    <link rel="stylesheet" href="formal-style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="f-body f-page-enter">
+
+    <header class="f-header">
+      <a href="FormalIndex.html" class="f-logo">C L E R K S.</a>
+      <nav>
+        <ul class="f-nav">
+          <li><a href="FormalShop.html">Shop</a></li>
+          <li><a href="FormalAbout.html" class="f-nav-active">About Us</a></li>
+          <li><a href="FormalContact.html">Contact</a></li>
+          <li><a href="index.html" class="f-nav-switch">Sport ↗</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="f-page-main">
+
+      <div class="f-page-hero">
+        <h1 class="f-page-title">About Us</h1>
+        <p class="f-page-subtitle">The story behind Clerks Formal</p>
+      </div>
+
+      <div class="f-about-layout">
+        <div class="f-about-image-col">
+          <!-- Formal shoe illustration placeholder -->
+          <div class="f-about-shoe-placeholder">
+            <svg viewBox="0 0 360 280" xmlns="http://www.w3.org/2000/svg" aria-label="Clerks Formal Shoe">
+              <defs>
+                <linearGradient id="aboutGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#3A0E0E"/>
+                  <stop offset="100%" stop-color="#6B2020"/>
+                </linearGradient>
+              </defs>
+              <ellipse cx="180" cy="252" rx="155" ry="15" fill="#2A0808" opacity="0.18"/>
+              <path d="M40,215 Q50,140 115,122 Q175,108 235,114 Q295,120 325,148 Q342,165 330,198 Q280,222 180,227 Q90,230 40,215Z" fill="url(#aboutGrad)"/>
+              <path d="M85,178 Q115,160 150,160" stroke="#D4A0A0" stroke-width="1.5" fill="none" stroke-dasharray="4,3" opacity="0.65"/>
+              <circle cx="98"  cy="170" r="2.2" fill="#D4A0A0" opacity="0.55"/>
+              <circle cx="110" cy="164" r="2.2" fill="#D4A0A0" opacity="0.55"/>
+              <circle cx="122" cy="161" r="2.2" fill="#D4A0A0" opacity="0.55"/>
+              <circle cx="134" cy="160" r="2.2" fill="#D4A0A0" opacity="0.55"/>
+              <path d="M155,160 Q182,154 215,157 Q228,158 234,167" stroke="#1A0A0A" stroke-width="2" fill="none" opacity="0.45"/>
+              <line x1="162" y1="164" x2="170" y2="171" stroke="#1A0A0A" stroke-width="1.2" opacity="0.4"/>
+              <line x1="175" y1="162" x2="183" y2="169" stroke="#1A0A0A" stroke-width="1.2" opacity="0.4"/>
+              <line x1="188" y1="161" x2="195" y2="168" stroke="#1A0A0A" stroke-width="1.2" opacity="0.4"/>
+              <line x1="200" y1="162" x2="206" y2="168" stroke="#1A0A0A" stroke-width="1.2" opacity="0.4"/>
+              <path d="M295,186 Q325,176 330,198 Q320,212 295,217Z" fill="#3A0E0E"/>
+              <path d="M40,215 Q180,233 330,198" stroke="#2A0808" stroke-width="3.5" fill="none"/>
+              <text x="155" y="208" font-family="serif" font-size="8" fill="#D4A0A0" opacity="0.5" letter-spacing="3" font-style="italic">CLERKS</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="f-about-text-col">
+          <h2 class="f-about-heading">Crafted with Purpose</h2>
+          <p class="f-about-body">
+            Clerks was founded on a simple belief: that every step you take should reflect the standard you hold yourself to. Our formal collection is built for those who understand that dressing well is not vanity — it is respect for the moment, the room, and the people in it.
+          </p>
+          <p class="f-about-body">
+            Each pair in the Clerks Formal line is hand-finished by our craftsmen and carries the Clerks mark — engraved, embossed, or stitched — as a quiet signature of quality. From the boardroom to black-tie, we make shoes that endure.
+          </p>
+          <p class="f-about-body">
+            We source only the finest full-grain leathers, and every sole is Blake-stitched for a sleek profile and long-lasting construction. Because your shoes should work as hard as you do — and look better for it.
+          </p>
+          <a href="FormalShop.html" class="f-about-cta">View the Collection</a>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="f-footer">
+      <p>© 2026 Clerks UK. All rights reserved. | Step Into Your Next Chapter</p>
+      <p style="margin-top:8px;">
+        <a href="FormalShop.html">Shop</a> &nbsp;·&nbsp;
+        <a href="FormalContact.html">Contact</a> &nbsp;·&nbsp;
+        <a href="index.html">Switch to Sport</a>
+      </p>
+    </footer>
+
+    <script>
+      document.addEventListener('click', function (e) {
+        const link = e.target.closest('a[href]');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('#') || link.target === '_blank') return;
+        e.preventDefault();
+        document.body.classList.add('f-page-leaving');
+        setTimeout(function () { window.location.href = href; }, 300);
+      });
+    </script>
+  </body>
+</html>

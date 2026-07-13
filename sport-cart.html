@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Basket — Clerks UK Sport</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .cv-error { display:none; color:#ff6b6b; font-size:11px; font-family:"IBM Plex Sans",sans-serif; margin-top:3px; }
+      .cv-delivery-section { margin:16px 0 10px; }
+      .cv-delivery-label { font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#7886a0; margin-bottom:10px; display:block; }
+      .cv-delivery-options { display:flex; flex-direction:column; gap:8px; }
+      .cv-delivery-option { display:flex; align-items:center; gap:10px; border:1px solid rgba(120,134,160,0.3); border-radius:8px; padding:10px 14px; cursor:pointer; transition:border-color 0.2s; }
+      .cv-delivery-option:hover { border-color:#ff5f23; }
+      .cv-delivery-option:has(input:checked) { border-color:#ff5f23; background:rgba(255,95,35,0.06); }
+      .cv-delivery-option input[type="radio"] { accent-color:#ff5f23; width:16px; height:16px; flex-shrink:0; }
+      .cv-delivery-text { flex:1; }
+      .cv-delivery-name { font-family:"IBM Plex Sans",sans-serif; font-size:13px; font-weight:700; color:#ffffff; }
+      .cv-delivery-desc { font-family:"IBM Plex Sans",sans-serif; font-size:11px; color:#7886a0; margin-top:1px; }
+      .cv-delivery-price { font-family:"IBM Plex Sans",sans-serif; font-size:13px; font-weight:700; color:#ffffff; }
+      .cv-checkout-delivery-row { display:flex; justify-content:space-between; font-size:13px; color:#c2c2c2; margin-top:6px; }
+      .cv-checkout-grand-total-row { display:flex; justify-content:space-between; font-size:17px; font-weight:700; color:#ffffff; margin-top:10px; padding-top:10px; border-top:1px solid rgba(120,134,160,0.2); }
+      .auth-field-error { display:none; color:#ff6b6b; font-size:11px; font-family:"IBM Plex Sans",sans-serif; margin-top:3px; }
+      .auth-pw-hint { display:block; font-size:11px; color:#7886a0; font-family:"IBM Plex Sans",sans-serif; margin-top:3px; }
+    </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ── Cart Page Styles ── */
+      .cart-page { max-width: 1100px; margin: 0 auto; padding: 48px 24px 80px; }
+      .cart-page-title {
+        font-family: "IBM Plex Sans", sans-serif; font-size: 36px; font-weight: 700;
+        font-style: italic; color: #ff5f23; margin: 0 0 6px;
+      }
+      .cart-page-subtitle { font-family: "IBM Plex Sans", sans-serif; font-size: 14px; color: #7886a0; margin-bottom: 36px; }
+
+      .cart-page-layout { display: grid; grid-template-columns: 1fr 360px; gap: 40px; align-items: start; }
+      @media (max-width: 900px) { .cart-page-layout { grid-template-columns: 1fr; } }
+
+      /* Items column */
+      .cart-page-items { }
+      .cart-page-empty { text-align: center; padding: 80px 20px; }
+      .cart-page-empty h2 { font-family: "IBM Plex Sans", sans-serif; color: #7886a0; font-size: 22px; margin-bottom: 12px; }
+      .cart-page-empty p { color: #7886a0; font-size: 14px; font-family: "IBM Plex Sans", sans-serif; margin-bottom: 28px; }
+      .cart-page-empty a { background: #ff5f23; color: #fff; text-decoration: none; padding: 12px 28px; border-radius: 6px; font-family: "IBM Plex Sans", sans-serif; font-weight: 600; font-size: 14px; transition: background 0.2s; }
+      .cart-page-empty a:hover { background: #e54d1a; }
+
+      /* Cart item card */
+      .cpc-item {
+        display: grid; grid-template-columns: 100px 1fr auto;
+        gap: 20px; align-items: center;
+        padding: 20px; background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(120,134,160,0.15);
+        border-radius: 12px; margin-bottom: 16px;
+        transition: border-color 0.2s;
+      }
+      .cpc-item:hover { border-color: #ff5f23; }
+      .cpc-img { width: 100px; height: 100px; object-fit: cover; border-radius: 8px; background: rgba(255,95,35,0.08); }
+      .cpc-details { }
+      .cpc-name { font-family: "IBM Plex Sans", sans-serif; font-size: 17px; font-weight: 700; color: #ffffff; margin-bottom: 4px; line-height: 1.3; }
+      .cpc-colorway { font-size: 13px; color: #ff5f23; font-family: "IBM Plex Sans", sans-serif; margin-bottom: 4px; }
+      .cpc-size { font-size: 13px; color: #7886a0; font-family: "IBM Plex Sans", sans-serif; margin-bottom: 12px; }
+      .cpc-badge { display: inline-block; background: rgba(255,95,35,0.1); border: 1px solid rgba(255,95,35,0.3); color: #ff5f23; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 4px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; font-family: "IBM Plex Sans", sans-serif; }
+
+      .cpc-qty-row { display: flex; align-items: center; gap: 10px; }
+      .cpc-qty-btn { background: rgba(255,255,255,0.07); border: 1px solid rgba(120,134,160,0.3); color: #ffffff; width: 30px; height: 30px; border-radius: 5px; cursor: pointer; font-size: 18px; font-weight: 700; display: flex; align-items: center; justify-content: center; transition: all 0.2s; font-family: "IBM Plex Sans", sans-serif; }
+      .cpc-qty-btn:hover { background: #ff5f23; border-color: #ff5f23; }
+      .cpc-qty-num { font-family: "IBM Plex Sans", sans-serif; font-size: 15px; font-weight: 700; color: #ffffff; min-width: 24px; text-align: center; }
+
+      .cpc-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+      .cpc-price { font-family: "IBM Plex Sans", sans-serif; font-size: 20px; font-weight: 700; color: #ffffff; }
+      .cpc-price-member { color: #22c55e; }
+      .cpc-price-original { font-size: 13px; color: #7886a0; text-decoration: line-through; font-family: "IBM Plex Sans", sans-serif; }
+      .cpc-remove { background: none; border: 1px solid rgba(120,134,160,0.3); color: #7886a0; padding: 6px 12px; border-radius: 5px; cursor: pointer; font-size: 12px; font-family: "IBM Plex Sans", sans-serif; transition: all 0.2s; }
+      .cpc-remove:hover { border-color: #a70404; color: #a70404; }
+
+      @media (max-width: 600px) {
+        .cpc-item { grid-template-columns: 80px 1fr; }
+        .cpc-right { grid-column: 1 / -1; flex-direction: row; justify-content: space-between; }
+      }
+
+      /* Summary panel */
+      .cart-summary {
+        background: rgba(255,255,255,0.02); border: 1px solid rgba(120,134,160,0.15);
+        border-radius: 14px; padding: 28px; position: sticky; top: 90px;
+      }
+      .cart-summary-title { font-family: "IBM Plex Sans", sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #7886a0; margin-bottom: 20px; }
+      .cart-summary-line { display: flex; justify-content: space-between; font-family: "IBM Plex Sans", sans-serif; font-size: 14px; color: #c2c2c2; margin-bottom: 10px; }
+      .cart-summary-line.saving { color: #22c55e; font-weight: 600; }
+      .cart-summary-divider { border: none; border-top: 1px solid rgba(120,134,160,0.2); margin: 16px 0; }
+      .cart-summary-total { display: flex; justify-content: space-between; font-family: "IBM Plex Sans", sans-serif; font-size: 20px; font-weight: 700; color: #ffffff; margin-bottom: 24px; }
+      .cart-summary-checkout {
+        width: 100%; background: #ff5f23; border: none; color: #ffffff; padding: 14px;
+        border-radius: 50px; font-family: "IBM Plex Sans", sans-serif; font-size: 16px;
+        font-weight: 700; cursor: pointer; transition: background 0.2s, transform 0.15s; margin-bottom: 10px;
+      }
+      .cart-summary-checkout:hover { background: #e54d1a; transform: translateY(-2px); }
+      .cart-summary-continue { width: 100%; background: none; border: 2px solid rgba(120,134,160,0.3); color: #7886a0; padding: 12px; border-radius: 50px; font-family: "IBM Plex Sans", sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+      .cart-summary-continue:hover { border-color: #ff5f23; color: #ff5f23; }
+      .cart-signin-nudge { background: rgba(255,95,35,0.08); border: 1px solid rgba(255,95,35,0.25); border-radius: 8px; padding: 12px 14px; margin-bottom: 18px; font-family: "IBM Plex Sans", sans-serif; font-size: 13px; color: #c2c2c2; text-align: center; line-height: 1.5; }
+      .cart-signin-nudge strong { color: #ff5f23; }
+      .cart-signin-nudge-btn { background: none; border: none; color: #ff5f23; cursor: pointer; font-family: "IBM Plex Sans", sans-serif; font-size: 13px; text-decoration: underline; padding: 0; }
+    </style>
+  </head>
+
+  <body class="page-enter">
+    <header>
+      <h1><a href="SportIndex.html">C L E R K S.</a></h1>
+      <nav class="navbar">
+        <ul>
+          <li><a href="Shop.html">Sport Shop</a></li>
+          <li><a href="sport-wishlist.html">Wishlist ♡</a></li>
+          <li id="s-nav-orders-li" style="display:none;"><a href="sport-orders.html">My Orders</a></li>
+          <li><a href="About.html">About Us</a></li>
+          <li><a href="Contact.html">Contact</a></li>
+          <li><a href="FormalIndex.html" style="color:#c48080;">Formal ↗</a></li>
+        </ul>
+      </nav>
+      <button id="cart-btn" class="cart-button" aria-label="Shopping basket">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 2L7 6H3L6 20H18L21 6H17L15 2H9Z" /><path d="M9 10V14" /><path d="M15 10V14" />
+        </svg>
+        <span id="cart-count" class="cart-badge">0</span>
+      </button>
+      <button id="auth-signin-btn" class="auth-header-btn">Sign In</button>
+    </header>
+
+    <main class="cart-page">
+      <h1 class="cart-page-title">Your Basket</h1>
+      <p class="cart-page-subtitle" id="cart-page-subtitle">Loading your items…</p>
+
+      <div id="cart-page-empty" class="cart-page-empty" style="display:none;">
+        <h2>Your basket is empty</h2>
+        <p>Looks like you haven't added anything yet.</p>
+        <a href="Shop.html">Continue Shopping</a>
+      </div>
+
+      <div id="cart-page-content" class="cart-page-layout">
+        <div class="cart-page-items" id="cart-page-items"></div>
+
+        <div class="cart-summary">
+          <p class="cart-summary-title">Order Summary</p>
+
+          <div id="cart-signin-nudge-wrap"></div>
+
+          <div class="cart-summary-line"><span>Subtotal</span><span id="cs-subtotal">£0.00</span></div>
+          <div class="cart-summary-line" id="cs-delivery-row"><span>Delivery</span><span id="cs-delivery-cost" style="color:#7886a0;">Select at checkout</span></div>
+          <div class="cart-summary-line saving" id="cs-saving-row" style="display:none;">
+            <span>Member saving (10%)</span><span id="cs-saving">−£0.00</span>
+          </div>
+          <hr class="cart-summary-divider" />
+          <div class="cart-summary-total">
+            <span>Total</span><span id="cs-total">£0.00</span>
+          </div>
+          <button class="cart-summary-checkout" id="cs-checkout-btn">Proceed to Checkout</button>
+          <button class="cart-summary-continue" onclick="window.location.href='Shop.html'">Continue Shopping</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="modal">
+      <div class="modal-content checkout-modal-content">
+        <button class="modal-close">&times;</button>
+        <h2>Checkout</h2>
+        <p class="checkout-summary-title">Order Summary</p>
+        <div id="checkout-summary"></div>
+
+        <!-- Delivery options -->
+        <div class="cv-delivery-section" id="s-delivery-section">
+          <span class="cv-delivery-label">Delivery Method</span>
+          <div class="cv-delivery-options">
+            <label class="cv-delivery-option">
+              <input type="radio" name="sdelivery" value="standard" data-cost="1.99" />
+              <div class="cv-delivery-text"><div class="cv-delivery-name">Standard Delivery</div><div class="cv-delivery-desc">3–5 working days</div></div>
+              <span class="cv-delivery-price">£1.99</span>
+            </label>
+            <label class="cv-delivery-option">
+              <input type="radio" name="sdelivery" value="fast" data-cost="2.99" />
+              <div class="cv-delivery-text"><div class="cv-delivery-name">Fast Delivery</div><div class="cv-delivery-desc">1–2 working days</div></div>
+              <span class="cv-delivery-price">£2.99</span>
+            </label>
+            <label class="cv-delivery-option">
+              <input type="radio" name="sdelivery" value="next-day" data-cost="4.99" />
+              <div class="cv-delivery-text"><div class="cv-delivery-name">Next-Day Delivery</div><div class="cv-delivery-desc">Order before 2pm</div></div>
+              <span class="cv-delivery-price">£4.99</span>
+            </label>
+          </div>
+        </div>
+
+        <hr class="checkout-divider" />
+        <div class="cv-checkout-delivery-row"><span>Delivery</span><span class="cv-checkout-delivery-cost">—</span></div>
+        <div class="cv-checkout-grand-total-row"><span>Total</span><span class="cv-checkout-grand-total">£0.00</span></div>
+        <hr class="checkout-divider" style="margin:12px 0 0;" />
+
+        <form id="checkout-form" novalidate>
+          <div class="checkout-form-grid">
+            <div class="checkout-form-group"><label>First Name</label><input type="text" id="s-first-name" placeholder="John" required autocomplete="given-name" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group"><label>Last Name</label><input type="text" id="s-last-name" placeholder="Smith" required autocomplete="family-name" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group checkout-full"><label>Email</label><input type="email" id="s-email" placeholder="john@example.com" required autocomplete="email" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group checkout-full"><label>Phone Number</label><input type="tel" id="s-phone" placeholder="+44 7700 900123" required autocomplete="tel" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group checkout-full"><label>Address</label><input type="text" id="s-address" placeholder="123 High Street" required autocomplete="street-address" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group"><label>Town / City</label><input type="text" id="s-city" placeholder="London" required autocomplete="address-level2" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group"><label>County (optional)</label><input type="text" id="s-county" placeholder="Greater London" autocomplete="address-level1" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group"><label>Postcode</label><input type="text" id="s-postcode" placeholder="SW1A 1AA" required autocomplete="postal-code" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group checkout-full"><label>Cardholder Name</label><input type="text" id="s-card-holder" placeholder="John Smith" required autocomplete="cc-name" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group checkout-full"><label>Card Number</label><input type="text" id="s-card" placeholder="•••• •••• •••• ••••" maxlength="19" required autocomplete="cc-number" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group"><label>Expiry</label><input type="text" id="s-expiry" placeholder="MM/YY" maxlength="5" required autocomplete="cc-exp" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group"><label>CVV</label><input type="text" id="s-cvv" placeholder="•••" maxlength="4" required autocomplete="cc-csc" /><span class="cv-error"></span></div>
+          </div>
+          <button type="submit" class="btn-primary checkout-submit-btn">Place Order</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Confirm Modal -->
+    <div id="confirm-modal" class="modal">
+      <div class="modal-content confirm-modal-content">
+        <button class="modal-close">&times;</button>
+        <div class="confirm-icon">✓</div>
+        <h2>Order Placed!</h2>
+        <p class="confirm-msg">Thank you for your purchase. A confirmation has been sent to your email. Your Clerks shoes are on their way.</p>
+        <p id="s-confirm-order-ref" style="font-size:13px;color:#ff5f23;font-weight:700;margin:8px 0 0;"></p>
+        <button class="btn-primary" onclick="document.getElementById('confirm-modal').classList.remove('active');window.location.href='Shop.html'">Continue Shopping</button>
+        <button class="btn-primary" style="margin-top:8px;" onclick="document.getElementById('confirm-modal').classList.remove('active');window.location.href='sport-orders.html'">View My Orders</button>
+      </div>
+    </div>
+
+    <footer>
+      <p id="footer">© 2026 Clerks UK. All rights reserved. | Step Into Your Next Chapter &nbsp;|&nbsp;
+        <a href="FormalIndex.html" style="color:#ff5f23;text-decoration:none;">Formal Collection →</a>
+      </p>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/checkout-validation.js"></script>
+    <script>
+      let cartInstance;
+
+      function renderCartPage() {
+        cartInstance = cartInstance || new ShoppingCart();
+        const items = cartInstance.items;
+        const isLoggedIn = (typeof Auth !== 'undefined') && Auth.isLoggedIn();
+
+        const pageContent = document.getElementById('cart-page-content');
+        const emptyEl = document.getElementById('cart-page-empty');
+        const subtitle = document.getElementById('cart-page-subtitle');
+        const itemsContainer = document.getElementById('cart-page-items');
+
+        if (items.length === 0) {
+          pageContent.style.display = 'none';
+          emptyEl.style.display = 'block';
+          subtitle.textContent = '';
+          return;
+        }
+
+        pageContent.style.display = 'grid';
+        emptyEl.style.display = 'none';
+        const totalItems = cartInstance.getTotalItems();
+        subtitle.textContent = `${totalItems} item${totalItems !== 1 ? 's' : ''} in your basket`;
+
+        // Render items
+        itemsContainer.innerHTML = '';
+        items.forEach(item => {
+          const lineRaw = item.price * item.quantity;
+          const linePrice = isLoggedIn && typeof getDisplayTotal === 'function' ? getDisplayTotal(lineRaw) : lineRaw;
+          const hasSaving = linePrice < lineRaw;
+
+          const card = document.createElement('div');
+          card.className = 'cpc-item';
+
+          // Find product for image
+          const prod = (typeof products !== 'undefined') ? products.find(p => p.id === item.productId) : null;
+          const imgSrc = prod ? prod.image : item.image;
+
+          card.innerHTML = `
+            <img class="cpc-img" src="${imgSrc}" alt="${item.name}" />
+            <div class="cpc-details">
+              <div class="cpc-badge">Sport</div>
+              <div class="cpc-name">${item.name}</div>
+              <div class="cpc-colorway">${item.colorway}</div>
+              <div class="cpc-size">Size: UK ${item.size}</div>
+              <div class="cpc-qty-row">
+                <button class="cpc-qty-btn" data-action="dec" data-id="${item.productId}" data-size="${item.size}" data-qty="${item.quantity}">−</button>
+                <span class="cpc-qty-num">${item.quantity}</span>
+                <button class="cpc-qty-btn" data-action="inc" data-id="${item.productId}" data-size="${item.size}" data-qty="${item.quantity}">+</button>
+              </div>
+            </div>
+            <div class="cpc-right">
+              <div>
+                <div class="cpc-price ${hasSaving ? 'cpc-price-member' : ''}">£${linePrice.toFixed(2)}</div>
+                ${hasSaving ? `<div class="cpc-price-original">£${lineRaw.toFixed(2)}</div>` : ''}
+              </div>
+              <button class="cpc-remove" data-action="remove" data-id="${item.productId}" data-size="${item.size}">Remove</button>
+            </div>
+          `;
+          itemsContainer.appendChild(card);
+        });
+
+        // Summary
+        const rawTotal = cartInstance.getRawTotal();
+        const finalTotal = cartInstance.getTotalPrice();
+        const savings = cartInstance.getSavings();
+
+        document.getElementById('cs-subtotal').textContent = `£${rawTotal.toFixed(2)}`;
+        document.getElementById('cs-total').textContent = `£${finalTotal.toFixed(2)}`;
+
+        const savingRow = document.getElementById('cs-saving-row');
+        if (savings > 0) {
+          savingRow.style.display = 'flex';
+          document.getElementById('cs-saving').textContent = `−£${savings.toFixed(2)}`;
+        } else {
+          savingRow.style.display = 'none';
+        }
+
+        // Sign-in nudge
+        const nudgeWrap = document.getElementById('cart-signin-nudge-wrap');
+        if (!isLoggedIn) {
+          nudgeWrap.innerHTML = `<div class="cart-signin-nudge">
+            <strong>Save 10%</strong> on this order — 
+            <button class="cart-signin-nudge-btn" id="nudge-signin">Sign in</button>
+          </div>`;
+          document.getElementById('nudge-signin').addEventListener('click', () => {
+            if (typeof AuthModal !== 'undefined') AuthModal.open('login');
+          });
+        } else {
+          nudgeWrap.innerHTML = '';
+        }
+      }
+
+      // Event delegation for qty/remove
+      document.getElementById('cart-page-items').addEventListener('click', function (e) {
+        const btn = e.target.closest('[data-action]');
+        if (!btn) return;
+        const action = btn.dataset.action;
+        const id = parseInt(btn.dataset.id);
+        const size = parseInt(btn.dataset.size);
+        const qty = parseInt(btn.dataset.qty);
+        if (action === 'inc') cartInstance.updateQuantity(id, size, qty + 1);
+        else if (action === 'dec') cartInstance.updateQuantity(id, size, qty - 1);
+        else if (action === 'remove') cartInstance.removeItem(id, size);
+        renderCartPage();
+      });
+
+      // Open checkout modal and seed totals
+      document.getElementById('cs-checkout-btn').addEventListener('click', () => {
+        if (!cartInstance || cartInstance.getTotalItems() === 0) { alert('Your basket is empty!'); return; }
+        const isLoggedIn = (typeof Auth !== 'undefined') && Auth.isLoggedIn();
+        const summaryEl  = document.getElementById('checkout-summary');
+        let html = cartInstance.items.map(item => {
+          const lineRaw   = item.price * item.quantity;
+          const linePrice = isLoggedIn && typeof getDisplayTotal === 'function' ? getDisplayTotal(lineRaw) : lineRaw;
+          return `<div class="s-checkout-item"><span>${item.name} (UK ${item.size}) x ${item.quantity}</span><span>£${linePrice.toFixed(2)}</span></div>`;
+        }).join('');
+        const savings = cartInstance.getSavings();
+        if (savings > 0) html += `<div class="s-checkout-savings"><span>Member saving (10%)</span><span style="color:#4caf50;">-£${savings.toFixed(2)}</span></div>`;
+        summaryEl.innerHTML = html;
+
+        // Store subtotal on form for delivery recalculation
+        const form = document.getElementById('checkout-form');
+        const basketTotal = cartInstance.getTotalPrice();
+        form.dataset.subtotal = basketTotal.toFixed(2);
+
+        // Reset delivery & totals display
+        document.querySelectorAll('input[name="sdelivery"]').forEach(r => r.checked = false);
+        const grandTotalEl = document.querySelector('.cv-checkout-grand-total');
+        if (grandTotalEl) grandTotalEl.textContent = '£' + basketTotal.toFixed(2);
+        const deliveryCostEl = document.querySelector('.cv-checkout-delivery-cost');
+        if (deliveryCostEl) deliveryCostEl.textContent = '—';
+
+        document.getElementById('checkout-modal').classList.add('active');
+      });
+
+      // Checkout form submit — validation (checkout-validation.js) runs first in capture phase
+      document.getElementById('checkout-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Read delivery selection
+        const deliveryInput  = document.querySelector('input[name="sdelivery"]:checked');
+        const deliveryCost   = deliveryInput ? parseFloat(deliveryInput.dataset.cost) : 0;
+        const deliveryMethod = deliveryInput ? deliveryInput.value : 'standard';
+        const deliveryLabels = { standard: 'Standard Delivery', fast: 'Fast Delivery', 'next-day': 'Next-Day Delivery' };
+
+        // Build order record and save to history
+        const user     = (typeof Auth !== 'undefined') ? Auth.currentUser() : null;
+        const orderId  = (typeof OrderStore !== 'undefined') ? OrderStore.generateId() : ('CK-' + Date.now());
+        const subtotal = parseFloat(this.dataset.subtotal || '0');
+        const total    = +(subtotal + deliveryCost).toFixed(2);
+
+        if (typeof OrderStore !== 'undefined') {
+          const emailKey = user ? user.email : 'guest';
+          OrderStore.saveOrder(emailKey, {
+            id:               orderId,
+            date:             new Date().toISOString(),
+            collection:       'sport',
+            items:            cartInstance.items.map(i => ({ name: i.name, colorway: i.colorway, size: i.size, quantity: i.quantity, price: i.price })),
+            subtotal,
+            deliveryCost,
+            deliveryMethod,
+            deliveryLabel:    deliveryLabels[deliveryMethod] || deliveryMethod,
+            total,
+            status:           'received',
+            trackingNumber:   'TRK-' + Date.now().toString(36).toUpperCase(),
+            estimatedDelivery: OrderStore.estimatedDeliveryDate({ date: new Date().toISOString(), deliveryMethod }),
+          });
+        }
+
+        document.getElementById('checkout-modal').classList.remove('active');
+        cartInstance.clearCart();
+
+        // Show order reference in confirmation modal
+        const refEl = document.getElementById('s-confirm-order-ref');
+        if (refEl) refEl.textContent = 'Order reference: ' + orderId;
+
+        document.getElementById('confirm-modal').classList.add('active');
+        renderCartPage();
+      });
+
+      // Cart icon in header opens this page already, but also update badge
+      document.getElementById('cart-btn').addEventListener('click', () => {
+        // Already on cart page, just scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Modal close
+      document.querySelectorAll('.modal-close').forEach(btn => {
+        btn.addEventListener('click', function () { this.closest('.modal').classList.remove('active'); });
+      });
+      document.querySelectorAll('.modal').forEach(m => {
+        m.addEventListener('click', function (e) { if (e.target === this) this.classList.remove('active'); });
+      });
+
+      document.addEventListener('DOMContentLoaded', () => {
+        cartInstance = new ShoppingCart();
+        renderCartPage();
+      });
+    </script>
+    <script>
+      document.addEventListener('click', function (e) {
+        const link = e.target.closest('a[href]');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('javascript') || link.target === '_blank') return;
+        e.preventDefault();
+        document.body.classList.add('page-leaving');
+        setTimeout(function () { window.location.href = href; }, 300);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sport Product — Clerks UK</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ── Product Detail Page ── */
+      .pd-page { max-width: 1200px; margin: 0 auto; padding: 40px 24px 80px; }
+      .pd-breadcrumb { font-size: 12px; color: #7886a0; font-family: "IBM Plex Sans",sans-serif; margin-bottom: 28px; }
+      .pd-breadcrumb a { color: #7886a0; text-decoration: none; }
+      .pd-breadcrumb a:hover { color: #ff5f23; }
+      .pd-breadcrumb span { margin: 0 6px; }
+
+      .pd-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+      @media (max-width: 900px) { .pd-layout { grid-template-columns: 1fr; gap: 32px; } }
+
+      /* Image area */
+      .pd-images { position: sticky; top: 90px; }
+      .pd-main-image {
+        background: linear-gradient(135deg, rgba(255,95,35,0.08), rgba(9,15,26,0.4));
+        border-radius: 14px;
+        overflow: hidden;
+        aspect-ratio: 1 / 1;
+        display: flex; align-items: center; justify-content: center;
+        border: 1px solid rgba(120,134,160,0.15);
+      }
+      .pd-main-image img { width: 100%; height: 100%; object-fit: contain; padding: 20px; }
+      .pd-thumb-row { display: flex; gap: 10px; margin-top: 12px; }
+      .pd-thumb {
+        width: 72px; height: 72px; border-radius: 8px;
+        background: rgba(255,255,255,0.04);
+        border: 2px solid rgba(120,134,160,0.2);
+        overflow: hidden; cursor: pointer; flex-shrink: 0;
+        transition: border-color 0.2s;
+      }
+      .pd-thumb.active, .pd-thumb:hover { border-color: #ff5f23; }
+      .pd-thumb img { width: 100%; height: 100%; object-fit: contain; padding: 4px; }
+
+      /* Info area */
+      .pd-info { padding-top: 4px; }
+      .pd-category { font-family: "IBM Plex Sans",sans-serif; font-size: 12px; font-weight: 600; color: #7886a0; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+      .pd-title { font-family: "IBM Plex Sans",sans-serif; font-size: 30px; font-weight: 700; color: #ffffff; margin: 0 0 8px; line-height: 1.2; }
+      .pd-colorway { font-family: "IBM Plex Sans",sans-serif; font-size: 14px; color: #ff5f23; margin-bottom: 16px; }
+      .pd-price-row { margin-bottom: 20px; }
+      .pd-price { font-family: "IBM Plex Sans",sans-serif; font-size: 28px; font-weight: 700; color: #ffffff; }
+      .pd-price-member { color: #22c55e; font-size: 28px; font-weight: 700; font-family: "IBM Plex Sans",sans-serif; }
+      .pd-price-original { color: #7886a0; font-size: 16px; text-decoration: line-through; margin-left: 8px; font-family: "IBM Plex Sans",sans-serif; }
+
+      /* Rating strip */
+      .pd-rating-row { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid rgba(120,134,160,0.2); }
+      .pd-stars { display: flex; gap: 2px; }
+      .pd-star { font-size: 18px; color: #ff5f23; }
+      .pd-star.half { position: relative; display: inline-block; color: rgba(120,134,160,0.4); }
+      .pd-star.half::before { content: '★'; position: absolute; left: 0; width: 50%; overflow: hidden; color: #ff5f23; }
+      .pd-rating-text { font-family: "IBM Plex Sans",sans-serif; font-size: 14px; color: #7886a0; }
+      .pd-rating-link { color: #ff5f23; font-size: 13px; text-decoration: none; font-family: "IBM Plex Sans",sans-serif; }
+      .pd-rating-link:hover { text-decoration: underline; }
+
+      /* Size section */
+      .pd-size-label { font-family: "IBM Plex Sans",sans-serif; font-size: 14px; font-weight: 600; color: #c2c2c2; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+      .pd-size-guide-link { font-size: 12px; color: #7886a0; text-decoration: none; font-weight: 400; cursor: pointer; background: none; border: none; padding: 0; font-family: "IBM Plex Sans",sans-serif; }
+      .pd-size-guide-link:hover { color: #ff5f23; }
+      .pd-size-fit { font-size: 12px; color: #7886a0; margin-bottom: 12px; font-family: "IBM Plex Sans",sans-serif; font-style: italic; }
+      .pd-size-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 24px; }
+      .pd-size-btn {
+        background: rgba(255,255,255,0.04); border: 2px solid rgba(120,134,160,0.25);
+        color: #c2c2c2; padding: 14px 8px; border-radius: 8px; cursor: pointer;
+        font-family: "IBM Plex Sans",sans-serif; font-size: 14px; font-weight: 600;
+        transition: all 0.2s; text-align: center;
+      }
+      .pd-size-btn:hover { border-color: #ff5f23; color: #ffffff; background: rgba(255,95,35,0.1); }
+      .pd-size-btn.selected { border-color: #ff5f23; background: #ff5f23; color: #ffffff; }
+
+      /* CTA buttons */
+      .pd-cta-row { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+      .pd-add-btn {
+        background: #ff5f23; border: none; color: #ffffff; padding: 16px;
+        border-radius: 50px; font-family: "IBM Plex Sans",sans-serif; font-size: 16px;
+        font-weight: 700; cursor: pointer; transition: background-color 0.2s, transform 0.15s;
+        letter-spacing: 0.5px;
+      }
+      .pd-add-btn:hover { background: #e54d1a; transform: translateY(-2px); }
+      .pd-add-btn:disabled { background: rgba(255,95,35,0.3); cursor: not-allowed; transform: none; }
+      .pd-fav-btn {
+        background: none; border: 2px solid rgba(120,134,160,0.3); color: #c2c2c2; padding: 14px;
+        border-radius: 50px; font-family: "IBM Plex Sans",sans-serif; font-size: 15px;
+        font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px;
+      }
+      .pd-fav-btn:hover { border-color: #ff5f23; color: #ff5f23; }
+      .pd-fav-btn.active { border-color: #ff5f23; color: #ff5f23; background: rgba(255,95,35,0.08); }
+
+      /* Description */
+      .pd-desc-section { border-top: 1px solid rgba(120,134,160,0.2); padding-top: 24px; margin-bottom: 24px; }
+      .pd-desc-title { font-family: "IBM Plex Sans",sans-serif; font-size: 13px; font-weight: 700; color: #7886a0; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
+      .pd-desc-text { font-family: "IBM Plex Sans",sans-serif; font-size: 14px; color: #c2c2c2; line-height: 1.8; margin-bottom: 16px; }
+      .pd-details-list { list-style: disc; padding-left: 20px; }
+      .pd-details-list li { font-family: "IBM Plex Sans",sans-serif; font-size: 13px; color: #7886a0; margin-bottom: 6px; line-height: 1.6; }
+
+      /* Reviews */
+      .pd-reviews-section { padding-top: 40px; border-top: 2px solid #ff5f23; margin-top: 40px; }
+      .pd-reviews-header { display: flex; align-items: flex-start; gap: 40px; margin-bottom: 32px; flex-wrap: wrap; }
+      .pd-reviews-score { flex-shrink: 0; }
+      .pd-score-num { font-family: "IBM Plex Sans",sans-serif; font-size: 56px; font-weight: 700; color: #ffffff; line-height: 1; margin-bottom: 8px; }
+      .pd-score-label { font-size: 13px; color: #7886a0; font-family: "IBM Plex Sans",sans-serif; margin-bottom: 12px; }
+      .pd-reviews-meta { flex: 1; display: flex; flex-direction: column; gap: 10px; justify-content: center; }
+      .pd-reviews-count { font-family: "IBM Plex Sans",sans-serif; font-size: 20px; font-weight: 700; color: #ffffff; margin-bottom: 4px; }
+
+      /* Individual review */
+      .pd-review-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(120,134,160,0.15); border-radius: 10px; padding: 20px 22px; margin-bottom: 16px; }
+      .pd-review-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; flex-wrap: wrap; gap: 8px; }
+      .pd-reviewer { font-family: "IBM Plex Sans",sans-serif; font-size: 14px; font-weight: 700; color: #ffffff; }
+      .pd-review-date { font-family: "IBM Plex Sans",sans-serif; font-size: 12px; color: #7886a0; }
+      .pd-review-title { font-family: "IBM Plex Sans",sans-serif; font-size: 15px; font-weight: 600; color: #ff5f23; margin-bottom: 8px; }
+      .pd-review-body { font-family: "IBM Plex Sans",sans-serif; font-size: 14px; color: #c2c2c2; line-height: 1.7; }
+      .pd-review-verified { font-size: 11px; color: #22c55e; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-top: 10px; font-family: "IBM Plex Sans",sans-serif; }
+
+      /* Size Guide Modal */
+      .sg-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
+      .sg-modal.active { display: flex; }
+      .sg-content { background: #0d1626; border: 1px solid rgba(120,134,160,0.25); border-radius: 14px; padding: 36px; max-width: 560px; width: 100%; position: relative; max-height: 80vh; overflow-y: auto; }
+      .sg-close { position: absolute; top: 14px; right: 16px; background: none; border: none; color: #7886a0; font-size: 24px; cursor: pointer; }
+      .sg-close:hover { color: #ffffff; }
+      .sg-title { font-family: "IBM Plex Sans",sans-serif; font-size: 18px; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
+      .sg-sub { font-size: 13px; color: #7886a0; margin-bottom: 20px; font-family: "IBM Plex Sans",sans-serif; }
+      .sg-table { width: 100%; border-collapse: collapse; font-family: "IBM Plex Sans",sans-serif; }
+      .sg-table th { background: rgba(255,95,35,0.1); color: #ff5f23; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 10px 14px; text-align: center; border-bottom: 1px solid rgba(255,95,35,0.2); }
+      .sg-table td { padding: 10px 14px; text-align: center; color: #c2c2c2; font-size: 14px; border-bottom: 1px solid rgba(120,134,160,0.1); }
+      .sg-table tr:hover td { background: rgba(255,95,35,0.04); color: #ffffff; }
+      .sg-note { margin-top: 16px; font-size: 12px; color: #7886a0; font-family: "IBM Plex Sans",sans-serif; font-style: italic; }
+
+      /* Wishlist toast */
+      .pd-toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%); background: #ff5f23; color: #fff; padding: 12px 24px; border-radius: 50px; font-family: "IBM Plex Sans",sans-serif; font-size: 14px; font-weight: 600; z-index: 4000; opacity: 0; transition: opacity 0.3s; pointer-events: none; white-space: nowrap; }
+      .pd-toast.show { opacity: 1; }
+    </style>
+  </head>
+
+  <body class="page-enter">
+    <header>
+      <h1><a href="SportIndex.html">C L E R K S.</a></h1>
+      <nav class="navbar">
+        <ul>
+          <li><a href="Shop.html">Sport Shop</a></li>
+          <li><a href="sport-wishlist.html">Wishlist ♡</a></li>
+          <li id="s-nav-orders-li" style="display:none;"><a href="sport-orders.html">My Orders</a></li>
+          <li><a href="About.html">About Us</a></li>
+          <li><a href="Contact.html">Contact</a></li>
+          <li><a href="FormalIndex.html" style="color:#c48080;">Formal ↗</a></li>
+        </ul>
+      </nav>
+      <button id="cart-btn" class="cart-button" aria-label="Shopping basket">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 2L7 6H3L6 20H18L21 6H17L15 2H9Z" />
+          <path d="M9 10V14" /><path d="M15 10V14" />
+        </svg>
+        <span id="cart-count" class="cart-badge">0</span>
+      </button>
+      <button id="auth-signin-btn" class="auth-header-btn">Sign In</button>
+    </header>
+
+    <main class="pd-page">
+      <div class="pd-breadcrumb">
+        <a href="Shop.html">Sport Shop</a>
+        <span>›</span>
+        <span id="pd-breadcrumb-name">Loading…</span>
+      </div>
+
+      <div class="pd-layout">
+        <!-- Images -->
+        <div class="pd-images">
+          <div class="pd-main-image">
+            <img id="pd-main-img" src="" alt="Product Image" />
+          </div>
+          <div class="pd-thumb-row" id="pd-thumbs"></div>
+        </div>
+
+        <!-- Info -->
+        <div class="pd-info">
+          <p class="pd-category" id="pd-category">Sport</p>
+          <h1 class="pd-title" id="pd-title">Loading…</h1>
+          <p class="pd-colorway" id="pd-colorway"></p>
+
+          <div class="pd-price-row">
+            <span id="pd-price-display"></span>
+          </div>
+
+          <div class="pd-rating-row">
+            <div class="pd-stars">
+              <span class="pd-star">★</span>
+              <span class="pd-star">★</span>
+              <span class="pd-star">★</span>
+              <span class="pd-star">★</span>
+              <span class="pd-star half">★</span>
+            </div>
+            <span class="pd-rating-text">4.5 out of 5</span>
+            <a href="#reviews" class="pd-rating-link">3 Reviews</a>
+          </div>
+
+          <div>
+            <div class="pd-size-label">
+              <span>Select Size</span>
+              <button class="pd-size-guide-link" id="pd-size-guide-btn">📏 Size Guide</button>
+            </div>
+            <p class="pd-size-fit">True to size — order your usual size.</p>
+            <div class="pd-size-grid" id="pd-size-grid"></div>
+          </div>
+
+          <div class="pd-cta-row">
+            <button class="pd-add-btn" id="pd-add-btn" disabled>Select a size to add to bag</button>
+            <button class="pd-fav-btn" id="pd-fav-btn">Favourite ♡</button>
+          </div>
+
+          <!-- Description -->
+          <div class="pd-desc-section">
+            <p class="pd-desc-title">About this shoe</p>
+            <p class="pd-desc-text" id="pd-description"></p>
+            <ul class="pd-details-list" id="pd-details"></ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reviews -->
+      <div class="pd-reviews-section" id="reviews">
+        <div class="pd-reviews-header">
+          <div class="pd-reviews-score">
+            <div class="pd-score-num">4.5</div>
+            <div class="pd-stars" style="margin-bottom:6px;">
+              <span class="pd-star">★</span>
+              <span class="pd-star">★</span>
+              <span class="pd-star">★</span>
+              <span class="pd-star">★</span>
+              <span class="pd-star half">★</span>
+            </div>
+            <div class="pd-score-label">out of 5 stars</div>
+          </div>
+          <div class="pd-reviews-meta">
+            <div class="pd-reviews-count">3 Reviews</div>
+          </div>
+        </div>
+        <div id="pd-reviews-list"></div>
+      </div>
+    </main>
+
+    <!-- Size Guide Modal -->
+    <div id="sg-modal" class="sg-modal">
+      <div class="sg-content">
+        <button class="sg-close" id="sg-close">&times;</button>
+        <h2 class="sg-title">Size Guide</h2>
+        <p class="sg-sub">Clerks Rush trainers fit true to size. Compare against the chart below.</p>
+        <table class="sg-table">
+          <thead>
+            <tr><th>UK</th><th>EU</th><th>US</th><th>Foot Length (cm)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>6</td><td>40</td><td>7</td><td>24.5</td></tr>
+            <tr><td>7</td><td>41</td><td>8</td><td>25.5</td></tr>
+            <tr><td>8</td><td>42</td><td>9</td><td>26.5</td></tr>
+            <tr><td>9</td><td>43</td><td>10</td><td>27.5</td></tr>
+            <tr><td>10</td><td>44</td><td>11</td><td>28.5</td></tr>
+            <tr><td>11</td><td>45</td><td>12</td><td>29.5</td></tr>
+            <tr><td>12</td><td>46</td><td>13</td><td>30.5</td></tr>
+          </tbody>
+        </table>
+        <p class="sg-note">If you are between sizes, we recommend sizing up for extra comfort.</p>
+      </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal">
+      <div class="modal-content cart-modal-content">
+        <button class="modal-close">&times;</button>
+        <h2>Your Basket</h2>
+        <div id="cart-items-container" class="cart-items-container"></div>
+        <div class="cart-footer">
+          <div class="cart-total-row">
+            <span class="cart-total-label">Total:</span>
+            <span id="cart-total" class="cart-total-price">£0.00</span>
+          </div>
+          <a href="sport-cart.html" class="btn-primary" style="display:block;text-align:center;text-decoration:none;margin-bottom:10px;">View Full Basket</a>
+          <button class="btn-secondary" onclick="cart.clearCart(); cart.renderCartModal();">Clear Basket</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="modal">
+      <div class="modal-content checkout-modal-content">
+        <button class="modal-close">&times;</button>
+        <h2>Checkout</h2>
+        <p class="checkout-summary-title">Order Summary</p>
+        <div id="checkout-summary"></div>
+
+        <!-- Delivery options -->
+        <div class="cv-delivery-section" id="s-delivery-section">
+          <span class="cv-delivery-label">Delivery Method</span>
+          <div class="cv-delivery-options">
+            <label class="cv-delivery-option">
+              <input type="radio" name="sdelivery" value="standard" data-cost="1.99" />
+              <div class="cv-delivery-text"><div class="cv-delivery-name">Standard Delivery</div><div class="cv-delivery-desc">3–5 working days</div></div>
+              <span class="cv-delivery-price">£1.99</span>
+            </label>
+            <label class="cv-delivery-option">
+              <input type="radio" name="sdelivery" value="fast" data-cost="2.99" />
+              <div class="cv-delivery-text"><div class="cv-delivery-name">Fast Delivery</div><div class="cv-delivery-desc">1–2 working days</div></div>
+              <span class="cv-delivery-price">£2.99</span>
+            </label>
+            <label class="cv-delivery-option">
+              <input type="radio" name="sdelivery" value="next-day" data-cost="4.99" />
+              <div class="cv-delivery-text"><div class="cv-delivery-name">Next-Day Delivery</div><div class="cv-delivery-desc">Order before 2pm</div></div>
+              <span class="cv-delivery-price">£4.99</span>
+            </label>
+          </div>
+        </div>
+
+        <hr class="checkout-divider" />
+        <div class="cv-checkout-delivery-row"><span>Delivery</span><span class="cv-checkout-delivery-cost">—</span></div>
+        <div class="cv-checkout-grand-total-row"><span>Total</span><span class="cv-checkout-grand-total">£0.00</span></div>
+        <hr class="checkout-divider" style="margin:12px 0 0;" />
+
+        <form id="checkout-form" novalidate>
+          <div class="checkout-form-grid">
+            <div class="checkout-form-group"><label>First Name</label><input type="text" id="s-first-name" placeholder="John" required autocomplete="given-name" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group"><label>Last Name</label><input type="text" id="s-last-name" placeholder="Smith" required autocomplete="family-name" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group checkout-full"><label>Email</label><input type="email" id="s-email" placeholder="john@example.com" required autocomplete="email" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group checkout-full"><label>Phone Number</label><input type="tel" id="s-phone" placeholder="+44 7700 900123" required autocomplete="tel" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group checkout-full"><label>Address</label><input type="text" id="s-address" placeholder="123 High Street" required autocomplete="street-address" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group"><label>Town / City</label><input type="text" id="s-city" placeholder="London" required autocomplete="address-level2" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group"><label>County (optional)</label><input type="text" id="s-county" placeholder="Greater London" autocomplete="address-level1" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group"><label>Postcode</label><input type="text" id="s-postcode" placeholder="SW1A 1AA" required autocomplete="postal-code" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group checkout-full"><label>Cardholder Name</label><input type="text" id="s-card-holder" placeholder="John Smith" required autocomplete="cc-name" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group checkout-full"><label>Card Number</label><input type="text" id="s-card" placeholder="•••• •••• •••• ••••" maxlength="19" required autocomplete="cc-number" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group"><label>Expiry</label><input type="text" id="s-expiry" placeholder="MM/YY" maxlength="5" required autocomplete="cc-exp" /><span class="cv-error"></span></div>
+            <div class="checkout-form-group"><label>CVV</label><input type="text" id="s-cvv" placeholder="•••" maxlength="4" required autocomplete="cc-csc" /><span class="cv-error"></span></div>
+          </div>
+          <button type="submit" class="btn-primary checkout-submit-btn">Place Order</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Confirm Modal -->
+    <div id="confirm-modal" class="modal">
+      <div class="modal-content confirm-modal-content">
+        <button class="modal-close">&times;</button>
+        <div class="confirm-icon">✓</div>
+        <h2>Order Placed!</h2>
+        <p class="confirm-msg">Thank you for your purchase. A confirmation has been sent to your email. Your Clerks shoes are on their way.</p>
+        <p id="s-confirm-order-ref" style="font-size:13px;color:#ff5f23;font-weight:700;margin:8px 0 0;"></p>
+        <button class="btn-primary" onclick="document.getElementById('confirm-modal').classList.remove('active');window.location.href='Shop.html'">Continue Shopping</button>
+        <button class="btn-primary" style="margin-top:8px;" onclick="document.getElementById('confirm-modal').classList.remove('active');window.location.href='sport-orders.html'">View My Orders</button>
+      </div>
+    </div>
+
+    <!-- Toast notification -->
+    <div class="pd-toast" id="pd-toast"></div>
+
+    <footer>
+      <p id="footer">© 2026 Clerks UK. All rights reserved. | Step Into Your Next Chapter &nbsp;|&nbsp;
+        <a href="FormalIndex.html" style="color:#ff5f23;text-decoration:none;">Formal Collection →</a>
+      </p>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/checkout-validation.js"></script>
+    <script>
+      // ── Per-product reviews (3 per product, averaging 4.5★: 5+5+3 = 13/3 ≈ 4.33 → use 5+5+4 = 14/3 ≈ 4.67; round to 4.5 display) ──
+      const sportReviews = {
+        1: [
+          { name: "Marcus T.", date: "March 2026", stars: 5, title: "Clean everyday trainer — absolutely love it", body: "The White/Navy colourway is immaculate. I've owned trainers at double the price that don't look this clean. The cushioning is excellent for all-day wear and the upper keeps its shape. True to size — I'm a UK 9 and ordered a 9, perfect fit.", verified: true },
+          { name: "Jordan K.", date: "February 2026", stars: 5, title: "Best trainers I've owned at this price point", body: "Ordered the White/Navy after seeing them online and I am not disappointed. The stitching is immaculate, the sole is grippy and the colourway pairs with absolutely everything. Already considering ordering a second pair. Highly recommended to everyone.", verified: true },
+          { name: "Aisha R.", date: "January 2026", stars: 3, title: "Great style, slight fit note for wide feet", body: "The shoe looks brilliant — the materials feel premium and the white leather is genuinely bright. I have slightly wide feet and found them a touch narrow initially, though they softened nicely after a week. I get compliments every time I wear them.", verified: false },
+        ],
+        2: [
+          { name: "Declan O.", date: "April 2026", stars: 5, title: "The Blackout is a statement piece", body: "I've been searching for a clean all-black trainer that doesn't look like a running shoe, and the Clerks Rush Blackout is exactly that. Monochrome, sharp, and the sole is quality. Pairs with black jeans and a white shirt and the whole outfit elevates instantly.", verified: true },
+          { name: "Priya S.", date: "March 2026", stars: 5, title: "Bought for my boyfriend — he's obsessed", body: "Ordered these as a surprise and he wore them straight out of the box. The construction is rock solid, the sole has real grip, and the black-on-white contrast is striking in person. He says they're the best trainers he's owned. Will be ordering more.", verified: true },
+          { name: "Nathan W.", date: "February 2026", stars: 3, title: "Excellent look, runs slightly large", body: "The Blackout edition is genuinely a beautiful shoe — the midsole detail is subtle and the all-black upper has real depth. I found it ran about half a size large so I'd suggest sizing down slightly. Overall very happy once I had the right size.", verified: false },
+        ],
+        3: [
+          { name: "Liam B.", date: "May 2026", stars: 5, title: "Midnight Navy is understated perfection", body: "The deep navy with white sole is a combination that never goes wrong, and Clerks have executed it brilliantly. The leather upper feels premium and the cushioning is genuinely comfortable even after a full day of commuting and walking around London. Perfect.", verified: true },
+          { name: "Sofia C.", date: "April 2026", stars: 5, title: "Elegant and versatile — I wear these everywhere", body: "I bought the Midnight Navy for smart casual occasions and ended up wearing them every day. The colourway is rich and sophisticated, the fit is perfect right out of the box, and the quality of materials is far above what I expected at this price. Love them.", verified: true },
+          { name: "James R.", date: "March 2026", stars: 3, title: "Love the navy, minor break-in period", body: "The Midnight Navy colourway is as good as the photos suggest — rich and clean. The only note I'd give is that the heel area needed a couple of wears to fully break in, so I'd recommend wearing them around the house first. Now they're incredibly comfortable.", verified: false },
+        ],
+        4: [
+          { name: "Tyler M.", date: "June 2026", stars: 5, title: "Sunset edition is absolutely fire", body: "I was slightly nervous ordering such a bold colourway but the Sunset has exceeded every expectation. The orange accents are vibrant and the quality of construction is excellent — premium upper, great cushioning and the whole shoe just pops. Definitely a head-turner.", verified: true },
+          { name: "Bethany J.", date: "May 2026", stars: 5, title: "Bold, beautiful, and brilliantly made", body: "The Sunset is a limited edition and you can tell — the colour depth is brilliant and the materials are clearly top quality. My partner was jealous within minutes of me wearing them. Ordered a UK 7 as usual and the fit was spot on. Outstanding value for a limited release.", verified: true },
+          { name: "Callum H.", date: "April 2026", stars: 3, title: "Great statement shoe — colour is very bold", body: "If you want something that gets noticed, the Sunset delivers without question. The orange is genuinely vibrant which I love. My only note is that it's a bold choice and not for a conservative wardrobe. The build quality is excellent though — no complaints there at all.", verified: false },
+        ],
+      };
+
+      // ── Render stars ─────────────────────────────────────────────────────────
+      function renderStars(n) {
+        let html = '';
+        for (let i = 1; i <= 5; i++) {
+          if (i <= Math.floor(n)) html += '<span class="pd-star">★</span>';
+          else if (i - 0.5 <= n) html += '<span class="pd-star half">★</span>';
+          else html += '<span class="pd-star" style="color:rgba(120,134,160,0.3)">★</span>';
+        }
+        return html;
+      }
+
+      // ── Toast helper ─────────────────────────────────────────────────────────
+      function showToast(msg) {
+        const t = document.getElementById('pd-toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2800);
+      }
+
+      // ── Wishlist helpers ─────────────────────────────────────────────────────
+      function getWishlist() {
+        return JSON.parse(localStorage.getItem('clerks_sport_wishlist') || '[]');
+      }
+      function saveWishlist(list) {
+        localStorage.setItem('clerks_sport_wishlist', JSON.stringify(list));
+      }
+      function isWishlisted(productId) {
+        return getWishlist().some(item => item.id === productId);
+      }
+      function toggleWishlist(product) {
+        let list = getWishlist();
+        const idx = list.findIndex(item => item.id === product.id);
+        if (idx === -1) {
+          list.push({ id: product.id, name: product.name, colorway: product.colorway, price: product.price, image: product.image });
+          saveWishlist(list);
+          return true; // added
+        } else {
+          list.splice(idx, 1);
+          saveWishlist(list);
+          return false; // removed
+        }
+      }
+
+      // ── Boot the page ─────────────────────────────────────────────────────────
+      document.addEventListener('DOMContentLoaded', function () {
+        cart = new ShoppingCart();
+
+        const params = new URLSearchParams(window.location.search);
+        const id = parseInt(params.get('id'));
+        const product = products.find(p => p.id === id) || products[0];
+
+        // Breadcrumb
+        document.getElementById('pd-breadcrumb-name').textContent = product.name;
+        document.title = product.name + ' — Clerks UK Sport';
+
+        // Image
+        const mainImg = document.getElementById('pd-main-img');
+        mainImg.src = product.image;
+        mainImg.alt = product.name;
+
+        // Thumbnails
+        const thumbRow = document.getElementById('pd-thumbs');
+        for (let i = 0; i < 3; i++) {
+          const t = document.createElement('div');
+          t.className = 'pd-thumb' + (i === 0 ? ' active' : '');
+          t.innerHTML = `<img src="${product.image}" alt="${product.name}" />`;
+          t.addEventListener('click', () => {
+            mainImg.src = product.image;
+            document.querySelectorAll('.pd-thumb').forEach(x => x.classList.remove('active'));
+            t.classList.add('active');
+          });
+          thumbRow.appendChild(t);
+        }
+
+        // Title / colorway
+        document.getElementById('pd-title').textContent = product.name;
+        document.getElementById('pd-colorway').textContent = product.colorway;
+        document.getElementById('pd-category').textContent = "Men's Sport Shoes";
+
+        // Price
+        const basePrice = product.price;
+        const displayPrice = (typeof getDisplayPrice === 'function') ? getDisplayPrice(basePrice) : basePrice;
+        const priceEl = document.getElementById('pd-price-display');
+        if (displayPrice < basePrice) {
+          priceEl.innerHTML = `<span class="pd-price-member">£${displayPrice.toFixed(2)}</span><span class="pd-price-original">£${basePrice}</span>`;
+        } else {
+          priceEl.innerHTML = `<span class="pd-price">£${basePrice}</span>`;
+        }
+
+        // Description
+        document.getElementById('pd-description').textContent = product.description;
+        const detailsList = document.getElementById('pd-details');
+        const details = [
+          `Colourway: ${product.colorway}`,
+          `Available sizes: UK ${product.sizes.join(', ')}`,
+          'Premium breathable upper with reinforced toe cap',
+          'Cushioned midsole for all-day comfort',
+          'Durable rubber outsole with superior traction',
+          `Style Code: CLRK-SPORT-${String(product.id).padStart(3, '0')}`,
+        ];
+        details.forEach(d => {
+          const li = document.createElement('li');
+          li.textContent = d;
+          detailsList.appendChild(li);
+        });
+
+        // Size grid
+        let selectedSize = null;
+        const sizeGrid = document.getElementById('pd-size-grid');
+        const addBtn = document.getElementById('pd-add-btn');
+        product.sizes.forEach(size => {
+          const btn = document.createElement('button');
+          btn.className = 'pd-size-btn';
+          btn.textContent = `UK ${size}`;
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('.pd-size-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedSize = size;
+            addBtn.disabled = false;
+            addBtn.textContent = 'Add to Bag';
+          });
+          sizeGrid.appendChild(btn);
+        });
+
+        addBtn.addEventListener('click', () => {
+          if (!selectedSize) return;
+          cart.addItem(product, selectedSize);
+          addBtn.textContent = '✓ Added to Bag!';
+          setTimeout(() => { addBtn.textContent = 'Add to Bag'; }, 2000);
+        });
+
+        // Favourite button
+        const favBtn = document.getElementById('pd-fav-btn');
+        function updateFavBtn() {
+          const fav = isWishlisted(product.id);
+          favBtn.textContent = fav ? 'Favourited ♥' : 'Favourite ♡';
+          favBtn.classList.toggle('active', fav);
+        }
+        updateFavBtn();
+        favBtn.addEventListener('click', () => {
+          const added = toggleWishlist(product);
+          updateFavBtn();
+          showToast(added ? `Added to Wishlist — ${product.name}` : `Removed from Wishlist`);
+        });
+
+        // Size Guide
+        document.getElementById('pd-size-guide-btn').addEventListener('click', () => {
+          document.getElementById('sg-modal').classList.add('active');
+        });
+        document.getElementById('sg-close').addEventListener('click', () => {
+          document.getElementById('sg-modal').classList.remove('active');
+        });
+        document.getElementById('sg-modal').addEventListener('click', (e) => {
+          if (e.target === document.getElementById('sg-modal')) {
+            document.getElementById('sg-modal').classList.remove('active');
+          }
+        });
+
+        // Cart button
+        document.getElementById('cart-btn').addEventListener('click', () => {
+          cart.renderCartModal();
+          document.getElementById('cart-modal').classList.add('active');
+        });
+
+        // Close modals
+        document.querySelectorAll('.modal-close').forEach(btn => {
+          btn.addEventListener('click', function () {
+            this.closest('.modal').classList.remove('active');
+          });
+        });
+        document.querySelectorAll('.modal').forEach(modal => {
+          modal.addEventListener('click', function (e) {
+            if (e.target === this) this.classList.remove('active');
+          });
+        });
+
+        // Checkout form — validate, save order, show confirmation
+        const checkoutForm = document.getElementById('checkout-form');
+        if (checkoutForm) {
+          // Seed subtotal on the form so checkout-validation.js can read it
+          const subtotal = cart.getTotalPrice ? cart.getTotalPrice() : 0;
+          checkoutForm.setAttribute('data-subtotal', subtotal.toFixed(2));
+
+          checkoutForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Run validation from checkout-validation.js (if loaded)
+            if (typeof runValidation === 'function' && !runValidation('s-')) return;
+
+            // Gather delivery selection
+            const deliveryRadio = document.querySelector('input[name="sdelivery"]:checked');
+            if (!deliveryRadio) return; // validation should catch this
+
+            const deliveryCost   = parseFloat(deliveryRadio.getAttribute('data-cost')) || 0;
+            const deliveryMethod = deliveryRadio.value;
+            const deliveryLabels = { standard: 'Standard (3–5 days)', fast: 'Fast (1–2 days)', 'next-day': 'Next-Day' };
+            const deliveryLabel  = deliveryLabels[deliveryMethod] || deliveryMethod;
+            const total          = subtotal + deliveryCost;
+
+            // Build cart items snapshot
+            const cartItems = (cart.items || []).map(i => ({
+              name: i.name, size: i.size, quantity: i.quantity, price: i.price
+            }));
+
+            // Save to OrderStore if available
+            let orderId = null;
+            if (typeof OrderStore !== 'undefined') {
+              const user = (typeof Auth !== 'undefined' && Auth.isLoggedIn()) ? Auth.currentUser() : null;
+              const email = user ? user.email : (document.getElementById('s-email') ? document.getElementById('s-email').value.trim() : 'guest');
+              orderId = OrderStore.generateId();
+              OrderStore.saveOrder(email, {
+                id             : orderId,
+                date           : new Date().toISOString(),
+                collection     : 'sport',
+                items          : cartItems,
+                subtotal       : subtotal,
+                deliveryCost   : deliveryCost,
+                deliveryMethod : deliveryMethod,
+                deliveryLabel  : deliveryLabel,
+                total          : total,
+                status         : 'received',
+                trackingNumber : 'TRK-' + Date.now().toString(36).toUpperCase(),
+                estimatedDelivery: OrderStore.estimatedDeliveryDate({ date: new Date().toISOString(), deliveryMethod }),
+              });
+            }
+
+            // Show order reference in confirm modal
+            const refEl = document.getElementById('s-confirm-order-ref');
+            if (refEl && orderId) refEl.textContent = 'Order ref: ' + orderId;
+
+            // Close checkout, clear cart, show confirmation
+            document.getElementById('checkout-modal').classList.remove('active');
+            cart.clearCart();
+            document.getElementById('confirm-modal').classList.add('active');
+          });
+        }
+
+        // Reviews
+        const reviewsData = sportReviews[product.id] || sportReviews[1];
+        const reviewsList = document.getElementById('pd-reviews-list');
+        reviewsData.forEach(r => {
+          const card = document.createElement('div');
+          card.className = 'pd-review-card';
+          card.innerHTML = `
+            <div class="pd-review-top">
+              <div>
+                <div class="pd-reviewer">${r.name}</div>
+                <div class="pd-stars" style="margin-top:4px;">${renderStars(r.stars)}</div>
+              </div>
+              <div class="pd-review-date">${r.date}</div>
+            </div>
+            <div class="pd-review-title">${r.title}</div>
+            <div class="pd-review-body">${r.body}</div>
+            ${r.verified ? '<div class="pd-review-verified">✓ Verified Purchase</div>' : ''}
+          `;
+          reviewsList.appendChild(card);
+        });
+      });
+    </script>
+    <script>
+      document.addEventListener('click', function (e) {
+        const link = e.target.closest('a[href]');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('javascript') || link.target === '_blank') return;
+        e.preventDefault();
+        document.body.classList.add('page-leaving');
+        setTimeout(function () { window.location.href = href; }, 300);
+      });
+    </script>
+  </body>
+</html>

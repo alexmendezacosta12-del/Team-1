@@ -3,23 +3,143 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Contact Clerks UK Sport | Get in Touch</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body>
+  <body class="page-enter">
+
     <header>
-      <h1><a href="index.html">C L E R K S.</a></h1>
+      <h1><a href="SportIndex.html">C L E R K S.</a></h1>
       <nav class="navbar">
         <ul>
-          <li><a href="Shop.html">Shop</a></li>
+          <li><a href="Shop.html">Sport Shop</a></li>
           <li><a href="About.html">About Us</a></li>
           <li><a href="Contact.html">Contact</a></li>
+          <li><a href="FormalIndex.html" class="nav-formal-link">Formal ↗</a></li>
         </ul>
       </nav>
     </header>
-    <h1>Contact Us</h1>
+
+    <main class="s-page-main">
+
+      <div class="s-page-hero">
+        <h1 class="s-page-title">Contact Us</h1>
+        <p class="s-page-subtitle">We're here to help — drop us a message</p>
+      </div>
+
+      <div class="s-contact-layout">
+
+        <!-- Left column: contact details -->
+        <div class="s-contact-info">
+          <h2 class="s-contact-heading">Get in Touch</h2>
+          <p class="s-contact-body">Got a question about your order, sizing, or want to know what's dropping next? Our team runs fast — just like our shoes.</p>
+
+          <div class="s-contact-detail">
+            <span class="s-contact-label">Email</span>
+            <span class="s-contact-value">sport@clerksuk.com</span>
+          </div>
+          <div class="s-contact-detail">
+            <span class="s-contact-label">Phone</span>
+            <span class="s-contact-value">+44 20 7946 0121</span>
+          </div>
+          <div class="s-contact-detail">
+            <span class="s-contact-label">Studio</span>
+            <span class="s-contact-value">8 Carnaby Street, London W1F 9PS</span>
+          </div>
+          <div class="s-contact-detail">
+            <span class="s-contact-label">Hours</span>
+            <span class="s-contact-value">Mon–Sat 9am – 6pm GMT</span>
+          </div>
+        </div>
+
+        <!-- Right column: form -->
+        <div class="s-contact-form-wrap">
+          <form class="s-contact-form" action="action_page.php" method="get" novalidate>
+
+            <div class="s-contact-form-row">
+              <div class="s-form-group">
+                <label for="sc-fname">First Name</label>
+                <input
+                  type="text"
+                  id="sc-fname"
+                  name="fname"
+                  placeholder="Jamie"
+                  required
+                  maxlength="20"
+                  minlength="2"
+                  pattern="[A-Za-z ]+"
+                />
+              </div>
+              <div class="s-form-group">
+                <label for="sc-lname">Last Name</label>
+                <input
+                  type="text"
+                  id="sc-lname"
+                  name="lname"
+                  placeholder="Johnson"
+                  required
+                  maxlength="20"
+                  minlength="2"
+                  pattern="[A-Za-z ]+"
+                />
+              </div>
+            </div>
+
+            <div class="s-form-group">
+              <label for="sc-email">Email Address</label>
+              <input
+                type="email"
+                id="sc-email"
+                name="email"
+                placeholder="jamie@example.com"
+                required
+                maxlength="60"
+              />
+            </div>
+
+            <div class="s-form-group">
+              <label for="sc-message">Message</label>
+              <textarea
+                id="sc-message"
+                name="message"
+                rows="5"
+                placeholder="How can we help you?"
+                class="s-contact-textarea"
+              ></textarea>
+            </div>
+
+            <div class="s-contact-buttons">
+              <button type="submit" class="s-btn-primary s-contact-submit">Send Message</button>
+              <button type="reset" class="s-btn-secondary s-contact-reset">Clear</button>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+    </main>
+
+    <footer>
+      <p id="footer">
+        © 2026 Clerks UK. All rights reserved. | Step Into Your Next Chapter &nbsp;|&nbsp;
+        <a href="FormalIndex.html" style="color:#ff5f23;text-decoration:none;">Formal Collection →</a>
+      </p>
+    </footer>
+
+    <script>
+      document.addEventListener('click', function (e) {
+        const link = e.target.closest('a[href]');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('#') || link.target === '_blank') return;
+        e.preventDefault();
+        document.body.classList.add('page-leaving');
+        setTimeout(function () { window.location.href = href; }, 300);
+      });
+    </script>
   </body>
-  <footer>
-    <p id="footer">Footer content.</p>
-  </footer>
 </html>

@@ -1,0 +1,2869 @@
+body {
+  background-color: #090f1a;
+}
+
+h1 {
+  font-family: "Arial", sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+  margin: 0px;
+  font-style: italic;
+  float: left;
+  padding: 6.2px;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+h1 a {
+  text-decoration: none;
+  color: white;
+}
+h1 a:active {
+  color: #ff5f23;
+}
+h1 a:hover {
+  color: #ff5f23;
+}
+h1:hover {
+  transform: scale(1.15);
+  transition: transform 0.2s ease;
+}
+.navbar ul {
+  list-style-type: none;
+
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 15px;
+  font-weight: normal;
+  color: #7886a0;
+  padding: 5px;
+  display: flex;
+  text-align: center;
+}
+.navbar a {
+  text-decoration: none;
+  color: #7886a0;
+  padding: 10px 16px;
+  text-align: center;
+  display: block;
+}
+.navbar a:hover {
+  color: #ff5f23;
+  transform: scale(1.15);
+  transition: transform 0.2s ease;
+}
+
+#orgshoe {
+  margin-top: 55px;
+  float: right;
+  width: 880px;
+  height: 500px;
+  border-radius: 1000px;
+  float: right;
+  margin-right: -150px;
+}
+#orgshoe:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+.htext {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-weight: normal;
+  color: white;
+  text-align: left;
+  font-weight: bold;
+  margin-top: 128px;
+  font-size: 55px;
+  line-height: 0.5;
+  float: left;
+  margin-left: 105px;
+}
+.htext:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+#footer {
+  background-color: #ffffff;
+  color: #7886a0;
+  text-align: center;
+  padding: 20px;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 14px;
+}
+
+/* Landing page: clear the floats so the footer sits below the hero */
+.sport-landing-main {
+  min-height: 560px;
+  overflow: hidden; /* clearfix — contains the floated htext and orgshoe */
+  padding-bottom: 20px;
+}
+
+.sport-landing-clear {
+  clear: both;
+  display: block;
+}
+
+#p2 {
+  color: #ff5f23;
+}
+#p4 {
+  background-color: #ffffff;
+  color: #a70404;
+  text-decoration: none;
+  padding: 1px;
+  font-style: italic;
+  text-shadow: 1px 0px 3.2px;
+  white-space: nowrap;
+}
+#p5 {
+  font-family: "IBM Plex Sans", sans-serif;
+  color: #c2c2c2;
+  border-radius: 50px;
+  border-style: solid;
+  border-color: #ff5f23;
+  border-width: 7px;
+  border-style: outset;
+  background-color: #090f1a;
+  color: aliceblue;
+  margin-top: 150px;
+  margin-right: 650px;
+  margin-left: 20px;
+  padding: 15px;
+}
+#p5:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+#UPSHOE {
+  float: right;
+  width: 500px;
+  height: 500px;
+  margin-top: 0px;
+}
+#UPSHOE:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+#p6 {
+  margin-left: 18%;
+  font-family: "IBM Plex Sans", sans-serif;
+  margin-top: 5%;
+}
+#p6:hover {
+  text-decoration: underline;
+}
+#shop {
+  text-align: right;
+  margin-left: 0%;
+  padding: 20px;
+  text-align: right;
+  margin-left: 0%;
+}
+
+#clerksrush {
+  margin-top: 100px;
+  margin-left: -50px;
+  border-radius: 25%;
+  height: 360px;
+  border: #ff5f23;
+  border-width: 200px;
+}
+
+#clerksrush:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+#clerksrushmidnight {
+  margin-top: 100px;
+  margin-left: -500px;
+  border-radius: 25%;
+  width: 500px;
+  height: 360px;
+  float: right;
+}
+#clerksrushmidnight:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+#p7 {
+  text-align: right;
+  margin-left: 12.3%;
+  margin-top: 2%;
+  margin-bottom: 3%;
+  border-radius: 50px;
+  border-style: solid;
+  border-color: #ff5f23;
+  padding: 20px;
+  border-width: 7px;
+  border-style: outset;
+}
+
+#fname {
+  margin-top: 0px;
+  color: #ff5f23;
+  display: flex;
+  flex-direction: column;
+}
+
+#lname {
+  color: #ff5f23;
+  margin-top: 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+#email {
+  margin-top: 0px;
+  color: #ff5f23;
+  display: flex;
+  flex-direction: column;
+}
+
+#submit {
+  color: #ff5f23;
+  margin-top: 10px;
+  margin-left: 100px;
+  display: flex;
+}
+#reset {
+  color: #ff5f23;
+  margin-top: 10px;
+  margin-left: 100px;
+  display: flex;
+  padding: 10px;
+}
+
+#formbuttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+#reset,
+#submit {
+  margin: 0;
+}
+
+#Fnameform {
+  margin-top: 100px;
+  header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 20px;
+  }
+}
+
+/* Global input — only applies to the old Contact/About form inputs.
+   Excluded: shop sidebar (.form-group, .price-input-group, .filter-section),
+   new page forms (.s-form-group), checkout forms (.checkout-form-group, .f-form-group) */
+.Fnameform input,
+.Lnameform input,
+.email input[type="text"],
+.email input[type="email"] {
+  width: 315px;
+  height: 40px;
+  outline-color: #627393;
+  border-radius: 20px;
+  border-color: #627393;
+  box-sizing: border-box;
+  font-size: 18px;
+}
+#reset input {
+  width: 150px;
+  cursor: pointer;
+  margin-left: -10px;
+  margin-top: 30px;
+}
+#submit input {
+  width: 150px;
+  cursor: pointer;
+  margin-left: 170px;
+  margin-top: -50px;
+}
+.email {
+  margin-left: 5px;
+}
+/* Placeholder padding only on the old inline form inputs */
+.Fnameform input::placeholder,
+.Lnameform input::placeholder,
+.email input::placeholder {
+  padding: 15px;
+  font-size: large;
+}
+input:invalid {
+  outline-color: #ff0000;
+}
+input:valid {
+  outline-color: greenyellow;
+  outline-width: 20px;
+}
+/* Override invalid/valid for new sport/formal form inputs — no coloured outlines */
+.s-form-group input:invalid,
+.s-form-group input:valid,
+.f-form-group input:invalid,
+.f-form-group input:valid {
+  outline-color: initial;
+  outline-width: initial;
+}
+/* Global form — scoped away from the new page-level forms */
+form:not(.s-contact-form):not(.f-contact-form):not(#recommendation-form):not(
+    #checkout-form
+  ):not(#f-checkout-form) {
+  display: block;
+  clear: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* Labels on the old inline contact form only */
+.Fnameform label,
+.Lnameform label,
+.email > label {
+  font-size: 18px;
+  font-family: "IBM Plex Sans", sans-serif;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* ==================== SHOP PAGE STYLES ==================== */
+
+/* Shop Container Layout */
+.shop-container {
+  display: flex;
+  gap: 30px;
+  max-width: 1400px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* Filter Sidebar */
+.filter-sidebar {
+  width: 300px;
+  flex-shrink: 0;
+  background-color: rgba(255, 255, 255, 0.02);
+  border-radius: 15px;
+  padding: 25px;
+  height: fit-content;
+  position: sticky;
+  top: 20px;
+}
+
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #ff5f23;
+}
+
+.filter-header h2 {
+  font-family: "IBM Plex Sans", sans-serif;
+  color: white;
+  font-size: 24px;
+  margin: 0;
+}
+
+#filter-count {
+  color: #ff5f23;
+  font-size: 16px;
+  margin-left: 5px;
+}
+
+.btn-clear {
+  background: none;
+  border: 1px solid #7886a0;
+  color: #7886a0;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.btn-clear:hover {
+  border-color: #ff5f23;
+  color: #ff5f23;
+  transform: scale(1.05);
+}
+
+/* Filter Sections */
+.filter-section {
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(120, 134, 160, 0.2);
+}
+
+.filter-section:last-child {
+  border-bottom: none;
+}
+
+.filter-section h3 {
+  font-family: "IBM Plex Sans", sans-serif;
+  color: #7886a0;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+}
+
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #c2c2c2;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.filter-option:hover {
+  color: white;
+}
+
+.filter-option input[type="checkbox"] {
+  margin-right: 10px;
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  accent-color: #ff5f23;
+}
+
+/* Size Grid */
+.size-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.size-option {
+  justify-content: center;
+  padding: 8px;
+  border: 1px solid rgba(120, 134, 160, 0.3);
+  border-radius: 5px;
+  transition: all 0.2s ease;
+}
+
+.size-option:hover {
+  border-color: #ff5f23;
+  background-color: rgba(255, 95, 35, 0.1);
+}
+
+.size-option input[type="checkbox"] {
+  display: none;
+}
+
+.size-option input[type="checkbox"]:checked + span {
+  color: #ff5f23;
+  font-weight: bold;
+}
+
+/* Price Range */
+.price-inputs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.price-input-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.price-input-group label {
+  color: #7886a0;
+  font-size: 12px;
+  margin-bottom: 5px;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.price-input-group input {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(120, 134, 160, 0.3);
+  border-radius: 5px;
+  padding: 8px;
+  color: white;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 14px;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
+
+.price-input-group input:focus {
+  outline: none;
+  border-color: #ff5f23;
+}
+
+.price-separator {
+  color: #7886a0;
+  margin-top: 20px;
+}
+
+/* Buttons */
+.btn-secondary {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid #7886a0;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  margin-top: 20px;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 95, 35, 0.1);
+  border-color: #ff5f23;
+  transform: scale(1.02);
+}
+
+.btn-primary {
+  width: 100%;
+  background-color: #ff5f23;
+  border: none;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  margin-top: 15px;
+}
+
+.btn-primary:hover {
+  background-color: #e54d1a;
+  transform: scale(1.05);
+}
+
+/* AI Section */
+.ai-section {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 95, 35, 0.1),
+    rgba(255, 95, 35, 0.05)
+  );
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 95, 35, 0.3);
+}
+
+.ai-description {
+  color: #7886a0;
+  font-size: 13px;
+  margin-bottom: 15px;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  color: #c2c2c2;
+  font-size: 13px;
+  margin-bottom: 6px;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  height: auto;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(120, 134, 160, 0.3);
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #ff5f23;
+}
+
+/* Fix select dropdown options visibility */
+.form-group select option {
+  background-color: #090f1a;
+  color: white;
+  padding: 10px;
+}
+
+#sort-select option {
+  background-color: #090f1a;
+  color: white;
+  padding: 10px;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #c2c2c2;
+  font-size: 13px;
+}
+
+.radio-option input[type="radio"] {
+  margin-right: 8px;
+  accent-color: #ff5f23;
+  cursor: pointer;
+}
+
+/* Recommendation Results */
+#recommendation-results {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 95, 35, 0.3);
+}
+
+#recommendation-results h3 {
+  color: white;
+  font-size: 16px;
+  margin-bottom: 15px;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.recommendation-card {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid rgba(255, 95, 35, 0.2);
+}
+
+.rec-number {
+  background-color: #ff5f23;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.recommendation-card img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.rec-info {
+  flex: 1;
+}
+
+.rec-info h4 {
+  color: white;
+  font-size: 13px;
+  margin: 0 0 5px 0;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.rec-price {
+  color: #ff5f23;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 0 0 5px 0;
+}
+
+.rec-reason {
+  color: #7886a0;
+  font-size: 11px;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Product Section */
+.product-section {
+  flex: 1;
+  min-width: 0;
+}
+
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #ff5f23;
+}
+
+.product-title {
+  display: flex;
+  align-items: baseline;
+  gap: 15px;
+}
+
+.product-title h2 {
+  font-family: "IBM Plex Sans", sans-serif;
+  color: white;
+  font-size: 32px;
+  margin: 0;
+}
+
+.result-count {
+  color: #7886a0;
+  font-size: 14px;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.sort-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sort-container label {
+  color: #7886a0;
+  font-size: 14px;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+#sort-select {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(120, 134, 160, 0.3);
+  border-radius: 5px;
+  padding: 8px 12px;
+  color: white;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#sort-select:focus {
+  outline: none;
+  border-color: #ff5f23;
+}
+
+/* Product Grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.product-card {
+  background-color: rgba(255, 255, 255, 0.02);
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(120, 134, 160, 0.1);
+  position: relative;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255, 95, 35, 0.2);
+  border-color: #ff5f23;
+}
+
+.product-card.recommended {
+  border: 2px solid #ff5f23;
+  box-shadow: 0 0 20px rgba(255, 95, 35, 0.3);
+}
+
+.recommended-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #ff5f23;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: bold;
+  font-family: "IBM Plex Sans", sans-serif;
+  z-index: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.product-image {
+  width: 100%;
+  height: 250px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 95, 35, 0.1),
+    rgba(9, 15, 26, 0.5)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.1);
+}
+
+.product-info {
+  padding: 20px;
+}
+
+.product-name {
+  font-family: "IBM Plex Sans", sans-serif;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.product-colorway {
+  color: #ff5f23;
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0 0 12px 0;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.product-description {
+  color: #7886a0;
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0 0 15px 0;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+  border-top: 1px solid rgba(120, 134, 160, 0.2);
+}
+
+.product-price {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.btn-view-sizes {
+  background-color: #ff5f23;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-view-sizes:hover {
+  background-color: #e54d1a;
+  transform: scale(1.05);
+}
+
+/* No Products Message */
+.no-products {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.no-products p {
+  color: #7886a0;
+  font-size: 18px;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+/* Modals */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background-color: #090f1a;
+  border: 2px solid #ff5f23;
+  border-radius: 15px;
+  padding: 40px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: #7886a0;
+  font-size: 32px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  line-height: 1;
+}
+
+.modal-close:hover {
+  color: #ff5f23;
+}
+
+.modal-content h2 {
+  font-family: "IBM Plex Sans", sans-serif;
+  color: white;
+  font-size: 28px;
+  margin: 0 0 25px 0;
+  text-align: center;
+}
+
+/* Size Chart Table */
+.size-chart-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.size-chart-table thead {
+  background-color: #ff5f23;
+}
+
+.size-chart-table th {
+  color: white;
+  padding: 15px;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.size-chart-table td {
+  color: #c2c2c2;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid rgba(120, 134, 160, 0.2);
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 15px;
+}
+
+.size-chart-table tr:hover td {
+  background-color: rgba(255, 95, 35, 0.1);
+  color: white;
+}
+
+/* Size Selection Grid */
+.size-selection-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.size-selection-grid button {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(120, 134, 160, 0.3);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.size-selection-grid button:hover {
+  background-color: #ff5f23;
+  border-color: #ff5f23;
+  transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .shop-container {
+    gap: 20px;
+  }
+
+  .filter-sidebar {
+    width: 260px;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 968px) {
+  .shop-container {
+    flex-direction: column;
+  }
+
+  .filter-sidebar {
+    width: 100%;
+    position: static;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+
+  .size-selection-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .product-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .size-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .size-selection-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .modal-content {
+    padding: 25px;
+  }
+}
+
+/* ==================== SHOPPING CART STYLES ==================== */
+
+/* Cart Button in Header */
+.cart-button {
+  position: relative;
+  background: none;
+  border: 2px solid #7886a0;
+  color: #7886a0;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cart-button:hover {
+  border-color: #ff5f23;
+  color: #ff5f23;
+  transform: scale(1.05);
+}
+
+.cart-button svg {
+  width: 24px;
+  height: 24px;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #ff5f23;
+  color: white;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+/* Cart Modal Specific Styles */
+.cart-modal-content {
+  max-width: 700px;
+  max-height: 85vh;
+}
+
+.cart-items-container {
+  max-height: 400px;
+  overflow-y: auto;
+  margin: 20px 0;
+  padding-right: 10px;
+}
+
+.cart-items-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.cart-items-container::-webkit-scrollbar-track {
+  background: rgba(120, 134, 160, 0.1);
+  border-radius: 4px;
+}
+
+.cart-items-container::-webkit-scrollbar-thumb {
+  background: #ff5f23;
+  border-radius: 4px;
+}
+
+.empty-cart {
+  text-align: center;
+  padding: 60px 20px;
+  color: #7886a0;
+}
+
+.empty-cart p {
+  font-size: 18px;
+  margin: 10px 0;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.empty-cart-subtitle {
+  font-size: 14px !important;
+  color: #7886a0;
+}
+
+/* Cart Item */
+.cart-item {
+  display: flex;
+  gap: 15px;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+  margin-bottom: 15px;
+  border: 1px solid rgba(120, 134, 160, 0.2);
+  transition: all 0.2s ease;
+}
+
+.cart-item:hover {
+  border-color: #ff5f23;
+  background-color: rgba(255, 95, 35, 0.05);
+}
+
+.cart-item-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.cart-item-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.cart-item-details h4 {
+  color: white;
+  font-size: 16px;
+  margin: 0 0 5px 0;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.cart-item-colorway {
+  color: #ff5f23;
+  font-size: 13px;
+  margin: 0 0 5px 0;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.cart-item-size {
+  color: #7886a0;
+  font-size: 12px;
+  margin: 0;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.cart-item-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 5px;
+}
+
+.qty-btn {
+  background-color: #ff5f23;
+  border: none;
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.qty-btn:hover {
+  background-color: #e54d1a;
+  transform: scale(1.1);
+}
+
+.quantity {
+  color: white;
+  font-weight: bold;
+  min-width: 30px;
+  text-align: center;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.cart-item-price {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.btn-remove {
+  background: none;
+  border: 1px solid #7886a0;
+  color: #7886a0;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: "IBM Plex Sans", sans-serif;
+  transition: all 0.2s ease;
+}
+
+.btn-remove:hover {
+  border-color: #a70404;
+  color: #a70404;
+}
+
+/* Cart Footer */
+.cart-footer {
+  border-top: 2px solid #ff5f23;
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+.cart-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: rgba(255, 95, 35, 0.1);
+  border-radius: 8px;
+}
+
+.cart-total-label {
+  color: #c2c2c2;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.cart-total-price {
+  color: #ff5f23;
+  font-size: 28px;
+  font-weight: bold;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.btn-checkout {
+  margin-bottom: 10px;
+}
+
+/* Cart Notification */
+.cart-notification {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  background-color: #090f1a;
+  border: 2px solid #ff5f23;
+  border-radius: 10px;
+  padding: 15px 20px;
+  box-shadow: 0 10px 30px rgba(255, 95, 35, 0.3);
+  z-index: 2000;
+  transform: translateX(400px);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.cart-notification.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.notification-icon {
+  background-color: #ff5f23;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.notification-text {
+  color: white;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.notification-text strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+
+.notification-text p {
+  margin: 0;
+  font-size: 12px;
+  color: #7886a0;
+}
+
+/* Responsive Cart Styles */
+@media (max-width: 640px) {
+  .cart-item {
+    flex-direction: column;
+  }
+
+  .cart-item-controls {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .cart-notification {
+    right: 10px;
+    left: 10px;
+    max-width: calc(100% - 20px);
+  }
+}
+
+/* ============================================================
+   LANDING PAGE — Style Selector Overlay
+   ============================================================ */
+
+/* Page fade-in for sport/formal pages — opacity only so position:fixed still
+   anchors to the viewport (transform on body breaks fixed positioning) */
+.page-enter {
+  animation: pageEnter 0.5s ease forwards;
+}
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Hide main content until a choice is made */
+.hidden-until-choice {
+  display: none;
+}
+
+/* Full-screen selector overlay */
+.style-selector-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: #090f1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: selectorFadeIn 0.4s ease;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+@keyframes selectorFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.style-selector-overlay.selector-fade-out {
+  opacity: 0;
+  transform: scale(1.03);
+  pointer-events: none;
+}
+
+.style-selector-inner {
+  text-align: center;
+  max-width: 700px;
+  width: 90%;
+  padding: 20px;
+}
+
+.selector-brand {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  font-style: italic;
+  color: #ffffff;
+  letter-spacing: 6px;
+  margin-bottom: 10px;
+}
+
+.selector-tagline {
+  color: #7886a0;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 14px;
+  margin: 0 0 32px 0;
+  letter-spacing: 1px;
+}
+
+.selector-prompt {
+  color: #7886a0;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 28px;
+}
+
+.selector-options {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border: 1px solid rgba(120, 134, 160, 0.25);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.selector-card {
+  flex: 1;
+  display: block;
+  text-decoration: none;
+  padding: 48px 32px;
+  transition: background-color 0.3s ease;
+  position: relative;
+}
+
+.selector-sporty {
+  background-color: rgba(255, 95, 35, 0.07);
+}
+.selector-sporty:hover {
+  background-color: rgba(255, 95, 35, 0.18);
+}
+
+.selector-formal {
+  background-color: rgba(92, 26, 26, 0.07);
+}
+.selector-formal:hover {
+  background-color: rgba(92, 26, 26, 0.18);
+}
+
+.selector-card-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.selector-label {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 6px;
+  color: #ffffff;
+}
+
+.selector-sporty .selector-label {
+  color: #ff5f23;
+}
+.selector-formal .selector-label {
+  color: #c48080;
+}
+
+.selector-sub {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 13px;
+  color: #7886a0;
+  letter-spacing: 0.5px;
+}
+
+.selector-arrow {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.3);
+  transition:
+    transform 0.2s,
+    color 0.2s;
+}
+.selector-card:hover .selector-arrow {
+  transform: translateX(6px);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.selector-divider {
+  width: 1px;
+  background: rgba(120, 134, 160, 0.25);
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   SPORT SHOP — Search Bar
+   ============================================================ */
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 20px;
+  background-color: #090f1a;
+  border-bottom: 1px solid rgba(120, 134, 160, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  color: #7886a0;
+  pointer-events: none;
+}
+
+.sport-search-input {
+  width: 220px;
+  padding: 9px 12px 9px 32px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(120, 134, 160, 0.3);
+  border-radius: 6px;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 13px;
+  color: #ffffff;
+  outline: none;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+.sport-search-input::placeholder {
+  color: #7886a0;
+}
+.sport-search-input:focus {
+  border-color: #ff5f23;
+  box-shadow: 0 0 0 3px rgba(255, 95, 35, 0.12);
+}
+
+/* ============================================================
+   SPORT SHOP — Checkout & Confirmation Modals
+   ============================================================ */
+
+.checkout-modal-content {
+  max-width: 560px;
+}
+
+.checkout-summary-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #7886a0;
+  margin-bottom: 12px;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.checkout-divider {
+  border: none;
+  border-top: 1px solid rgba(120, 134, 160, 0.2);
+  margin: 18px 0;
+}
+
+.checkout-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.checkout-full {
+  grid-column: 1 / -1;
+}
+
+.checkout-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.checkout-form-group label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #7886a0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+.checkout-form-group input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(120, 134, 160, 0.3);
+  border-radius: 5px;
+  padding: 10px 12px;
+  color: #ffffff;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 13px;
+  width: 100%;
+  height: auto;
+  outline: none;
+}
+.checkout-form-group input:focus {
+  border-color: #ff5f23;
+  box-shadow: 0 0 0 2px rgba(255, 95, 35, 0.1);
+}
+
+#checkout-summary {
+  margin-bottom: 20px;
+}
+
+.s-checkout-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(120, 134, 160, 0.15);
+  font-size: 13px;
+  color: #c2c2c2;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.s-checkout-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0 0;
+  font-size: 16px;
+  color: #ff5f23;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.checkout-submit-btn {
+  margin-top: 4px;
+}
+
+/* Confirmation Modal */
+.confirm-modal-content {
+  max-width: 420px;
+  text-align: center;
+  padding: 50px 36px;
+}
+
+.confirm-icon {
+  width: 56px;
+  height: 56px;
+  background: #ff5f23;
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 auto 20px;
+}
+
+.confirm-modal-content h2 {
+  color: #ffffff;
+  font-size: 22px;
+  margin-bottom: 12px;
+  padding-bottom: 0 !important;
+  border-bottom: none !important;
+}
+
+.confirm-msg {
+  color: #7886a0;
+  font-size: 14px;
+  margin-bottom: 24px;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+@media (max-width: 600px) {
+  .checkout-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   SPORT — Inner Pages (About, Contact)
+   Mirrors the formal page layout structure, sport colours.
+   ============================================================ */
+
+/* Formal link in sport nav */
+.nav-formal-link {
+  color: #c48080 !important;
+  border: 1px solid rgba(196, 128, 128, 0.35);
+  border-radius: 4px;
+  padding: 5px 10px !important;
+  font-size: 12px;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+.nav-formal-link:hover {
+  background-color: #c48080 !important;
+  color: #090f1a !important;
+  border-color: #c48080 !important;
+}
+
+/* ── Page wrapper ──────────────────────────────────────────── */
+.s-page-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 60px 40px 80px;
+}
+
+/* ── Page hero (title + subtitle) ─────────────────────────── */
+.s-page-hero {
+  text-align: center;
+  padding-bottom: 48px;
+  border-bottom: 2px solid #ff5f23;
+  margin-bottom: 56px;
+}
+
+.s-page-title {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 52px;
+  font-weight: 700;
+  font-style: italic;
+  color: #ff5f23;
+  margin: 0 0 12px 0;
+  letter-spacing: -0.5px;
+}
+
+.s-page-subtitle {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 15px;
+  color: #7886a0;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+/* ── About layout ──────────────────────────────────────────── */
+.s-about-layout {
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+  margin-bottom: 70px;
+}
+
+.s-about-image-col {
+  flex: 0 0 380px;
+}
+
+.s-about-image {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 95, 35, 0.3);
+  display: block;
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s;
+}
+.s-about-image:hover {
+  transform: scale(1.02);
+  border-color: #ff5f23;
+}
+
+.s-about-text-col {
+  flex: 1;
+  padding-top: 8px;
+}
+
+.s-about-heading {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  font-style: italic;
+  color: #ff5f23;
+  margin: 0 0 24px 0;
+}
+
+.s-about-body {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 15px;
+  color: #c2c2c2;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.s-about-cta {
+  display: inline-block;
+  margin-top: 12px;
+  background-color: #ff5f23;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition:
+    background-color 0.2s,
+    transform 0.15s;
+}
+.s-about-cta:hover {
+  background-color: #e54d1a;
+  transform: translateY(-2px);
+}
+
+/* ── About stats strip ─────────────────────────────────────── */
+.s-about-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  border: 1px solid rgba(255, 95, 35, 0.2);
+  border-radius: 10px;
+  background-color: rgba(255, 95, 35, 0.05);
+  padding: 32px 40px;
+  flex-wrap: wrap;
+}
+
+.s-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 0 40px;
+}
+
+.s-stat-number {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #ff5f23;
+  letter-spacing: -0.5px;
+}
+
+.s-stat-label {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: #7886a0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.s-stat-divider {
+  width: 1px;
+  height: 50px;
+  background: rgba(255, 95, 35, 0.2);
+  flex-shrink: 0;
+}
+
+/* ── Contact layout ────────────────────────────────────────── */
+.s-contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.s-contact-heading {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  font-style: italic;
+  color: #ff5f23;
+  margin: 0 0 14px 0;
+}
+
+.s-contact-body {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 14px;
+  color: #7886a0;
+  margin: 0 0 28px 0;
+  line-height: 1.7;
+}
+
+.s-contact-detail {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(120, 134, 160, 0.2);
+}
+.s-contact-detail:last-child {
+  border-bottom: none;
+}
+
+.s-contact-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ff5f23;
+  margin-bottom: 4px;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.s-contact-value {
+  font-size: 14px;
+  color: #c2c2c2;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+/* ── Contact form wrapper ──────────────────────────────────── */
+.s-contact-form-wrap {
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(120, 134, 160, 0.2);
+  border-radius: 10px;
+  padding: 32px;
+}
+
+.s-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.s-contact-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* ── Form group (label + input) ────────────────────────────── */
+.s-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.s-form-group label {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #7886a0;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.s-form-group input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(120, 134, 160, 0.3);
+  border-radius: 5px;
+  padding: 11px 14px;
+  color: #ffffff;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 14px;
+  width: 100%;
+  height: auto;
+  outline: none;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+  box-sizing: border-box;
+}
+.s-form-group input:focus {
+  border-color: #ff5f23;
+  box-shadow: 0 0 0 3px rgba(255, 95, 35, 0.12);
+}
+.s-form-group input::placeholder {
+  color: #7886a0;
+}
+
+/* ── Textarea ──────────────────────────────────────────────── */
+.s-contact-textarea {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(120, 134, 160, 0.3);
+  border-radius: 5px;
+  padding: 11px 14px;
+  color: #ffffff;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 14px;
+  width: 100%;
+  resize: vertical;
+  outline: none;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+  box-sizing: border-box;
+}
+.s-contact-textarea:focus {
+  border-color: #ff5f23;
+  box-shadow: 0 0 0 3px rgba(255, 95, 35, 0.12);
+}
+.s-contact-textarea::placeholder {
+  color: #7886a0;
+}
+
+/* ── Sport buttons (page-level, not shop-level) ────────────── */
+.s-btn-primary {
+  background-color: #ff5f23;
+  border: none;
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition:
+    background-color 0.2s,
+    transform 0.15s;
+  width: 100%;
+}
+.s-btn-primary:hover {
+  background-color: #e54d1a;
+  transform: translateY(-1px);
+}
+
+.s-btn-secondary {
+  background: none;
+  border: 1px solid #7886a0;
+  color: #7886a0;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  width: 100%;
+}
+.s-btn-secondary:hover {
+  border-color: #ff5f23;
+  color: #ff5f23;
+}
+
+/* ── Contact button row ────────────────────────────────────── */
+.s-contact-buttons {
+  display: flex;
+  gap: 12px;
+}
+.s-contact-submit {
+  flex: 2;
+}
+.s-contact-reset {
+  flex: 1;
+}
+
+/* ── Fix footer margin for inner pages ────────────────────── */
+.s-page-main ~ footer #footer,
+body.page-enter footer #footer {
+  margin-top: 0;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .s-about-layout {
+    flex-direction: column;
+    gap: 36px;
+  }
+  .s-about-image-col {
+    flex: none;
+    width: 100%;
+    max-width: 420px;
+  }
+  .s-contact-layout {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .s-about-stats {
+    padding: 24px 20px;
+    gap: 0;
+  }
+  .s-stat {
+    padding: 16px 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .s-page-main {
+    padding: 40px 20px 60px;
+  }
+  .s-page-title {
+    font-size: 38px;
+  }
+  .s-contact-form-row {
+    grid-template-columns: 1fr;
+  }
+  .s-contact-buttons {
+    flex-direction: column;
+  }
+  .s-about-stats {
+    flex-direction: column;
+  }
+  .s-stat-divider {
+    width: 60%;
+    height: 1px;
+    margin: 4px 0;
+  }
+}
+
+/* ============================================================
+   AUTH MODAL & HEADER BUTTON — Sport (dark theme)
+   ============================================================ */
+
+/* Header sign-in button */
+.auth-header-btn {
+  background: none;
+  border: 1px solid #7886a0;
+  color: #7886a0;
+  padding: 7px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.auth-header-btn:hover {
+  border-color: #ff5f23;
+  color: #ff5f23;
+}
+.auth-user-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* Auth modal overlay */
+.auth-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 3000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+.auth-modal.active {
+  display: flex;
+  animation: authBgIn 0.2s ease;
+}
+@keyframes authBgIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.auth-modal-content {
+  background: #0d1626;
+  border: 1px solid rgba(120, 134, 160, 0.25);
+  border-radius: 14px;
+  padding: 40px 36px;
+  max-width: 440px;
+  width: 100%;
+  position: relative;
+  animation: authSlideIn 0.25s ease;
+}
+@keyframes authSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.auth-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  background: none;
+  border: none;
+  color: #7886a0;
+  font-size: 22px;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.auth-modal-close:hover {
+  color: #ffffff;
+}
+
+.auth-brand {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  font-style: italic;
+  color: #ffffff;
+  letter-spacing: 5px;
+  text-align: center;
+  margin-bottom: 4px;
+}
+.auth-brand-sub {
+  text-align: center;
+  font-size: 12px;
+  color: #7886a0;
+  margin-bottom: 22px;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+/* Discount banner inside modal */
+.auth-discount-banner {
+  background: rgba(255, 95, 35, 0.1);
+  border: 1px solid rgba(255, 95, 35, 0.25);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 13px;
+  color: #c2c2c2;
+  margin-bottom: 20px;
+  text-align: center;
+  line-height: 1.5;
+}
+.auth-discount-banner strong {
+  color: #ff5f23;
+}
+.auth-discount-icon {
+  margin-right: 6px;
+  color: #ff5f23;
+}
+
+/* Tabs */
+.auth-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 24px;
+  border-bottom: 1px solid rgba(120, 134, 160, 0.2);
+}
+.auth-tab {
+  flex: 1;
+  background: none;
+  border: none;
+  color: #7886a0;
+  padding: 10px;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  margin-bottom: -1px;
+}
+.auth-tab.active {
+  color: #ff5f23;
+  border-bottom-color: #ff5f23;
+}
+.auth-tab:hover:not(.active) {
+  color: #c2c2c2;
+}
+
+/* Panels */
+.auth-panel {
+  display: none;
+}
+.auth-panel.active {
+  display: block;
+}
+
+/* Form */
+.auth-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.auth-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+.auth-form-group label {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #7886a0;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.auth-form-group input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(120, 134, 160, 0.3);
+  border-radius: 5px;
+  padding: 11px 14px;
+  color: #ffffff;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 14px;
+  width: 100%;
+  height: auto;
+  outline: none;
+  box-sizing: border-box;
+  border-radius: 5px !important;
+  transition: border-color 0.2s;
+}
+.auth-form-group input:focus {
+  border-color: #ff5f23;
+}
+.auth-form-group input::placeholder {
+  color: #7886a0;
+}
+
+/* Error */
+.auth-error {
+  font-size: 12px;
+  color: #f87171;
+  margin-bottom: 10px;
+  font-family: "IBM Plex Sans", sans-serif;
+  background: rgba(248, 113, 113, 0.08);
+  border-radius: 4px;
+  padding: 6px 10px;
+}
+
+/* Submit button */
+.auth-submit {
+  width: 100%;
+  background: #ff5f23;
+  border: none;
+  color: #ffffff;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  transition:
+    background-color 0.2s,
+    transform 0.15s;
+  margin-top: 4px;
+}
+.auth-submit:hover {
+  background: #e54d1a;
+  transform: translateY(-1px);
+}
+
+/* Switch link */
+.auth-switch {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 13px;
+  color: #7886a0;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+.auth-switch-btn {
+  background: none;
+  border: none;
+  color: #ff5f23;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: "IBM Plex Sans", sans-serif;
+  text-decoration: underline;
+  padding: 0;
+}
+
+@media (max-width: 480px) {
+  .auth-modal-content {
+    padding: 28px 20px;
+  }
+  .auth-form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   SPORT — Member Savings Row (cart & checkout)
+   ============================================================ */
+
+.cart-savings-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  border-radius: 5px;
+  margin-bottom: 12px;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 13px;
+}
+.cart-savings-label {
+  color: #22c55e;
+  font-weight: 500;
+}
+.cart-savings-amount {
+  color: #22c55e;
+  font-weight: 700;
+}
+
+.s-checkout-savings {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 10px;
+  margin-top: 4px;
+  background: rgba(34, 197, 94, 0.07);
+  border-radius: 4px;
+  font-size: 13px;
+  color: #22c55e;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-weight: 500;
+}
+
+/* ============================================================
+   SMOOTH PAGE TRANSITIONS — nav links
+   Fade-out the current page before navigating
+   ============================================================ */
+
+/* Apply fade-out class via JS before navigation — opacity only (no transform
+   on body to keep position:fixed modals anchored to viewport) */
+body.page-leaving {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+/* ============================================================
+   SPORT SHOP — Improved product card price display
+   ============================================================ */
+.product-price-member {
+  color: #22c55e;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+.product-price-original {
+  color: #7886a0;
+  font-size: 14px;
+  text-decoration: line-through;
+  margin-left: 4px;
+}
+
+/* ============================================================
+   SPORT LANDING PAGE — Hero CTA Buttons
+   ============================================================ */
+/* Reset inherited htext sizing (55px font / 0.5 line-height) */
+.landing-cta-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 48px; /* at normal line-height this renders ~48px below the text */
+  flex-wrap: wrap;
+  font-size: 0; /* zero out the 55px inherited size for inline children */
+  line-height: 1;
+  align-items: center;
+}
+
+.landing-shop-btn {
+  display: inline-flex;
+  align-items: center;
+  background-color: #ff5f23;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 13px 28px;
+  border-radius: 6px;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 15px; /* explicit override of inherited 55px */
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+  transition:
+    background-color 0.2s,
+    transform 0.15s;
+}
+.landing-shop-btn:hover {
+  background-color: #e54d1a;
+  transform: translateY(-2px);
+}
+
+.landing-signin-btn {
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: 2px solid #ff5f23;
+  color: #ff5f23;
+  padding: 11px 22px;
+  border-radius: 6px;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 15px; /* explicit override of inherited 55px */
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.landing-signin-btn:hover {
+  background: #ff5f23;
+  color: #ffffff;
+}
+
+/* ============================================================
+   SPORT SHOP — Product card name fix (no overflow)
+   ============================================================ */
+.product-name {
+  white-space: normal !important;
+  word-break: break-word;
+  line-height: 1.3;
+  font-size: 16px !important;
+}
+
+/* Product card clickable cursor */
+.product-card {
+  cursor: pointer;
+}
+
+/* ============================================================
+   SPORT GLOBAL POLISH — quality improvements across all pages
+   ============================================================ */
+
+/* ── Wishlist / Favourite button active state ── */
+.pd-fav-btn.is-faved {
+  border-color: #ff5f23;
+  color: #ff5f23;
+  background: rgba(255, 95, 35, 0.08);
+}
+.pd-fav-btn.is-faved::after { content: ' ♥'; }
+
+/* ── Size Guide modal (sport product pages) ── */
+.pd-size-modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 4000;
+  display: none; align-items: center; justify-content: center; padding: 20px;
+}
+.pd-size-modal-overlay.active { display: flex; animation: authBgIn 0.2s ease; }
+.pd-size-modal-box {
+  background: #0d1626;
+  border: 1px solid rgba(120, 134, 160, 0.25);
+  border-radius: 14px;
+  padding: 36px 32px;
+  max-width: 420px; width: 100%; position: relative;
+  animation: authSlideIn 0.25s ease;
+}
+.pd-size-modal-close {
+  position: absolute; top: 14px; right: 16px;
+  background: none; border: none; color: #7886a0; font-size: 22px; cursor: pointer;
+  transition: color 0.2s; line-height: 1;
+}
+.pd-size-modal-close:hover { color: #ffffff; }
+.pd-size-modal-title {
+  font-family: "IBM Plex Sans", sans-serif; font-size: 20px; font-weight: 700;
+  color: #ffffff; margin: 0 0 20px; text-align: center;
+}
+.pd-size-table { width: 100%; border-collapse: collapse; }
+.pd-size-table thead { background: #ff5f23; }
+.pd-size-table th {
+  color: #ffffff; padding: 12px 16px; font-family: "IBM Plex Sans", sans-serif;
+  font-size: 13px; font-weight: 600; text-align: center;
+}
+.pd-size-table td {
+  color: #c2c2c2; padding: 11px 16px; text-align: center;
+  border-bottom: 1px solid rgba(120, 134, 160, 0.12);
+  font-family: "IBM Plex Sans", sans-serif; font-size: 14px;
+}
+.pd-size-table tr:last-child td { border-bottom: none; }
+.pd-size-table tbody tr:hover td { background: rgba(255, 95, 35, 0.08); color: #ffffff; }
+
+/* ── Wishlist page (sport-wishlist.html) ── */
+.s-wishlist-page { max-width: 1100px; margin: 0 auto; padding: 48px 24px 80px; }
+.s-wishlist-title { font-family: "IBM Plex Sans", sans-serif; font-size: 36px; font-weight: 700; font-style: italic; color: #ff5f23; margin: 0 0 6px; }
+.s-wishlist-subtitle { font-family: "IBM Plex Sans", sans-serif; font-size: 14px; color: #7886a0; margin-bottom: 36px; }
+.s-wishlist-empty { text-align: center; padding: 80px 20px; }
+.s-wishlist-empty h2 { font-family: "IBM Plex Sans", sans-serif; font-size: 22px; color: #7886a0; margin-bottom: 12px; }
+.s-wishlist-empty p { color: #7886a0; font-family: "IBM Plex Sans", sans-serif; font-size: 14px; margin-bottom: 28px; }
+.s-wishlist-empty a { background: #ff5f23; color: #fff; text-decoration: none; padding: 12px 28px; border-radius: 6px; font-family: "IBM Plex Sans", sans-serif; font-weight: 600; font-size: 14px; }
+.s-wishlist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
+.s-wishlist-card {
+  background: rgba(255,255,255,0.02); border: 1px solid rgba(120,134,160,0.15);
+  border-radius: 12px; overflow: hidden;
+  transition: box-shadow 0.25s, border-color 0.25s, transform 0.2s; cursor: pointer;
+}
+.s-wishlist-card:hover { box-shadow: 0 8px 32px rgba(255,95,35,0.18); border-color: #ff5f23; transform: translateY(-3px); }
+.s-wishlist-card-img { height: 200px; background: linear-gradient(135deg,rgba(255,95,35,0.07),rgba(9,15,26,0.4)); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.s-wishlist-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+.s-wishlist-card:hover .s-wishlist-card-img img { transform: scale(1.06); }
+.s-wishlist-card-info { padding: 16px 18px; }
+.s-wishlist-card-name { font-family: "IBM Plex Sans", sans-serif; font-size: 15px; font-weight: 700; color: #ffffff; margin: 0 0 4px; line-height: 1.3; }
+.s-wishlist-card-colorway { font-size: 13px; color: #ff5f23; font-family: "IBM Plex Sans", sans-serif; margin-bottom: 12px; }
+.s-wishlist-card-footer { display: flex; justify-content: space-between; align-items: center; }
+.s-wishlist-card-price { font-family: "IBM Plex Sans", sans-serif; font-size: 18px; font-weight: 700; color: #ffffff; }
+.s-wishlist-card-remove { background: none; border: 1px solid rgba(120,134,160,0.3); color: #7886a0; padding: 6px 12px; border-radius: 5px; cursor: pointer; font-size: 12px; font-family: "IBM Plex Sans", sans-serif; transition: all 0.2s; }
+.s-wishlist-card-remove:hover { border-color: #a70404; color: #a70404; }
+
+/* ── Improved scrollbar ── */
+body::-webkit-scrollbar { width: 6px; }
+body::-webkit-scrollbar-track { background: #090f1a; }
+body::-webkit-scrollbar-thumb { background: rgba(120,134,160,0.4); border-radius: 3px; }
+body::-webkit-scrollbar-thumb:hover { background: #ff5f23; }
+
+/* ── Better focus outlines ── */
+body *:focus-visible {
+  outline: 2px solid #ff5f23;
+  outline-offset: 2px;
+}
+
+/* ── Sport footer polish ── */
+footer {
+  border-top: 1px solid rgba(120,134,160,0.12);
+}
+
+/* ── Sport header nav — active page indicator ── */
+.navbar a.active { color: #ff5f23; }
+
+/* ── Product card hover — more refined ── */
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(255, 95, 35, 0.22);
+}
+
+/* ============================================================
+   AUTH FIELD VALIDATION — inline error messages below inputs
+   ============================================================ */
+
+/* Red border on invalid auth inputs */
+.auth-form-group input.auth-input-error {
+  border-color: #f87171 !important;
+}
+
+/* Inline error message below a field */
+.auth-field-error {
+  font-size: 11px;
+  color: #f87171;
+  font-family: "IBM Plex Sans", sans-serif;
+  margin-top: 2px;
+  display: block;
+  min-height: 14px; /* reserve space so the layout doesn't jump */
+}
+
+/* Password strength hint text (green when requirements met) */
+.auth-pw-hint {
+  font-size: 11px;
+  color: #7886a0;
+  font-family: "IBM Plex Sans", sans-serif;
+  margin-top: 3px;
+  display: block;
+  line-height: 1.5;
+}
+.auth-pw-hint.strong { color: #22c55e; }
+
+/* ============================================================
+   CHECKOUT VALIDATION — cv-error spans & delivery styles
+   These apply to both Sport (style.css) and Formal pages.
+   ============================================================ */
+
+/* Inline error message beside / below a checkout field */
+.cv-error {
+  font-size: 11px;
+  color: #f87171;
+  font-family: "IBM Plex Sans", sans-serif;
+  margin-top: 2px;
+  display: block;
+  min-height: 14px;
+}
+
+/* Red border on invalid checkout inputs */
+.checkout-form-group input.cv-input-error {
+  border-color: #f87171 !important;
+}
+
+/* Delivery method section */
+.cv-delivery-section {
+  margin: 16px 0 4px;
+}
+.cv-delivery-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #7886a0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-family: "IBM Plex Sans", sans-serif;
+  margin-bottom: 8px;
+}
+.cv-delivery-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cv-delivery-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(120, 134, 160, 0.25);
+  border-radius: 7px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+.cv-delivery-option:hover {
+  border-color: #ff5f23;
+  background: rgba(255, 95, 35, 0.05);
+}
+.cv-delivery-option input[type="radio"] {
+  accent-color: #ff5f23;
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+.cv-delivery-option input[type="radio"]:checked + .cv-delivery-text ~ .cv-delivery-price,
+.cv-delivery-option:has(input:checked) {
+  border-color: #ff5f23;
+  background: rgba(255, 95, 35, 0.08);
+}
+.cv-delivery-text {
+  flex: 1;
+}
+.cv-delivery-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+.cv-delivery-desc {
+  font-size: 11px;
+  color: #7886a0;
+  font-family: "IBM Plex Sans", sans-serif;
+  margin-top: 1px;
+}
+.cv-delivery-price {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ff5f23;
+  font-family: "IBM Plex Sans", sans-serif;
+  flex-shrink: 0;
+}
+
+/* Delivery cost and grand total summary rows */
+.cv-checkout-delivery-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #c2c2c2;
+  margin-top: 6px;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+.cv-checkout-grand-total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 17px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(120, 134, 160, 0.2);
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+/* Delivery error banner (shown when no delivery method selected) */
+.cv-delivery-error {
+  font-size: 12px;
+  color: #f87171;
+  font-family: "IBM Plex Sans", sans-serif;
+  margin-top: 6px;
+  display: block;
+}
