@@ -2867,3 +2867,208 @@ footer {
   margin-top: 6px;
   display: block;
 }
+
+/* ============================================================
+   MOBILE RESPONSIVE — Global (all pages)
+   ============================================================ */
+
+/* ── Hamburger button (hidden on desktop) ───────────────── */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  margin-left: auto;
+  flex-direction: column;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: #ffffff;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── Tablet: tighten header ─────────────────────────────── */
+@media (max-width: 900px) {
+  header {
+    flex-wrap: wrap;
+    padding: 8px 16px;
+    gap: 8px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  .search-wrapper {
+    order: 3;
+    width: 100%;
+    margin-left: 0;
+  }
+  .sport-search-input {
+    width: 100%;
+  }
+
+  /* Hero: stack text and image */
+  .sport-landing-main {
+    overflow: visible;
+    padding: 20px 16px 40px;
+    min-height: unset;
+  }
+  .htext {
+    float: none;
+    margin: 32px 0 24px 0;
+    font-size: 42px;
+    text-align: center;
+  }
+  #orgshoe {
+    float: none;
+    display: block;
+    width: 90%;
+    max-width: 480px;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 40px;
+  }
+  .landing-cta-row {
+    justify-content: center;
+    margin-top: 32px;
+  }
+  #p4 {
+    text-align: center;
+    white-space: normal;
+    word-break: break-word;
+  }
+}
+
+/* ── Mobile: hamburger nav ───────────────────────────────── */
+@media (max-width: 680px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .navbar {
+    order: 4;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+  .navbar.nav-open {
+    max-height: 400px;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    padding: 4px 0 12px;
+    gap: 0;
+  }
+  .navbar ul li {
+    width: 100%;
+  }
+  .navbar a {
+    display: block;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(120, 134, 160, 0.12);
+    font-size: 14px;
+  }
+
+  /* Cart and auth buttons — keep inline with logo */
+  .cart-button,
+  .auth-header-btn {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  /* Hero text */
+  .htext {
+    font-size: 32px;
+    margin: 20px 0 16px 0;
+  }
+
+  #orgshoe {
+    width: 100%;
+    border-radius: 20px;
+  }
+
+  /* Shop container */
+  .shop-container {
+    padding: 0 12px;
+    margin: 20px auto;
+  }
+
+  /* Footer */
+  #footer {
+    font-size: 12px;
+    padding: 14px 12px;
+  }
+
+  /* About page: full-width image */
+  .s-about-image-col {
+    flex: none;
+    width: 100%;
+  }
+
+  /* Stats strip: single column */
+  .s-about-stats {
+    flex-direction: column;
+    padding: 20px 16px;
+  }
+  .s-stat-divider {
+    width: 60%;
+    height: 1px;
+    margin: 4px 0;
+  }
+  .s-stat {
+    padding: 12px 0;
+  }
+
+  /* Page hero title */
+  .s-page-title {
+    font-size: 30px;
+  }
+  .s-page-main {
+    padding: 28px 16px 60px;
+  }
+
+  /* Cart page */
+  .cart-page {
+    padding: 28px 14px 60px;
+  }
+  .cart-page-title {
+    font-size: 26px;
+  }
+  .cpc-item {
+    grid-template-columns: 72px 1fr;
+  }
+
+  /* Modal: full-width on mobile */
+  .modal-content {
+    padding: 20px 16px;
+    width: 95%;
+    max-height: 90vh;
+  }
+  .checkout-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Wishlist grid: single column */
+  .wl-grid {
+    grid-template-columns: 1fr;
+  }
+  .wl-page {
+    padding: 28px 14px 60px;
+  }
+}

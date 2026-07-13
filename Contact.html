@@ -14,12 +14,14 @@
 
     <header>
       <h1><a href="SportIndex.html">C L E R K S.</a></h1>
-      <nav class="navbar">
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="navbar" id="main-nav">
         <ul>
           <li><a href="Shop.html">Sport Shop</a></li>
           <li><a href="About.html">About Us</a></li>
           <li><a href="Contact.html">Contact</a></li>
-          <li><a href="FormalIndex.html" class="nav-formal-link">Formal ↗</a></li>
         </ul>
       </nav>
     </header>
@@ -125,11 +127,17 @@
 
     <footer>
       <p id="footer">
-        © 2026 Clerks UK. All rights reserved. | Step Into Your Next Chapter &nbsp;|&nbsp;
-        <a href="FormalIndex.html" style="color:#ff5f23;text-decoration:none;">Formal Collection →</a>
+        © 2026 Clerks UK. All rights reserved. | Step Into Your Next Chapter
       </p>
     </footer>
 
+    <script>
+      document.getElementById('hamburger').addEventListener('click', function () {
+        this.classList.toggle('open');
+        document.getElementById('main-nav').classList.toggle('nav-open');
+        this.setAttribute('aria-expanded', this.classList.contains('open'));
+      });
+    </script>
     <script>
       document.addEventListener('click', function (e) {
         const link = e.target.closest('a[href]');

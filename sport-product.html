@@ -143,14 +143,16 @@
   <body class="page-enter">
     <header>
       <h1><a href="SportIndex.html">C L E R K S.</a></h1>
-      <nav class="navbar">
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="navbar" id="main-nav">
         <ul>
           <li><a href="Shop.html">Sport Shop</a></li>
           <li><a href="sport-wishlist.html">Wishlist ♡</a></li>
           <li id="s-nav-orders-li" style="display:none;"><a href="sport-orders.html">My Orders</a></li>
           <li><a href="About.html">About Us</a></li>
           <li><a href="Contact.html">Contact</a></li>
-          <li><a href="FormalIndex.html" style="color:#c48080;">Formal ↗</a></li>
         </ul>
       </nav>
       <button id="cart-btn" class="cart-button" aria-label="Shopping basket">
@@ -359,15 +361,21 @@
     <div class="pd-toast" id="pd-toast"></div>
 
     <footer>
-      <p id="footer">© 2026 Clerks UK. All rights reserved. | Step Into Your Next Chapter &nbsp;|&nbsp;
-        <a href="FormalIndex.html" style="color:#ff5f23;text-decoration:none;">Formal Collection →</a>
-      </p>
+      <p id="footer">© 2026 Clerks UK. All rights reserved. | Step Into Your Next Chapter</p>
     </footer>
 
     <script src="js/auth.js"></script>
     <script src="js/products.js"></script>
     <script src="js/cart.js"></script>
     <script src="js/checkout-validation.js"></script>
+    <script>
+      document.getElementById('hamburger').addEventListener('click', function () {
+        this.classList.toggle('open');
+        document.getElementById('main-nav').classList.toggle('nav-open');
+        this.setAttribute('aria-expanded', this.classList.contains('open'));
+      });
+    </script>
+
     <script>
       // ── Per-product reviews (3 per product, averaging 4.5★: 5+5+3 = 13/3 ≈ 4.33 → use 5+5+4 = 14/3 ≈ 4.67; round to 4.5 display) ──
       const sportReviews = {
