@@ -11,10 +11,14 @@
     />
   </head>
   <body class="page-enter">
-
     <header>
       <h1><a href="SportIndex.html">C L E R K S.</a></h1>
-      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <button
+        class="hamburger"
+        id="hamburger"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+      >
         <span></span><span></span><span></span>
       </button>
       <nav class="navbar" id="main-nav">
@@ -27,16 +31,16 @@
     </header>
 
     <main class="s-page-main">
-
       <!-- Page hero -->
       <div class="s-page-hero">
         <h1 class="s-page-title">About Us</h1>
-        <p class="s-page-subtitle">Nearly 200 years of British footwear — and we're just getting started</p>
+        <p class="s-page-subtitle">
+          Nearly 200 years of British footwear — and we're just getting started
+        </p>
       </div>
 
       <!-- Two-column: image left, text right -->
       <div class="s-about-layout">
-
         <div class="s-about-image-col">
           <img
             src="Upcoming Shoe.png"
@@ -49,19 +53,36 @@
           <h2 class="s-about-heading">A British Icon, Moving Forward</h2>
 
           <p class="s-about-body">
-            Clerks is one of Britain's most recognised shoe brands, with a heritage stretching back almost 200 years. A fixture on the British high street, we've spent generations earning the trust of customers who care about quality — from school shoes to Sunday best, from workwear to weekend wear. Our name stands for footwear that lasts.
+            Clerks is one of Britain's most recognised shoe brands, with a
+            heritage stretching back almost 200 years. A fixture on the British
+            high street, we've spent generations earning the trust of customers
+            who care about quality — from school shoes to Sunday best, from
+            workwear to weekend wear. Our name stands for footwear that lasts.
           </p>
 
           <p class="s-about-body">
-            That reputation wasn't built overnight. It was built stitch by stitch, last by last, across nearly two centuries of craftsmanship. Today Clerks serves every age and every style, and our broad range reflects the diversity of the people who wear us — from children taking their first steps to adults who know exactly what they want from a shoe.
+            That reputation wasn't built overnight. It was built stitch by
+            stitch, last by last, across nearly two centuries of craftsmanship.
+            Today Clerks serves every age and every style, and our broad range
+            reflects the diversity of the people who wear us — from children
+            taking their first steps to adults who know exactly what they want
+            from a shoe.
           </p>
 
           <p class="s-about-body">
-            Now, Clerks is stepping into new territory. Recognising where culture and sport are heading, we are actively expanding into sports-style footwear — a natural evolution for a brand that has always moved with its customers. Through partnerships with respected names in the sporting world, the Clerks Sport line brings that same commitment to quality into a bolder, faster arena.
+            Now, Clerks is stepping into new territory. Recognising where
+            culture and sport are heading, we are actively expanding into
+            sports-style footwear — a natural evolution for a brand that has
+            always moved with its customers. Through partnerships with respected
+            names in the sporting world, the Clerks Sport line brings that same
+            commitment to quality into a bolder, faster arena.
           </p>
 
           <p class="s-about-body">
-            The Clerks Rush is the first expression of that ambition: a performance-inspired silhouette designed in Britain, built to move, and stamped with the Clerks standard that has meant something on this high street for two hundred years.
+            The Clerks Rush is the first expression of that ambition: a
+            performance-inspired silhouette designed in Britain, built to move,
+            and stamped with the Clerks standard that has meant something on
+            this high street for two hundred years.
           </p>
 
           <a href="Shop.html" class="s-about-cta">Shop the Collection</a>
@@ -90,7 +111,6 @@
           <span class="s-stat-label">Our Next Chapter</span>
         </div>
       </div>
-
     </main>
 
     <footer>
@@ -100,21 +120,25 @@
     </footer>
 
     <script>
-      document.getElementById('hamburger').addEventListener('click', function () {
-        this.classList.toggle('open');
-        document.getElementById('main-nav').classList.toggle('nav-open');
-        this.setAttribute('aria-expanded', this.classList.contains('open'));
-      });
+      document
+        .getElementById("hamburger")
+        .addEventListener("click", function () {
+          this.classList.toggle("open");
+          document.getElementById("main-nav").classList.toggle("nav-open");
+          this.setAttribute("aria-expanded", this.classList.contains("open"));
+        });
     </script>
     <script>
-      document.addEventListener('click', function (e) {
-        const link = e.target.closest('a[href]');
+      document.addEventListener("click", function (e) {
+        const link = e.target.closest("a[href]");
         if (!link) return;
-        const href = link.getAttribute('href');
-        if (!href || href.startsWith('#') || link.target === '_blank') return;
+        const href = link.getAttribute("href");
+        if (!href || href.startsWith("#") || link.target === "_blank") return;
         e.preventDefault();
-        document.body.classList.add('page-leaving');
-        setTimeout(function () { window.location.href = href; }, 300);
+        document.body.classList.add("page-leaving");
+        setTimeout(function () {
+          window.location.href = href;
+        }, 300);
       });
     </script>
   </body>
