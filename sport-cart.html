@@ -106,27 +106,48 @@
   </head>
 
   <body class="page-enter">
+
+    <!-- Scrolling promo ticker -->
+    <div class="promo-ticker" aria-hidden="true">
+      <div class="promo-ticker-track">
+        <span>SIGN IN &ndash; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; SIGN IN &ndash; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp;</span>
+        <span>SIGN IN &ndash; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; SIGN IN &ndash; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp;</span>
+      </div>
+    </div>
+
     <header>
-      <h1><a href="SportIndex.html">C L E R K S.</a></h1>
+      <h1><a href="SportIndex.html">CLERKS.</a></h1>
       <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
       <nav class="navbar" id="main-nav">
         <ul>
           <li><a href="Shop.html">Sport Shop</a></li>
-          <li><a href="sport-wishlist.html">Wishlist ♡</a></li>
-          <li id="s-nav-orders-li" style="display:none;"><a href="sport-orders.html">My Orders</a></li>
           <li><a href="About.html">About Us</a></li>
           <li><a href="Contact.html">Contact</a></li>
+          <li class="nav-wishlist-mobile"><a href="sport-wishlist.html">Wishlist ♡</a></li>
+          <li class="nav-orders-mobile" id="s-nav-orders-li" style="display:none;"><a href="sport-orders.html">My Orders</a></li>
         </ul>
       </nav>
-      <button id="cart-btn" class="cart-button" aria-label="Shopping basket">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M9 2L7 6H3L6 20H18L21 6H17L15 2H9Z" /><path d="M9 10V14" /><path d="M15 10V14" />
-        </svg>
-        <span id="cart-count" class="cart-badge">0</span>
-      </button>
-      <button id="auth-signin-btn" class="auth-header-btn">Sign In</button>
+      <div class="header-spacer"></div>
+      <div class="header-actions">
+        <!-- Search icon -->
+        <button class="icon-btn" id="hdr-search-btn" aria-label="Search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+        <!-- Basket icon — active on this page -->
+        <a href="sport-cart.html" class="icon-btn" aria-label="Shopping basket" id="cart-btn" style="border-color:#ff5f23;color:#ff5f23;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 2L7 6H3L6 20H18L21 6H17L15 2H9Z" /><path d="M9 10V14" /><path d="M15 10V14" />
+          </svg>
+          <span id="cart-count" class="cart-badge">0</span>
+        </a>
+        <!-- Wishlist icon -->
+        <a href="sport-wishlist.html" class="icon-btn" aria-label="Wishlist">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </a>
+        <button id="auth-signin-btn" class="auth-header-btn">Sign In</button>
+      </div>
     </header>
 
     <main class="cart-page">

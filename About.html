@@ -11,14 +11,18 @@
     />
   </head>
   <body class="page-enter">
+
+    <!-- Scrolling promo ticker -->
+    <div class="promo-ticker" aria-hidden="true">
+      <div class="promo-ticker-track">
+        <span>SIGN IN &ndash; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; SIGN IN &ndash; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp;</span>
+        <span>SIGN IN &ndash; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; SIGN IN &ndash; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp; 10% OFF &nbsp;&bull;&nbsp;</span>
+      </div>
+    </div>
+
     <header>
-      <h1><a href="SportIndex.html">C L E R K S.</a></h1>
-      <button
-        class="hamburger"
-        id="hamburger"
-        aria-label="Toggle navigation"
-        aria-expanded="false"
-      >
+      <h1><a href="SportIndex.html">CLERKS.</a></h1>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
       <nav class="navbar" id="main-nav">
@@ -26,119 +30,100 @@
           <li><a href="Shop.html">Sport Shop</a></li>
           <li><a href="About.html">About Us</a></li>
           <li><a href="Contact.html">Contact</a></li>
+          <li class="nav-wishlist-mobile"><a href="sport-wishlist.html">Wishlist ♡</a></li>
+          <li class="nav-orders-mobile" id="s-nav-orders-li" style="display:none;"><a href="sport-orders.html">My Orders</a></li>
         </ul>
       </nav>
+      <div class="header-spacer"></div>
+      <div class="header-actions">
+        <!-- Search icon -->
+        <button class="icon-btn" id="hdr-search-btn" aria-label="Search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+        <!-- Basket icon -->
+        <a href="sport-cart.html" class="icon-btn" aria-label="Shopping basket" id="cart-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 2L7 6H3L6 20H18L21 6H17L15 2H9Z" /><path d="M9 10V14" /><path d="M15 10V14" />
+          </svg>
+          <span id="cart-count" class="cart-badge"></span>
+        </a>
+        <!-- Wishlist icon -->
+        <a href="sport-wishlist.html" class="icon-btn" aria-label="Wishlist">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </a>
+        <button id="auth-signin-btn" class="auth-header-btn">Sign In</button>
+      </div>
     </header>
 
     <main class="s-page-main">
-      <!-- Page hero -->
       <div class="s-page-hero">
         <h1 class="s-page-title">About Us</h1>
-        <p class="s-page-subtitle">
-          Nearly 200 years of British footwear — and we're just getting started
-        </p>
+        <p class="s-page-subtitle">Nearly 200 years of British footwear — and we're just getting started</p>
       </div>
 
-      <!-- Two-column: image left, text right -->
       <div class="s-about-layout">
         <div class="s-about-image-col">
-          <img
-            src="Upcoming Shoe.png"
-            alt="Clerks upcoming shoe"
-            class="s-about-image"
-          />
+          <img src="Upcoming Shoe.png" alt="Clerks upcoming shoe" class="s-about-image" />
         </div>
-
         <div class="s-about-text-col">
           <h2 class="s-about-heading">A British Icon, Moving Forward</h2>
-
-          <p class="s-about-body">
-            Clerks is one of Britain's most recognised shoe brands, with a
-            heritage stretching back almost 200 years. A fixture on the British
-            high street, we've spent generations earning the trust of customers
-            who care about quality — from school shoes to Sunday best, from
-            workwear to weekend wear. Our name stands for footwear that lasts.
-          </p>
-
-          <p class="s-about-body">
-            That reputation wasn't built overnight. It was built stitch by
-            stitch, last by last, across nearly two centuries of craftsmanship.
-            Today Clerks serves every age and every style, and our broad range
-            reflects the diversity of the people who wear us — from children
-            taking their first steps to adults who know exactly what they want
-            from a shoe.
-          </p>
-
-          <p class="s-about-body">
-            Now, Clerks is stepping into new territory. Recognising where
-            culture and sport are heading, we are actively expanding into
-            sports-style footwear — a natural evolution for a brand that has
-            always moved with its customers. Through partnerships with respected
-            names in the sporting world, the Clerks Sport line brings that same
-            commitment to quality into a bolder, faster arena.
-          </p>
-
-          <p class="s-about-body">
-            The Clerks Rush is the first expression of that ambition: a
-            performance-inspired silhouette designed in Britain, built to move,
-            and stamped with the Clerks standard that has meant something on
-            this high street for two hundred years.
-          </p>
-
+          <p class="s-about-body">Clerks is one of Britain's most recognised shoe brands, with a heritage stretching back almost 200 years. A fixture on the British high street, we've spent generations earning the trust of customers who care about quality — from school shoes to Sunday best, from workwear to weekend wear. Our name stands for footwear that lasts.</p>
+          <p class="s-about-body">That reputation wasn't built overnight. It was built stitch by stitch, last by last, across nearly two centuries of craftsmanship. Today Clerks serves every age and every style, and our broad range reflects the diversity of the people who wear us — from children taking their first steps to adults who know exactly what they want from a shoe.</p>
+          <p class="s-about-body">Now, Clerks is stepping into new territory. Recognising where culture and sport are heading, we are actively expanding into sports-style footwear — a natural evolution for a brand that has always moved with its customers. Through partnerships with respected names in the sporting world, the Clerks Sport line brings that same commitment to quality into a bolder, faster arena.</p>
+          <p class="s-about-body">The Clerks Rush is the first expression of that ambition: a performance-inspired silhouette designed in Britain, built to move, and stamped with the Clerks standard that has meant something on this high street for two hundred years.</p>
           <a href="Shop.html" class="s-about-cta">Shop the Collection</a>
         </div>
       </div>
 
-      <!-- Stats strip -->
       <div class="s-about-stats">
-        <div class="s-stat">
-          <span class="s-stat-number">~200</span>
-          <span class="s-stat-label">Years of Heritage</span>
-        </div>
+        <div class="s-stat"><span class="s-stat-number">~200</span><span class="s-stat-label">Years of Heritage</span></div>
         <div class="s-stat-divider"></div>
-        <div class="s-stat">
-          <span class="s-stat-number">British</span>
-          <span class="s-stat-label">High Street Icon</span>
-        </div>
+        <div class="s-stat"><span class="s-stat-number">British</span><span class="s-stat-label">High Street Icon</span></div>
         <div class="s-stat-divider"></div>
-        <div class="s-stat">
-          <span class="s-stat-number">All Ages</span>
-          <span class="s-stat-label">Footwear for Everyone</span>
-        </div>
+        <div class="s-stat"><span class="s-stat-number">All Ages</span><span class="s-stat-label">Footwear for Everyone</span></div>
         <div class="s-stat-divider"></div>
-        <div class="s-stat">
-          <span class="s-stat-number">Sport</span>
-          <span class="s-stat-label">Our Next Chapter</span>
-        </div>
+        <div class="s-stat"><span class="s-stat-number">Sport</span><span class="s-stat-label">Our Next Chapter</span></div>
       </div>
     </main>
 
     <footer>
-      <p id="footer">
-        © 2026 Clerks UK. All rights reserved. | Step Into Your Next Chapter
-      </p>
+      <p id="footer">&copy; 2026 Clerks UK. All rights reserved. | Step Into Your Next Chapter</p>
     </footer>
 
     <script>
-      document
-        .getElementById("hamburger")
-        .addEventListener("click", function () {
-          this.classList.toggle("open");
-          document.getElementById("main-nav").classList.toggle("nav-open");
-          this.setAttribute("aria-expanded", this.classList.contains("open"));
-        });
+      (function () {
+        try {
+          var items = JSON.parse(localStorage.getItem('clerks_sport_cart') || '[]');
+          var count = items.reduce(function (s, i) { return s + (i.quantity || 1); }, 0);
+          var badge = document.getElementById('cart-count');
+          if (badge && count > 0) { badge.textContent = count; badge.style.display = 'flex'; }
+        } catch (e) {}
+        try {
+          if (localStorage.getItem('clerks_sport_user')) {
+            var ol = document.getElementById('orders-action-link');
+            var nl = document.getElementById('s-nav-orders-li');
+            if (ol) ol.style.display = 'flex';
+            if (nl) nl.style.display = 'list-item';
+          }
+        } catch (e) {}
+      })();
     </script>
     <script>
-      document.addEventListener("click", function (e) {
-        const link = e.target.closest("a[href]");
+      document.getElementById('hamburger').addEventListener('click', function () {
+        this.classList.toggle('open');
+        document.getElementById('main-nav').classList.toggle('nav-open');
+        this.setAttribute('aria-expanded', this.classList.contains('open'));
+      });
+    </script>
+    <script>
+      document.addEventListener('click', function (e) {
+        const link = e.target.closest('a[href]');
         if (!link) return;
-        const href = link.getAttribute("href");
-        if (!href || href.startsWith("#") || link.target === "_blank") return;
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('#') || link.target === '_blank') return;
         e.preventDefault();
-        document.body.classList.add("page-leaving");
-        setTimeout(function () {
-          window.location.href = href;
-        }, 300);
+        document.body.classList.add('page-leaving');
+        setTimeout(function () { window.location.href = href; }, 300);
       });
     </script>
   </body>
