@@ -4,28 +4,30 @@ body {
 
 h1 {
   font-family: "IBM Plex Sans", sans-serif;
-  font-size: 1.875rem;
-  font-weight: bold;
+  font-size: 1.5rem;
+  font-weight: 800;
   color: white;
   margin: 0;
   font-style: normal;
   padding: 4px 6px;
   flex-shrink: 0;
   white-space: nowrap;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 h1 a {
   text-decoration: none;
   color: white;
 }
 h1 a:active {
-  color: #ff5f23;
+  color: white;
 }
 h1 a:hover {
-  color: #ff5f23;
+  color: white;
 }
 h1:hover {
-  transform: scale(1.15);
-  transition: transform 0.2s ease;
+  transform: none;
+  transition: none;
 }
 .navbar ul {
   list-style-type: none;
@@ -51,40 +53,42 @@ h1:hover {
   transition: transform 0.2s ease;
 }
 
+/* ── Hero image ── */
 #orgshoe {
-  margin-top: 55px;
-  float: right;
-  width: min(880px, 58vw);
-  height: auto;
-  aspect-ratio: 880 / 500;
-  border-radius: clamp(40px, 10vw, 1000px);
-  margin-right: -150px;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 0;
+  margin: 0;
+  float: none;
   flex-shrink: 0;
+  transition: transform 0.3s ease;
 }
 #orgshoe:hover {
-  transform: scale(1.05);
-  transition: transform 0.2s ease;
+  transform: scale(1.04);
 }
 
+/* ── Hero text block ── */
 .htext {
   font-family: "IBM Plex Sans", sans-serif;
-  font-weight: bold;
+  font-weight: 800;
   color: white;
   text-align: left;
-  margin-top: 128px;
-  font-size: clamp(2rem, 4.5vw, 3.5rem);
-  line-height: 1.1;
-  float: left;
-  margin-left: clamp(20px, 7vw, 105px);
+  font-size: clamp(2.2rem, 4.8vw, 3.8rem);
+  line-height: 1.08;
+  float: none;
+  margin: 0;
 }
 .htext p {
   margin: 0;
   padding: 0;
-  line-height: 1.15;
+  line-height: 1.1;
 }
 .htext:hover {
-  transform: scale(1.05);
-  transition: transform 0.2s ease;
+  transform: none;
+  transition: none;
 }
 
 #footer {
@@ -97,16 +101,90 @@ h1:hover {
   word-break: break-word;
 }
 
-/* Landing page: clear the floats so the footer sits below the hero */
+/* ── Landing hero: two-column flex (text | shoe) ── */
 .sport-landing-main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   min-height: 560px;
-  overflow: hidden; /* clearfix — contains the floated htext and orgshoe */
-  padding-bottom: 20px;
+  overflow: hidden;
+  padding: 48px clamp(32px, 6vw, 100px);
+  gap: 0;
+  position: relative;
+}
+
+/* Left text column */
+.hero-text-col {
+  flex: 0 0 auto;
+  width: 48%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 32px;
+  z-index: 2;
+}
+
+/* Right image column */
+.hero-img-col {
+  flex: 1 1 0;
+  min-height: 380px;
+  max-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Orange radial glow behind the shoe */
+.hero-img-col::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 65% at 55% 55%, rgba(255,95,35,0.38) 0%, rgba(255,95,35,0.10) 55%, transparent 75%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Shoe image inside the glow column */
+.hero-img-col a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 82%;
+  max-width: 480px;
+  aspect-ratio: 1 / 0.9;
+  position: relative;
+  z-index: 1;
+  line-height: 0;
+}
+
+/* ── Hero eyebrow ("BUILT FOR PERFORMANCE.") ── */
+.hero-eyebrow {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #ff5f23;
+  margin-bottom: 18px;
+}
+
+/* ── Hero subtitle ── */
+.hero-subtitle {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+  font-weight: 400;
+  color: #7886a0;
+  line-height: 1.6;
+  margin-top: 18px;
+  margin-bottom: 0;
 }
 
 .sport-landing-clear {
-  clear: both;
-  display: block;
+  display: none;
 }
 
 #p2 {
@@ -1629,18 +1707,18 @@ form:not(.s-contact-form):not(.f-contact-form):not(#recommendation-form):not(
 }
 
 /* ============================================================
-   SPORT SHOP — Search Bar
+   SPORT SHOP — Header & Search Bar
    ============================================================ */
 
 header {
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
-  gap: 0;
-  padding: 0 24px;
-  height: 60px;
-  background-color: #090f1a;
-  border-bottom: 1px solid rgba(120, 134, 160, 0.15);
+  gap: 8px;
+  padding: 0 20px;
+  height: 64px;
+  background-color: #0d1321;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
   position: sticky;
   top: 0;
   z-index: 200;
@@ -1662,7 +1740,7 @@ header {
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   flex-shrink: 0;
 }
 
@@ -1671,21 +1749,22 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
-  background: none;
-  border: 1px solid rgba(120, 134, 160, 0.35);
-  border-radius: 6px;
-  color: #7886a0;
+  width: 42px;
+  height: 42px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  color: #c2c2c2;
   cursor: pointer;
   text-decoration: none;
   flex-shrink: 0;
-  transition: border-color 0.2s, color 0.2s;
+  transition: border-color 0.18s, background 0.18s, color 0.18s;
   position: relative;
 }
 .icon-btn:hover {
-  border-color: #ff5f23;
-  color: #ff5f23;
+  border-color: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.08);
+  color: #ffffff;
 }
 
 /* Search wrapper inside header-actions */
@@ -1704,25 +1783,23 @@ header {
 }
 
 .sport-search-input {
-  width: 220px;
-  padding: 9px 12px 9px 32px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(120, 134, 160, 0.3);
-  border-radius: 6px;
+  width: 200px;
+  padding: 9px 12px 9px 34px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
   font-family: "IBM Plex Sans", sans-serif;
   font-size: 13px;
   color: #ffffff;
   outline: none;
-  transition:
-    border-color 0.2s,
-    box-shadow 0.2s;
+  transition: border-color 0.18s, box-shadow 0.18s;
 }
 .sport-search-input::placeholder {
-  color: #7886a0;
+  color: rgba(120, 134, 160, 0.7);
 }
 .sport-search-input:focus {
-  border-color: #ff5f23;
-  box-shadow: 0 0 0 3px rgba(255, 95, 35, 0.12);
+  border-color: rgba(255,255,255,0.3);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.06);
 }
 
 /* ============================================================
@@ -2277,26 +2354,28 @@ body.page-enter footer #footer {
 
 /* Header sign-in button */
 .auth-header-btn {
-  background: none;
-  border: 1px solid #7886a0;
-  color: #7886a0;
-  padding: 7px 14px;
-  border-radius: 5px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #c2c2c2;
+  padding: 0 14px;
+  height: 42px;
+  border-radius: 8px;
   cursor: pointer;
   font-family: "IBM Plex Sans", sans-serif;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.5px;
-  transition: all 0.2s;
+  letter-spacing: 0.3px;
+  transition: border-color 0.18s, background 0.18s, color 0.18s;
   flex-shrink: 0;
   white-space: nowrap;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 .auth-header-btn:hover {
-  border-color: #ff5f23;
-  color: #ff5f23;
+  border-color: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.08);
+  color: #ffffff;
 }
 .auth-user-dot {
   width: 7px;
@@ -3720,19 +3799,21 @@ button, .btn-primary, .btn-secondary, .s-btn-primary, .s-btn-secondary,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 22px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   background: #ff5f23;
   color: #ffffff;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   flex-shrink: 0;
+  letter-spacing: 0;
 }
 .auth-btn-name {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
-  margin-left: 5px;
+  margin-left: 0;
+  color: #ffffff;
 }
 
 /* Account info modal grid */
