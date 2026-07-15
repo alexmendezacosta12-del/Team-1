@@ -787,7 +787,7 @@ const AuthModal = {
         sportBtn.id = 'auth-signin-btn'; // keep same id so click handler still works
         sportBtn.dataset.loggedIn = '1';
       } else {
-        sportBtn.innerHTML = 'Sign In';
+        sportBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Sign In';
         sportBtn.title = 'Sign in for 10% off';
         sportBtn.dataset.loggedIn = '0';
       }

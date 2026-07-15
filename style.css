@@ -4,30 +4,28 @@ body {
 
 h1 {
   font-family: "IBM Plex Sans", sans-serif;
-  font-size: 1.5rem;
-  font-weight: 800;
+  font-size: 1.875rem;
+  font-weight: bold;
   color: white;
   margin: 0;
   font-style: normal;
   padding: 4px 6px;
   flex-shrink: 0;
   white-space: nowrap;
-  letter-spacing: 1px;
-  text-transform: uppercase;
 }
 h1 a {
   text-decoration: none;
   color: white;
 }
 h1 a:active {
-  color: white;
+  color: #ff5f23;
 }
 h1 a:hover {
-  color: white;
+  color: #ff5f23;
 }
 h1:hover {
-  transform: none;
-  transition: none;
+  transform: scale(1.15);
+  transition: transform 0.2s ease;
 }
 .navbar ul {
   list-style-type: none;
@@ -53,42 +51,30 @@ h1:hover {
   transition: transform 0.2s ease;
 }
 
-/* ── Hero image ── */
 #orgshoe {
+  width: min(700px, 52vw);
+  height: auto;
+  border-radius: clamp(20px, 4vw, 60px);
   display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-  border-radius: 0;
-  margin: 0;
-  float: none;
-  flex-shrink: 0;
-  transition: transform 0.3s ease;
+  margin-right: -60px;
 }
 #orgshoe:hover {
-  transform: scale(1.04);
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
 }
 
-/* ── Hero text block ── */
 .htext {
   font-family: "IBM Plex Sans", sans-serif;
-  font-weight: 800;
+  font-weight: bold;
   color: white;
   text-align: left;
-  font-size: clamp(2.2rem, 4.8vw, 3.8rem);
-  line-height: 1.08;
-  float: none;
-  margin: 0;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  line-height: 1.1;
 }
 .htext p {
   margin: 0;
   padding: 0;
-  line-height: 1.1;
-}
-.htext:hover {
-  transform: none;
-  transition: none;
+  line-height: 1.15;
 }
 
 #footer {
@@ -101,91 +87,35 @@ h1:hover {
   word-break: break-word;
 }
 
-/* ── Landing hero: two-column flex (text | shoe) ── */
+/* Landing page hero — two-column flex layout */
 .sport-landing-main {
   display: flex;
-  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   min-height: 560px;
+  padding: 0 clamp(32px, 7vw, 110px);
   overflow: hidden;
-  padding: 48px clamp(32px, 6vw, 100px);
-  gap: 0;
-  position: relative;
 }
 
-/* Left text column */
 .hero-text-col {
-  flex: 0 0 auto;
-  width: 48%;
-  max-width: 560px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-right: 32px;
-  z-index: 2;
-}
-
-/* Right image column */
-.hero-img-col {
-  flex: 1 1 0;
-  min-height: 380px;
-  max-height: 600px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 1;
-}
-
-/* Orange radial glow behind the shoe */
-.hero-img-col::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 70% 65% at 55% 55%, rgba(255,95,35,0.38) 0%, rgba(255,95,35,0.10) 55%, transparent 75%);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Shoe image inside the glow column */
-.hero-img-col a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 82%;
+  flex: 0 0 auto;
   max-width: 480px;
-  aspect-ratio: 1 / 0.9;
-  position: relative;
-  z-index: 1;
-  line-height: 0;
+  padding: 60px 0;
 }
 
-/* ── Hero eyebrow ("BUILT FOR PERFORMANCE.") ── */
-.hero-eyebrow {
-  font-family: "IBM Plex Sans", sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: #ff5f23;
-  margin-bottom: 18px;
+.hero-img-col {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+  overflow: visible;
 }
 
-/* ── Hero subtitle ── */
-.hero-subtitle {
-  font-family: "IBM Plex Sans", sans-serif;
-  font-size: clamp(0.9rem, 1.6vw, 1.05rem);
-  font-weight: 400;
-  color: #7886a0;
-  line-height: 1.6;
-  margin-top: 18px;
-  margin-bottom: 0;
-}
-
-.sport-landing-clear {
-  display: none;
-}
+.hero-eyebrow { display: none; }
+.hero-subtitle { display: none; }
 
 #p2 {
   color: #ff5f23;
@@ -1707,18 +1637,18 @@ form:not(.s-contact-form):not(.f-contact-form):not(#recommendation-form):not(
 }
 
 /* ============================================================
-   SPORT SHOP — Header & Search Bar
+   SPORT SHOP — Search Bar
    ============================================================ */
 
 header {
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
-  gap: 8px;
-  padding: 0 20px;
-  height: 64px;
-  background-color: #0d1321;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  gap: 0;
+  padding: 0 24px;
+  height: 60px;
+  background-color: #090f1a;
+  border-bottom: 1px solid rgba(120, 134, 160, 0.15);
   position: sticky;
   top: 0;
   z-index: 200;
@@ -1740,7 +1670,7 @@ header {
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   flex-shrink: 0;
 }
 
@@ -1749,22 +1679,21 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 8px;
-  color: #c2c2c2;
+  width: 38px;
+  height: 38px;
+  background: none;
+  border: 1px solid rgba(120, 134, 160, 0.35);
+  border-radius: 6px;
+  color: #7886a0;
   cursor: pointer;
   text-decoration: none;
   flex-shrink: 0;
-  transition: border-color 0.18s, background 0.18s, color 0.18s;
+  transition: border-color 0.2s, color 0.2s;
   position: relative;
 }
 .icon-btn:hover {
-  border-color: rgba(255,255,255,0.3);
-  background: rgba(255,255,255,0.08);
-  color: #ffffff;
+  border-color: #ff5f23;
+  color: #ff5f23;
 }
 
 /* Search wrapper inside header-actions */
@@ -1783,23 +1712,25 @@ header {
 }
 
 .sport-search-input {
-  width: 200px;
-  padding: 9px 12px 9px 34px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 8px;
+  width: 220px;
+  padding: 9px 12px 9px 32px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(120, 134, 160, 0.3);
+  border-radius: 6px;
   font-family: "IBM Plex Sans", sans-serif;
   font-size: 13px;
   color: #ffffff;
   outline: none;
-  transition: border-color 0.18s, box-shadow 0.18s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 .sport-search-input::placeholder {
-  color: rgba(120, 134, 160, 0.7);
+  color: #7886a0;
 }
 .sport-search-input:focus {
-  border-color: rgba(255,255,255,0.3);
-  box-shadow: 0 0 0 3px rgba(255,255,255,0.06);
+  border-color: #ff5f23;
+  box-shadow: 0 0 0 3px rgba(255, 95, 35, 0.12);
 }
 
 /* ============================================================
@@ -2354,18 +2285,17 @@ body.page-enter footer #footer {
 
 /* Header sign-in button */
 .auth-header-btn {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.12);
-  color: #c2c2c2;
-  padding: 0 14px;
-  height: 42px;
-  border-radius: 8px;
+  background: none;
+  border: 1px solid rgba(120, 134, 160, 0.55);
+  color: #d0d6e0;
+  padding: 8px 20px;
+  border-radius: 6px;
   cursor: pointer;
   font-family: "IBM Plex Sans", sans-serif;
   font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.3px;
-  transition: border-color 0.18s, background 0.18s, color 0.18s;
+  letter-spacing: 0.4px;
+  transition: all 0.2s;
   flex-shrink: 0;
   white-space: nowrap;
   display: flex;
@@ -2373,9 +2303,8 @@ body.page-enter footer #footer {
   gap: 8px;
 }
 .auth-header-btn:hover {
-  border-color: rgba(255,255,255,0.3);
-  background: rgba(255,255,255,0.08);
-  color: #ffffff;
+  border-color: #ff5f23;
+  color: #ff5f23;
 }
 .auth-user-dot {
   width: 7px;
@@ -2705,29 +2634,28 @@ body.page-leaving {
    ============================================================ */
 .landing-cta-row {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  flex-direction: row;
+  gap: 14px;
   margin-top: 36px;
-  width: 100%;
-  max-width: 340px;
+  flex-wrap: wrap;
 }
 
 .landing-shop-btn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   background-color: #ff5f23;
   color: #ffffff;
   text-decoration: none;
-  padding: 16px 24px;
-  border-radius: 10px;
+  padding: 14px 28px;
+  border-radius: 8px;
   font-family: "IBM Plex Sans", sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.3px;
   line-height: 1.2;
   transition: background-color 0.2s, transform 0.15s;
-  width: 100%;
+  white-space: nowrap;
 }
 .landing-shop-btn:hover {
   background-color: #e54d1a;
@@ -2735,23 +2663,22 @@ body.page-leaving {
 }
 
 .landing-signin-btn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   background: none;
   border: 2px solid #ff5f23;
   color: #ff5f23;
-  padding: 14px 24px;
-  border-radius: 10px;
+  padding: 12px 24px;
+  border-radius: 8px;
   font-family: "IBM Plex Sans", sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   cursor: pointer;
   letter-spacing: 0.3px;
   line-height: 1.2;
   transition: all 0.2s;
   white-space: nowrap;
-  width: 100%;
 }
 .landing-signin-btn:hover {
   background: rgba(255,95,35,0.1);
@@ -3155,13 +3082,11 @@ button, .btn-primary, .btn-secondary, .s-btn-primary, .s-btn-secondary,
   }
   /* Hero: reduce oversized shoe image */
   #orgshoe {
-    width: 680px;
-    height: auto;
-    margin-right: -80px;
+    width: min(560px, 48vw);
+    margin-right: -40px;
   }
   .htext {
-    font-size: 48px;
-    margin-left: 60px;
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
   }
 }
 
@@ -3179,14 +3104,11 @@ button, .btn-primary, .btn-secondary, .s-btn-primary, .s-btn-secondary,
   }
   /* Hero */
   .htext {
-    font-size: 42px;
-    margin-left: 40px;
-    margin-top: 80px;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
   }
   #orgshoe {
-    width: 540px;
-    height: auto;
-    margin-right: -60px;
+    width: min(480px, 45vw);
+    margin-right: -30px;
   }
   /* Shop */
   .shop-container {
@@ -3245,27 +3167,14 @@ button, .btn-primary, .btn-secondary, .s-btn-primary, .s-btn-secondary,
 
   /* Hero: tablet — keep side-by-side but compact */
   .sport-landing-main {
-    overflow: hidden;
     min-height: unset;
     padding: 32px 24px;
     gap: 16px;
-  }
-  .hero-text-col {
-    width: 52%;
-    padding-right: 16px;
   }
   .htext {
     font-size: clamp(1.8rem, 5vw, 2.6rem);
     line-height: 1.1;
   }
-  .hero-img-col {
-    min-height: 280px;
-  }
-  .landing-cta-row {
-    max-width: 100%;
-    margin-top: 24px;
-  }
-  .sport-landing-clear { display: none; }
 
   /* Shop: stack sidebar above products */
   .shop-container {
@@ -3390,18 +3299,11 @@ button, .btn-primary, .btn-secondary, .s-btn-primary, .s-btn-secondary,
     color: #ff5f23;
   }
 
-  /* Hero: phone landscape — stay side-by-side */
+  /* Hero: phone landscape */
   .sport-landing-main {
     padding: 24px 16px;
     gap: 12px;
     min-height: unset;
-  }
-  .hero-text-col {
-    width: 55%;
-    padding-right: 12px;
-  }
-  .hero-img-col {
-    min-height: 220px;
   }
   .htext {
     font-size: clamp(1.5rem, 5.5vw, 2rem);
@@ -4272,6 +4174,35 @@ footer {
 }
 #orgshoe {
   max-width: 100%;
+  flex-shrink: 0;
+}
+
+/* ── Hero: stack vertically on small screens ── */
+@media (max-width: 700px) {
+  .sport-landing-main {
+    flex-direction: column;
+    padding: 40px 24px 32px;
+    text-align: center;
+    gap: 28px;
+  }
+  .hero-text-col {
+    max-width: 100%;
+    padding: 0;
+    align-items: center;
+  }
+  .htext {
+    text-align: center;
+  }
+  .landing-cta-row {
+    justify-content: center;
+  }
+  .hero-img-col {
+    justify-content: center;
+  }
+  #orgshoe {
+    width: min(340px, 80vw);
+    margin-right: 0;
+  }
 }
 
 /* ── All pages: prevent horizontal scroll ── */
@@ -4315,65 +4246,6 @@ header h1 {
   .pd-size-modal-box { padding: 24px 16px; }
 }
 
-/* ============================================================
-   MOBILE LANDING HERO — responsive two-column hero at all sizes
-   ============================================================ */
-
-/* Small phones ≤480px: stack vertically */
-@media (max-width: 480px) {
-  .sport-landing-main {
-    flex-direction: column !important;
-    padding: 28px 16px 36px !important;
-    gap: 24px !important;
-    align-items: stretch !important;
-    min-height: unset !important;
-  }
-  .hero-text-col {
-    width: 100% !important;
-    padding-right: 0 !important;
-    align-items: center !important;
-    text-align: center !important;
-  }
-  .htext {
-    font-size: clamp(2rem, 9vw, 2.4rem) !important;
-    text-align: center !important;
-  }
-  .hero-eyebrow {
-    text-align: center !important;
-  }
-  .hero-subtitle {
-    text-align: center !important;
-  }
-  .landing-cta-row {
-    max-width: 100% !important;
-    align-items: stretch !important;
-  }
-  .hero-img-col {
-    width: 100% !important;
-    min-height: 200px !important;
-    max-height: 280px !important;
-  }
-  .hero-img-col a {
-    width: 70% !important;
-    max-width: 260px !important;
-    margin: 0 auto !important;
-  }
-}
-
-/* Very small phones ≤375px */
-@media (max-width: 375px) {
-  .sport-landing-main {
-    padding: 20px 12px 28px !important;
-    gap: 18px !important;
-  }
-  .htext {
-    font-size: 1.75rem !important;
-  }
-  .hero-img-col {
-    min-height: 160px !important;
-  }
-}
-
 /* ── General mobile polish: ensure nothing is cut off ── */
 @media (max-width: 768px) {
   /* Modals: always within screen */
@@ -4410,3 +4282,87 @@ header h1 {
     text-decoration: underline;
   }
 }
+
+/* ============================================================
+   FINAL MOBILE POLISH — header, hero, size chart, overflow
+   ============================================================ */
+
+/* ── Standalone size chart (outside collapsible) — always on on mobile ── */
+.mobile-size-chart-standalone {
+  display: none;
+}
+@media (max-width: 768px) {
+  .mobile-size-chart-standalone {
+    display: block;
+    margin-top: 12px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(120,134,160,0.2);
+    border-radius: 8px;
+    padding: 14px 12px 10px;
+  }
+}
+
+/* ── Mobile header: keep search bar below, shrink auth button label ── */
+@media (max-width: 480px) {
+  /* Ensure header wraps properly */
+  header {
+    flex-wrap: wrap;
+    padding: 6px 12px;
+    height: auto;
+    min-height: 56px;
+    gap: 6px;
+  }
+  /* Logo: bolder and larger on mobile for identity */
+  h1 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+  }
+  /* Auth button: hide text label, show just the avatar pill to save space */
+  .auth-btn-name {
+    display: none;
+  }
+  .auth-header-btn {
+    max-width: 44px;
+    padding: 6px 8px;
+    justify-content: center;
+  }
+  /* Icon buttons: make them slightly smaller */
+  .icon-btn {
+    width: 34px;
+    height: 34px;
+  }
+  /* Header actions: tighter gap */
+  .header-actions {
+    gap: 4px;
+  }
+  /* Search row: full width, visible below the main header row */
+  .search-wrapper {
+    order: 10;
+    width: 100%;
+    flex: none;
+    margin: 0 0 6px 0;
+  }
+  .sport-search-input {
+    width: 100%;
+    font-size: 14px;
+  }
+}
+
+/* ── Very small phones ≤375px: even tighter header ── */
+@media (max-width: 375px) {
+  h1 {
+    font-size: 1rem;
+    letter-spacing: 2px;
+  }
+  .icon-btn {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+  }
+  .header-actions {
+    gap: 3px;
+  }
+}
+
