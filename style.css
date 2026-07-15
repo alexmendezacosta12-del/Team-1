@@ -3359,18 +3359,8 @@ button, .btn-primary, .btn-secondary, .s-btn-primary, .s-btn-secondary,
   .so-page { padding: 32px 16px 64px; }
   .so-page-title { font-size: 28px; }
 
-  /* Product detail — on 768px the layout is single-column.
-     Keep image sticky so user sees it while reading reviews.
-     Use a short top offset equal to header height. */
+  /* Product detail — tablet single-column layout (image sticky above reviews) */
   .pd-page { padding: 28px 16px 64px; }
-  .pd-images {
-    position: sticky;
-    top: 60px;
-    max-width: 480px;
-    margin: 0 auto;
-    width: 100%;
-    z-index: 10;
-  }
 
   /* Contact form row: single column */
   .s-contact-form-row {
@@ -3454,12 +3444,7 @@ button, .btn-primary, .btn-secondary, .s-btn-primary, .s-btn-secondary,
   .wl-grid { grid-template-columns: 1fr; gap: 12px; }
   .s-wishlist-grid { grid-template-columns: 1fr; gap: 12px; }
 
-  /* Product detail image: static on very small phones so it doesn't block content */
-  .pd-images {
-    position: static;
-    top: auto;
-    max-width: 100%;
-  }
+  /* Product detail: handled fully by inline styles in sport-product.html at ≤600px */
 
   /* Cart item card */
   .cpc-item {
@@ -4124,19 +4109,8 @@ button, .btn-primary, .btn-secondary, .s-btn-primary, .s-btn-secondary,
   .so-tracker-step-label { font-size: 9px; }
 }
 
-/* ── Product detail mobile ── */
-@media (max-width: 600px) {
-  .pd-page { padding: 16px 14px 60px; }
-  .pd-layout { gap: 20px; }
-  .pd-title { font-size: 22px; }
-  .pd-price, .pd-price-member { font-size: 22px; }
-  .pd-cta-row { flex-direction: column; gap: 10px; }
-  .pd-add-btn, .pd-fav-btn { width: 100%; }
-  .pd-thumb-row { gap: 8px; }
-  .pd-thumb { width: 60px; height: 60px; }
-  .pd-size-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
-  .pd-size-btn { padding: 10px 6px; font-size: 13px; }
-}
+/* ── Product detail mobile — overrides only for external .pd-* uses ── */
+/* (sport-product.html handles its own inline responsive styles) */
 
 /* ── About page mobile ── */
 @media (max-width: 600px) {
@@ -4253,26 +4227,20 @@ header h1 {
   .auth-modal-content,
   .sg-content,
   .pd-size-modal-box {
-    max-width: calc(100vw - 24px) !important;
-    width: calc(100vw - 24px) !important;
-    box-sizing: border-box !important;
+    max-width: calc(100vw - 24px);
+    width: calc(100vw - 24px);
+    box-sizing: border-box;
   }
-  /* Size chart table inside modal: scrollable */
+  /* Size chart table wrapper: scrollable horizontally */
+  .sg-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* Separate full-width size chart tables: scrollable */
   .size-chart-table,
-  .sg-table,
   .pd-size-table {
     display: block;
     overflow-x: auto;
-  }
-  /* Search wrapper in header stays full-width below first row */
-  .search-wrapper {
-    order: 10;
-    width: 100%;
-    margin: 0 0 6px 0;
-  }
-  .sport-search-input {
-    width: 100%;
-    font-size: 14px;
   }
   /* Product detail size guide link more prominent */
   .pd-size-guide-link {

@@ -54,10 +54,10 @@
         padding: 20px; background: rgba(255,255,255,0.02);
         border: 1px solid rgba(120,134,160,0.15);
         border-radius: 12px; margin-bottom: 16px;
-        transition: border-color 0.2s;
+        transition: border-color 0.2s; box-sizing: border-box;
       }
       .cpc-item:hover { border-color: #ff5f23; }
-      .cpc-img { width: 100px; height: 100px; object-fit: cover; border-radius: 8px; background: rgba(255,95,35,0.08); }
+      .cpc-img { width: 100px; height: 100px; object-fit: cover; border-radius: 8px; background: rgba(255,95,35,0.08); flex-shrink: 0; }
       .cpc-details { }
       .cpc-name { font-family: "IBM Plex Sans", sans-serif; font-size: 17px; font-weight: 700; color: #ffffff; margin-bottom: 4px; line-height: 1.3; }
       .cpc-colorway { font-size: 13px; color: #ff5f23; font-family: "IBM Plex Sans", sans-serif; margin-bottom: 4px; }
@@ -77,14 +77,23 @@
       .cpc-remove:hover { border-color: #a70404; color: #a70404; }
 
       @media (max-width: 600px) {
-        .cpc-item { grid-template-columns: 80px 1fr; }
-        .cpc-right { grid-column: 1 / -1; flex-direction: row; justify-content: space-between; }
+        .cpc-item { grid-template-columns: 80px 1fr; gap: 14px; padding: 16px; }
+        .cpc-img { width: 80px; height: 80px; }
+        .cpc-right { grid-column: 1 / -1; flex-direction: row; justify-content: space-between; align-items: center; }
+        .cpc-name { font-size: 15px; }
+        .cpc-price { font-size: 17px; }
+      }
+      @media (max-width: 380px) {
+        .cpc-item { grid-template-columns: 68px 1fr; gap: 10px; padding: 12px; }
+        .cpc-img { width: 68px; height: 68px; }
+        .cpc-name { font-size: 14px; }
+        .cpc-price { font-size: 16px; }
       }
 
       /* Summary panel */
       .cart-summary {
         background: rgba(255,255,255,0.02); border: 1px solid rgba(120,134,160,0.15);
-        border-radius: 14px; padding: 28px; position: sticky; top: 90px;
+        border-radius: 14px; padding: 28px; position: sticky; top: 90px; box-sizing: border-box;
       }
       .cart-summary-title { font-family: "IBM Plex Sans", sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #7886a0; margin-bottom: 20px; }
       .cart-summary-line { display: flex; justify-content: space-between; font-family: "IBM Plex Sans", sans-serif; font-size: 14px; color: #c2c2c2; margin-bottom: 10px; }

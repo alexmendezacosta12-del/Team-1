@@ -11,27 +11,25 @@
     />
     <style>
       /* ── Product Detail Page ── */
-      .pd-page { max-width: 1200px; margin: 0 auto; padding: 40px 24px 80px; }
+      .pd-page { max-width: 1200px; margin: 0 auto; padding: 40px 24px 80px; box-sizing: border-box; }
       .pd-breadcrumb { font-size: 12px; color: #7886a0; font-family: "IBM Plex Sans",sans-serif; margin-bottom: 28px; }
       .pd-breadcrumb a { color: #7886a0; text-decoration: none; }
       .pd-breadcrumb a:hover { color: #ff5f23; }
       .pd-breadcrumb span { margin: 0 6px; }
 
       .pd-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
-      @media (max-width: 900px) { .pd-layout { grid-template-columns: 1fr; gap: 24px; } }
+      @media (max-width: 900px) { .pd-layout { grid-template-columns: 1fr; gap: 28px; } }
 
-      /* Image area — sticky on desktop/tablet, overridden to static on small phones via style.css */
+      /* Image area */
       .pd-images { position: sticky; top: 80px; }
       .pd-main-image {
         background: linear-gradient(135deg, rgba(255,95,35,0.08), rgba(9,15,26,0.4));
-        border-radius: 14px;
-        overflow: hidden;
-        aspect-ratio: 1 / 1;
+        border-radius: 14px; overflow: hidden; aspect-ratio: 1 / 1;
         display: flex; align-items: center; justify-content: center;
         border: 1px solid rgba(120,134,160,0.15);
       }
-      .pd-main-image img { width: 100%; height: 100%; object-fit: contain; padding: 20px; }
-      .pd-thumb-row { display: flex; gap: 10px; margin-top: 12px; }
+      .pd-main-image img { width: 100%; height: 100%; object-fit: contain; padding: 20px; box-sizing: border-box; }
+      .pd-thumb-row { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
       .pd-thumb {
         width: 72px; height: 72px; border-radius: 8px;
         background: rgba(255,255,255,0.04);
@@ -40,12 +38,12 @@
         transition: border-color 0.2s;
       }
       .pd-thumb.active, .pd-thumb:hover { border-color: #ff5f23; }
-      .pd-thumb img { width: 100%; height: 100%; object-fit: contain; padding: 4px; }
+      .pd-thumb img { width: 100%; height: 100%; object-fit: contain; padding: 4px; box-sizing: border-box; }
 
       /* Info area */
-      .pd-info { padding-top: 4px; }
+      .pd-info { padding-top: 4px; min-width: 0; }
       .pd-category { font-family: "IBM Plex Sans",sans-serif; font-size: 12px; font-weight: 600; color: #7886a0; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
-      .pd-title { font-family: "IBM Plex Sans",sans-serif; font-size: 30px; font-weight: 700; color: #ffffff; margin: 0 0 8px; line-height: 1.2; }
+      .pd-title { font-family: "IBM Plex Sans",sans-serif; font-size: 30px; font-weight: 700; color: #ffffff; margin: 0 0 8px; line-height: 1.2; word-break: break-word; }
       .pd-colorway { font-family: "IBM Plex Sans",sans-serif; font-size: 14px; color: #ff5f23; margin-bottom: 16px; }
       .pd-price-row { margin-bottom: 20px; }
       .pd-price { font-family: "IBM Plex Sans",sans-serif; font-size: 28px; font-weight: 700; color: #ffffff; }
@@ -53,8 +51,8 @@
       .pd-price-original { color: #7886a0; font-size: 16px; text-decoration: line-through; margin-left: 8px; font-family: "IBM Plex Sans",sans-serif; }
 
       /* Rating strip */
-      .pd-rating-row { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid rgba(120,134,160,0.2); }
-      .pd-stars { display: flex; gap: 2px; }
+      .pd-rating-row { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid rgba(120,134,160,0.2); flex-wrap: wrap; }
+      .pd-stars { display: flex; gap: 2px; flex-shrink: 0; }
       .pd-star { font-size: 18px; color: #ff5f23; }
       .pd-star.half { position: relative; display: inline-block; color: rgba(120,134,160,0.4); }
       .pd-star.half::before { content: '★'; position: absolute; left: 0; width: 50%; overflow: hidden; color: #ff5f23; }
@@ -63,8 +61,8 @@
       .pd-rating-link:hover { text-decoration: underline; }
 
       /* Size section */
-      .pd-size-label { font-family: "IBM Plex Sans",sans-serif; font-size: 14px; font-weight: 600; color: #c2c2c2; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
-      .pd-size-guide-link { font-size: 12px; color: #7886a0; text-decoration: none; font-weight: 400; cursor: pointer; background: none; border: none; padding: 0; font-family: "IBM Plex Sans",sans-serif; }
+      .pd-size-label { font-family: "IBM Plex Sans",sans-serif; font-size: 14px; font-weight: 600; color: #c2c2c2; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+      .pd-size-guide-link { font-size: 12px; color: #7886a0; text-decoration: none; font-weight: 400; cursor: pointer; background: none; border: none; padding: 0; font-family: "IBM Plex Sans",sans-serif; white-space: nowrap; }
       .pd-size-guide-link:hover { color: #ff5f23; }
       .pd-size-fit { font-size: 12px; color: #7886a0; margin-bottom: 12px; font-family: "IBM Plex Sans",sans-serif; font-style: italic; }
       .pd-size-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 24px; }
@@ -72,7 +70,7 @@
         background: rgba(255,255,255,0.04); border: 2px solid rgba(120,134,160,0.25);
         color: #c2c2c2; padding: 14px 8px; border-radius: 8px; cursor: pointer;
         font-family: "IBM Plex Sans",sans-serif; font-size: 14px; font-weight: 600;
-        transition: all 0.2s; text-align: center;
+        transition: all 0.2s; text-align: center; box-sizing: border-box;
       }
       .pd-size-btn:hover { border-color: #ff5f23; color: #ffffff; background: rgba(255,95,35,0.1); }
       .pd-size-btn.selected { border-color: #ff5f23; background: #ff5f23; color: #ffffff; }
@@ -83,14 +81,15 @@
         background: #ff5f23; border: none; color: #ffffff; padding: 16px;
         border-radius: 50px; font-family: "IBM Plex Sans",sans-serif; font-size: 16px;
         font-weight: 700; cursor: pointer; transition: background-color 0.2s, transform 0.15s;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.5px; width: 100%; box-sizing: border-box;
       }
       .pd-add-btn:hover { background: #e54d1a; transform: translateY(-2px); }
       .pd-add-btn:disabled { background: rgba(255,95,35,0.3); cursor: not-allowed; transform: none; }
       .pd-fav-btn {
         background: none; border: 2px solid rgba(120,134,160,0.3); color: #c2c2c2; padding: 14px;
         border-radius: 50px; font-family: "IBM Plex Sans",sans-serif; font-size: 15px;
-        font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px;
+        font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center;
+        justify-content: center; gap: 8px; width: 100%; box-sizing: border-box;
       }
       .pd-fav-btn:hover { border-color: #ff5f23; color: #ff5f23; }
       .pd-fav-btn.active { border-color: #ff5f23; color: #ff5f23; background: rgba(255,95,35,0.08); }
@@ -98,45 +97,77 @@
       /* Description */
       .pd-desc-section { border-top: 1px solid rgba(120,134,160,0.2); padding-top: 24px; margin-bottom: 24px; }
       .pd-desc-title { font-family: "IBM Plex Sans",sans-serif; font-size: 13px; font-weight: 700; color: #7886a0; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
-      .pd-desc-text { font-family: "IBM Plex Sans",sans-serif; font-size: 14px; color: #c2c2c2; line-height: 1.8; margin-bottom: 16px; }
+      .pd-desc-text { font-family: "IBM Plex Sans",sans-serif; font-size: 14px; color: #c2c2c2; line-height: 1.8; margin-bottom: 16px; word-break: break-word; }
       .pd-details-list { list-style: disc; padding-left: 20px; }
       .pd-details-list li { font-family: "IBM Plex Sans",sans-serif; font-size: 13px; color: #7886a0; margin-bottom: 6px; line-height: 1.6; }
 
       /* Reviews */
       .pd-reviews-section { padding-top: 40px; border-top: 2px solid #ff5f23; margin-top: 40px; }
-      .pd-reviews-header { display: flex; align-items: flex-start; gap: 40px; margin-bottom: 32px; flex-wrap: wrap; }
+      .pd-reviews-header { display: flex; align-items: flex-start; gap: 24px; margin-bottom: 32px; flex-wrap: wrap; }
       .pd-reviews-score { flex-shrink: 0; }
-      .pd-score-num { font-family: "IBM Plex Sans",sans-serif; font-size: 56px; font-weight: 700; color: #ffffff; line-height: 1; margin-bottom: 8px; }
+      .pd-score-num { font-family: "IBM Plex Sans",sans-serif; font-size: 52px; font-weight: 700; color: #ffffff; line-height: 1; margin-bottom: 8px; }
       .pd-score-label { font-size: 13px; color: #7886a0; font-family: "IBM Plex Sans",sans-serif; margin-bottom: 12px; }
-      .pd-reviews-meta { flex: 1; display: flex; flex-direction: column; gap: 10px; justify-content: center; }
+      .pd-reviews-meta { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 10px; justify-content: center; }
       .pd-reviews-count { font-family: "IBM Plex Sans",sans-serif; font-size: 20px; font-weight: 700; color: #ffffff; margin-bottom: 4px; }
 
       /* Individual review */
-      .pd-review-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(120,134,160,0.15); border-radius: 10px; padding: 20px 22px; margin-bottom: 16px; }
+      .pd-review-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(120,134,160,0.15); border-radius: 10px; padding: 20px 18px; margin-bottom: 16px; }
       .pd-review-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; flex-wrap: wrap; gap: 8px; }
       .pd-reviewer { font-family: "IBM Plex Sans",sans-serif; font-size: 14px; font-weight: 700; color: #ffffff; }
       .pd-review-date { font-family: "IBM Plex Sans",sans-serif; font-size: 12px; color: #7886a0; }
-      .pd-review-title { font-family: "IBM Plex Sans",sans-serif; font-size: 15px; font-weight: 600; color: #ff5f23; margin-bottom: 8px; }
-      .pd-review-body { font-family: "IBM Plex Sans",sans-serif; font-size: 14px; color: #c2c2c2; line-height: 1.7; }
+      .pd-review-title { font-family: "IBM Plex Sans",sans-serif; font-size: 15px; font-weight: 600; color: #ff5f23; margin-bottom: 8px; word-break: break-word; }
+      .pd-review-body { font-family: "IBM Plex Sans",sans-serif; font-size: 14px; color: #c2c2c2; line-height: 1.7; word-break: break-word; }
       .pd-review-verified { font-size: 11px; color: #22c55e; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-top: 10px; font-family: "IBM Plex Sans",sans-serif; }
 
       /* Size Guide Modal */
-      .sg-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
+      .sg-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 16px; box-sizing: border-box; }
       .sg-modal.active { display: flex; }
-      .sg-content { background: #0d1626; border: 1px solid rgba(120,134,160,0.25); border-radius: 14px; padding: 36px; max-width: 560px; width: 100%; position: relative; max-height: 80vh; overflow-y: auto; }
+      .sg-content { background: #0d1626; border: 1px solid rgba(120,134,160,0.25); border-radius: 14px; padding: 32px 28px; max-width: 540px; width: 100%; position: relative; max-height: 90vh; overflow-y: auto; box-sizing: border-box; }
       .sg-close { position: absolute; top: 14px; right: 16px; background: none; border: none; color: #7886a0; font-size: 24px; cursor: pointer; }
       .sg-close:hover { color: #ffffff; }
       .sg-title { font-family: "IBM Plex Sans",sans-serif; font-size: 18px; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
       .sg-sub { font-size: 13px; color: #7886a0; margin-bottom: 20px; font-family: "IBM Plex Sans",sans-serif; }
-      .sg-table { width: 100%; border-collapse: collapse; font-family: "IBM Plex Sans",sans-serif; }
-      .sg-table th { background: rgba(255,95,35,0.1); color: #ff5f23; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 10px 14px; text-align: center; border-bottom: 1px solid rgba(255,95,35,0.2); }
-      .sg-table td { padding: 10px 14px; text-align: center; color: #c2c2c2; font-size: 14px; border-bottom: 1px solid rgba(120,134,160,0.1); }
+      .sg-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .sg-table { width: 100%; border-collapse: collapse; font-family: "IBM Plex Sans",sans-serif; min-width: 260px; }
+      .sg-table th { background: rgba(255,95,35,0.1); color: #ff5f23; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 10px 12px; text-align: center; border-bottom: 1px solid rgba(255,95,35,0.2); }
+      .sg-table td { padding: 10px 12px; text-align: center; color: #c2c2c2; font-size: 14px; border-bottom: 1px solid rgba(120,134,160,0.1); }
       .sg-table tr:hover td { background: rgba(255,95,35,0.04); color: #ffffff; }
       .sg-note { margin-top: 16px; font-size: 12px; color: #7886a0; font-family: "IBM Plex Sans",sans-serif; font-style: italic; }
 
-      /* Wishlist toast */
-      .pd-toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%); background: #ff5f23; color: #fff; padding: 12px 24px; border-radius: 50px; font-family: "IBM Plex Sans",sans-serif; font-size: 14px; font-weight: 600; z-index: 4000; opacity: 0; transition: opacity 0.3s; pointer-events: none; white-space: nowrap; }
+      /* Toast notification */
+      .pd-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #ff5f23; color: #fff; padding: 12px 20px; border-radius: 50px; font-family: "IBM Plex Sans",sans-serif; font-size: 14px; font-weight: 600; z-index: 4000; opacity: 0; transition: opacity 0.3s; pointer-events: none; white-space: nowrap; max-width: calc(100vw - 32px); text-align: center; box-sizing: border-box; }
       .pd-toast.show { opacity: 1; }
+
+      /* ── Mobile overrides (≤600px) ── */
+      @media (max-width: 600px) {
+        .pd-page { padding: 16px 14px 72px; }
+        .pd-layout { gap: 20px; }
+        .pd-images { position: static; top: auto; max-width: 100%; }
+        .pd-main-image { aspect-ratio: 4/3; border-radius: 10px; }
+        .pd-main-image img { padding: 12px; }
+        .pd-thumb { width: 56px; height: 56px; }
+        .pd-thumb-row { gap: 8px; }
+        .pd-title { font-size: 22px; }
+        .pd-price, .pd-price-member { font-size: 22px; }
+        .pd-size-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+        .pd-size-btn { padding: 12px 4px; font-size: 13px; }
+        .pd-add-btn { font-size: 15px; padding: 14px; }
+        .pd-fav-btn { font-size: 14px; padding: 12px; }
+        .pd-score-num { font-size: 40px; }
+        .pd-reviews-count { font-size: 16px; }
+        .pd-review-card { padding: 16px 14px; }
+        .sg-content { padding: 24px 16px; }
+        .sg-table th, .sg-table td { padding: 8px; font-size: 13px; }
+        .pd-toast { font-size: 13px; padding: 10px 16px; }
+      }
+
+      /* ── Very small phones (≤380px) ── */
+      @media (max-width: 380px) {
+        .pd-size-grid { grid-template-columns: repeat(3, 1fr); }
+        .pd-title { font-size: 20px; }
+        .pd-size-btn { padding: 10px 4px; font-size: 12px; }
+        .pd-score-num { font-size: 34px; }
+      }
     </style>
   </head>
 
@@ -286,20 +317,22 @@
         <button class="sg-close" id="sg-close">&times;</button>
         <h2 class="sg-title">Size Guide</h2>
         <p class="sg-sub">Clerks Rush trainers fit true to size. Compare against the chart below.</p>
-        <table class="sg-table">
-          <thead>
-            <tr><th>UK</th><th>EU</th><th>US</th><th>Foot Length (cm)</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>6</td><td>40</td><td>7</td><td>24.5</td></tr>
-            <tr><td>7</td><td>41</td><td>8</td><td>25.5</td></tr>
-            <tr><td>8</td><td>42</td><td>9</td><td>26.5</td></tr>
-            <tr><td>9</td><td>43</td><td>10</td><td>27.5</td></tr>
-            <tr><td>10</td><td>44</td><td>11</td><td>28.5</td></tr>
-            <tr><td>11</td><td>45</td><td>12</td><td>29.5</td></tr>
-            <tr><td>12</td><td>46</td><td>13</td><td>30.5</td></tr>
-          </tbody>
-        </table>
+        <div class="sg-table-wrap">
+          <table class="sg-table">
+            <thead>
+              <tr><th>UK</th><th>EU</th><th>US</th><th>Foot Length (cm)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>6</td><td>40</td><td>7</td><td>24.5</td></tr>
+              <tr><td>7</td><td>41</td><td>8</td><td>25.5</td></tr>
+              <tr><td>8</td><td>42</td><td>9</td><td>26.5</td></tr>
+              <tr><td>9</td><td>43</td><td>10</td><td>27.5</td></tr>
+              <tr><td>10</td><td>44</td><td>11</td><td>28.5</td></tr>
+              <tr><td>11</td><td>45</td><td>12</td><td>29.5</td></tr>
+              <tr><td>12</td><td>46</td><td>13</td><td>30.5</td></tr>
+            </tbody>
+          </table>
+        </div>
         <p class="sg-note">If you are between sizes, we recommend sizing up for extra comfort.</p>
       </div>
     </div>
