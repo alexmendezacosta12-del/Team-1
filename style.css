@@ -4122,7 +4122,55 @@ button, .btn-primary, .btn-secondary, .s-btn-primary, .s-btn-secondary,
   .product-name { font-size: 14px !important; }
   .product-price, .product-price-member { font-size: 18px; }
   .btn-view-sizes { padding: 8px 14px; font-size: 12px; }
+
+  /* ── Size chart: always visible on mobile inside sidebar ── */
+  .mobile-size-chart {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 8px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(120,134,160,0.2);
+    border-radius: 8px;
+    padding: 14px 12px 10px;
+  }
+  .mobile-size-chart-title {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #7886a0;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .mobile-size-chart table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .mobile-size-chart th {
+    background: rgba(255,95,35,0.1);
+    color: #ff5f23;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 7px 6px;
+    text-align: center;
+    font-family: "IBM Plex Sans", sans-serif;
+    border-bottom: 1px solid rgba(255,95,35,0.15);
+  }
+  .mobile-size-chart td {
+    padding: 7px 6px;
+    text-align: center;
+    color: #c2c2c2;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(120,134,160,0.1);
+    font-family: "IBM Plex Sans", sans-serif;
+  }
+  .mobile-size-chart tr:last-child td { border-bottom: none; }
 }
+
+/* Hide the mobile-only size chart on desktop */
+.mobile-size-chart { display: none; }
 
 @media (max-width: 480px) {
   .product-grid { grid-template-columns: 1fr; gap: 12px; }
@@ -4251,7 +4299,7 @@ header h1 {
 
 /* ── Auth button: cap width so it never pushes header icons off screen ── */
 .auth-header-btn {
-  max-width: 100px;
+  max-width: 110px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -4261,4 +4309,140 @@ header h1 {
   .sg-content { padding: 24px 16px; }
   .sg-table th, .sg-table td { padding: 8px 10px; font-size: 13px; }
   .pd-size-modal-box { padding: 24px 16px; }
+}
+
+/* ============================================================
+   MOBILE LANDING HERO — image sits side-by-side with text
+   On mobile the hero becomes a two-column flex row:
+   text on left, image on right (smaller & properly sized)
+   ============================================================ */
+
+/* Tablet & mobile: two-column hero row ≤900px */
+@media (max-width: 900px) {
+  .sport-landing-main {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    gap: 16px !important;
+    padding: 28px 20px 40px !important;
+    overflow: hidden !important;
+    min-height: unset !important;
+  }
+  .htext {
+    float: none !important;
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    font-size: clamp(22px, 5vw, 38px) !important;
+    text-align: left !important;
+    line-height: 1.2 !important;
+    width: auto !important;
+  }
+  .htext p {
+    line-height: 1.2 !important;
+    margin: 0 !important;
+    padding: 1px 0 !important;
+  }
+  .landing-cta-row {
+    justify-content: flex-start !important;
+    margin-top: 18px !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+  .landing-shop-btn,
+  .landing-signin-btn {
+    font-size: 13px !important;
+    padding: 10px 16px !important;
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  /* Hero image: fixed right column */
+  a:has(> #orgshoe) {
+    display: block !important;
+    flex: 0 0 auto !important;
+    width: clamp(140px, 38vw, 320px) !important;
+    max-width: none !important;
+    margin: 0 !important;
+  }
+  #orgshoe {
+    float: none !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    aspect-ratio: unset !important;
+    border-radius: 20px !important;
+    margin: 0 !important;
+  }
+  .sport-landing-clear { display: none !important; }
+}
+
+/* Small phones ≤480px: stay side-by-side but tighter */
+@media (max-width: 480px) {
+  .sport-landing-main {
+    padding: 20px 14px 32px !important;
+    gap: 12px !important;
+  }
+  .htext {
+    font-size: clamp(18px, 6vw, 26px) !important;
+  }
+  a:has(> #orgshoe) {
+    width: clamp(110px, 36vw, 180px) !important;
+  }
+  #orgshoe {
+    border-radius: 14px !important;
+  }
+}
+
+/* Very small phones ≤375px */
+@media (max-width: 375px) {
+  .sport-landing-main {
+    padding: 16px 12px 24px !important;
+    gap: 10px !important;
+  }
+  .htext {
+    font-size: 18px !important;
+  }
+  a:has(> #orgshoe) {
+    width: clamp(100px, 35vw, 150px) !important;
+  }
+}
+
+/* ── General mobile polish: ensure nothing is cut off ── */
+@media (max-width: 768px) {
+  /* Modals: always within screen */
+  .modal-content,
+  .auth-modal-content,
+  .sg-content,
+  .pd-size-modal-box {
+    max-width: calc(100vw - 24px) !important;
+    width: calc(100vw - 24px) !important;
+    box-sizing: border-box !important;
+  }
+  /* Size chart table inside modal: scrollable */
+  .size-chart-table,
+  .sg-table,
+  .pd-size-table {
+    display: block;
+    overflow-x: auto;
+  }
+  /* Search wrapper in header stays full-width below first row */
+  .search-wrapper {
+    order: 10;
+    width: 100%;
+    margin: 0 0 6px 0;
+  }
+  .sport-search-input {
+    width: 100%;
+    font-size: 14px;
+  }
+  /* Product detail size guide link more prominent */
+  .pd-size-guide-link {
+    font-size: 13px !important;
+    color: #ff5f23 !important;
+    font-weight: 600 !important;
+    text-decoration: underline;
+  }
 }

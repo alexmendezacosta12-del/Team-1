@@ -36,10 +36,13 @@
       </nav>
       <div class="header-spacer"></div>
       <div class="header-actions">
-        <!-- Search icon -->
-        <button class="icon-btn" id="hdr-search-btn" aria-label="Search">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        </button>
+        <!-- Inline search bar (same as Shop page) -->
+        <div class="search-wrapper">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+          </svg>
+          <input type="search" id="sport-search-input" class="sport-search-input" placeholder="Search shoes…" autocomplete="off" />
+        </div>
         <!-- Basket icon -->
         <a href="sport-cart.html" class="icon-btn" aria-label="Shopping basket" id="cart-btn">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -141,17 +144,7 @@
         this.setAttribute('aria-expanded', this.classList.contains('open'));
       });
     </script>
-    <!-- Search overlay -->
-    <div class="search-overlay" id="search-overlay">
-      <div class="search-overlay-box">
-        <div class="search-overlay-input-wrap">
-          <span class="search-overlay-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
-          <input type="text" class="search-overlay-input" id="search-overlay-input" placeholder="Search shoes, colours, styles…" autocomplete="off" />
-          <button class="search-overlay-close" id="search-overlay-close">&times;</button>
-        </div>
-        <p class="search-overlay-hint"><a href="Shop.html">Go to Sport Shop →</a></p>
-      </div>
-    </div>
+    <script src="js/products.js"></script>
     <script>
       document.addEventListener('click', function (e) {
         const link = e.target.closest('a[href]');
@@ -162,15 +155,26 @@
         document.body.classList.add('page-leaving');
         setTimeout(function () { window.location.href = href; }, 300);
       });
+      // Inline search — navigate directly to product page on Enter
       (function() {
-        var overlay = document.getElementById('search-overlay');
-        var input = document.getElementById('search-overlay-input');
-        var hdrSearch = document.getElementById('hdr-search-btn');
-        if (hdrSearch) hdrSearch.addEventListener('click', function() { overlay.classList.add('active'); setTimeout(function(){ input.focus(); },80); });
-        document.getElementById('search-overlay-close').addEventListener('click', function() { overlay.classList.remove('active'); });
-        overlay.addEventListener('click', function(e){ if(e.target===overlay) overlay.classList.remove('active'); });
-        document.addEventListener('keydown', function(e){ if(e.key==='Escape') overlay.classList.remove('active'); });
-        input.addEventListener('keydown', function(e){ if(e.key==='Enter'&&input.value.trim()) window.location.href='Shop.html?q='+encodeURIComponent(input.value.trim()); });
+        var inp = document.getElementById('sport-search-input');
+        if (!inp) return;
+        inp.addEventListener('keydown', function(e) {
+          if (e.key !== 'Enter') return;
+          var q = inp.value.trim().toLowerCase();
+          if (!q) return;
+          if (typeof products !== 'undefined') {
+            var matches = products.filter(function(p) {
+              return p.name.toLowerCase().includes(q) ||
+                     p.colorway.toLowerCase().includes(q);
+            });
+            if (matches.length === 1) {
+              window.location.href = 'sport-product.html?id=' + matches[0].id;
+              return;
+            }
+          }
+          window.location.href = 'Shop.html?q=' + encodeURIComponent(inp.value.trim());
+        });
       })();
     </script>
   </body>

@@ -164,6 +164,23 @@
           📏 View Size Chart
         </button>
 
+        <!-- Inline size chart — visible on mobile without tapping ── -->
+        <div class="mobile-size-chart">
+          <div class="mobile-size-chart-title">📏 Size Chart</div>
+          <table>
+            <thead><tr><th>UK</th><th>EU</th><th>US</th><th>cm</th></tr></thead>
+            <tbody>
+              <tr><td>6</td><td>40</td><td>7</td><td>24.5</td></tr>
+              <tr><td>7</td><td>41</td><td>8</td><td>25.5</td></tr>
+              <tr><td>8</td><td>42</td><td>9</td><td>26.5</td></tr>
+              <tr><td>9</td><td>43</td><td>10</td><td>27.5</td></tr>
+              <tr><td>10</td><td>44</td><td>11</td><td>28.5</td></tr>
+              <tr><td>11</td><td>45</td><td>12</td><td>29.5</td></tr>
+              <tr><td>12</td><td>46</td><td>13</td><td>30.5</td></tr>
+            </tbody>
+          </table>
+        </div>
+
         <!-- AI Recommendation Section -->
         <div class="filter-section ai-section">
           <h3>🤖 AI Shoe Finder</h3>
@@ -458,6 +475,39 @@
         }
         checkDesktop();
         window.addEventListener('resize', checkDesktop);
+      })();
+      // Pre-fill search from ?q= URL param (landing here from another page search)
+      (function() {
+        var params = new URLSearchParams(window.location.search);
+        var qParam = params.get('q');
+        if (qParam) {
+          document.addEventListener('DOMContentLoaded', function() {
+            var inp = document.getElementById('sport-search-input');
+            if (inp) {
+              inp.value = qParam;
+              inp.dispatchEvent(new Event('input'));
+            }
+          });
+        }
+      })();
+      // Direct product navigation on Enter — if search matches exactly 1 product
+      (function() {
+        var inp = document.getElementById('sport-search-input');
+        if (!inp) return;
+        inp.addEventListener('keydown', function(e) {
+          if (e.key !== 'Enter') return;
+          var q = inp.value.trim().toLowerCase();
+          if (!q) return;
+          // products array is available from products.js
+          if (typeof products === 'undefined') return;
+          var matches = products.filter(function(p) {
+            return p.name.toLowerCase().includes(q) ||
+                   p.colorway.toLowerCase().includes(q);
+          });
+          if (matches.length === 1) {
+            window.location.href = 'sport-product.html?id=' + matches[0].id;
+          }
+        });
       })();
     </script>
     <script>
