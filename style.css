@@ -2703,33 +2703,31 @@ body.page-leaving {
 /* ============================================================
    SPORT LANDING PAGE — Hero CTA Buttons
    ============================================================ */
-/* Reset inherited htext sizing (55px font / 0.5 line-height) */
 .landing-cta-row {
   display: flex;
+  flex-direction: column;
   gap: 12px;
-  margin-top: 48px; /* at normal line-height this renders ~48px below the text */
-  flex-wrap: wrap;
-  font-size: 0; /* zero out the 55px inherited size for inline children */
-  line-height: 1;
-  align-items: center;
+  margin-top: 36px;
+  width: 100%;
+  max-width: 340px;
 }
 
 .landing-shop-btn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   background-color: #ff5f23;
   color: #ffffff;
   text-decoration: none;
-  padding: 13px 28px;
-  border-radius: 6px;
+  padding: 16px 24px;
+  border-radius: 10px;
   font-family: "IBM Plex Sans", sans-serif;
-  font-size: 15px; /* explicit override of inherited 55px */
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
   line-height: 1.2;
-  transition:
-    background-color 0.2s,
-    transform 0.15s;
+  transition: background-color 0.2s, transform 0.15s;
+  width: 100%;
 }
 .landing-shop-btn:hover {
   background-color: #e54d1a;
@@ -2737,25 +2735,26 @@ body.page-leaving {
 }
 
 .landing-signin-btn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: center;
   background: none;
   border: 2px solid #ff5f23;
   color: #ff5f23;
-  padding: 11px 22px;
-  border-radius: 6px;
+  padding: 14px 24px;
+  border-radius: 10px;
   font-family: "IBM Plex Sans", sans-serif;
-  font-size: 15px; /* explicit override of inherited 55px */
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   line-height: 1.2;
   transition: all 0.2s;
   white-space: nowrap;
+  width: 100%;
 }
 .landing-signin-btn:hover {
-  background: #ff5f23;
-  color: #ffffff;
+  background: rgba(255,95,35,0.1);
 }
 
 /* ============================================================
@@ -3244,57 +3243,27 @@ button, .btn-primary, .btn-secondary, .s-btn-primary, .s-btn-secondary,
     flex: 1;
   }
 
-  /* Hero: disable float, stack vertically */
+  /* Hero: tablet — keep side-by-side but compact */
   .sport-landing-main {
-    overflow: visible;
+    overflow: hidden;
     min-height: unset;
-    padding: 24px 20px 48px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 32px 24px;
+    gap: 16px;
+  }
+  .hero-text-col {
+    width: 52%;
+    padding-right: 16px;
   }
   .htext {
-    float: none;
-    margin: 24px 0 20px 0;
-    font-size: 42px;
-    line-height: 1.25;
-    text-align: center;
-    width: 100%;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    line-height: 1.1;
   }
-  .htext p {
-    line-height: 1.25;
-    margin: 0;
-    padding: 2px 0;
-  }
-  /* Hero image — always visible on tablet */
-  #orgshoe {
-    float: none;
-    display: block !important;
-    width: 80%;
-    max-width: 460px;
-    height: auto;
-    aspect-ratio: unset;
-    margin: 0 auto;
-    border-radius: 36px;
-  }
-  a:has(> #orgshoe) {
-    display: block;
-    width: 80%;
-    max-width: 460px;
-    margin: 0 auto;
+  .hero-img-col {
+    min-height: 280px;
   }
   .landing-cta-row {
-    justify-content: center;
-    margin-top: 28px;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  #p4 {
-    text-align: center;
-    white-space: normal;
-    word-break: break-word;
-    width: 100%;
-    margin-top: 16px;
+    max-width: 100%;
+    margin-top: 24px;
   }
   .sport-landing-clear { display: none; }
 
@@ -3421,30 +3390,22 @@ button, .btn-primary, .btn-secondary, .s-btn-primary, .s-btn-secondary,
     color: #ff5f23;
   }
 
-  /* Hero */
+  /* Hero: phone landscape — stay side-by-side */
+  .sport-landing-main {
+    padding: 24px 16px;
+    gap: 12px;
+    min-height: unset;
+  }
+  .hero-text-col {
+    width: 55%;
+    padding-right: 12px;
+  }
+  .hero-img-col {
+    min-height: 220px;
+  }
   .htext {
-    font-size: 36px;
-    line-height: 1.25;
-  }
-  .htext p {
-    line-height: 1.25;
-    margin: 0;
-    padding: 2px 0;
-  }
-  #orgshoe {
-    display: block !important;
-    width: 90%;
-    max-width: 420px;
-    height: auto;
-    aspect-ratio: unset;
-    border-radius: 28px;
-    margin: 0 auto;
-  }
-  a:has(> #orgshoe) {
-    display: block;
-    width: 90%;
-    max-width: 420px;
-    margin: 0 auto;
+    font-size: clamp(1.5rem, 5.5vw, 2rem);
+    line-height: 1.1;
   }
 
   /* Product grid: 2 columns */
@@ -3570,48 +3531,10 @@ button, .btn-primary, .btn-secondary, .s-btn-primary, .s-btn-secondary,
   h1 { font-size: 1.05rem; }
   .auth-header-btn { font-size: 11px; padding: 6px 10px; }
 
-  /* Hero */
+  /* Hero phone (≤480px handled by the MOBILE LANDING HERO section below) */
   .htext {
-    font-size: 30px;
-    line-height: 1.3;
-    margin: 16px 0 12px 0;
-  }
-  .htext p {
-    line-height: 1.3;
-    margin: 0;
-    padding: 2px 0;
-  }
-  #orgshoe {
-    display: block !important;
-    width: 88%;
-    max-width: 360px;
-    height: auto;
-    aspect-ratio: unset;
-    border-radius: 16px;
-    margin: 0 auto;
-  }
-  a:has(> #orgshoe) {
-    display: block;
-    width: 88%;
-    max-width: 360px;
-    margin: 0 auto;
-  }
-  .landing-shop-btn,
-  .landing-signin-btn {
-    width: 100%;
-    justify-content: center;
-    font-size: 14px;
-    padding: 12px 16px;
-  }
-  .landing-cta-row {
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-    margin-top: 20px;
-  }
-  #p4 {
-    font-size: 12px;
-    padding: 4px 8px;
+    font-size: clamp(1.6rem, 7vw, 2rem);
+    line-height: 1.15;
   }
 
   /* Shop header */
@@ -4393,101 +4316,61 @@ header h1 {
 }
 
 /* ============================================================
-   MOBILE LANDING HERO — image sits side-by-side with text
-   On mobile the hero becomes a two-column flex row:
-   text on left, image on right (smaller & properly sized)
+   MOBILE LANDING HERO — responsive two-column hero at all sizes
    ============================================================ */
 
-/* Tablet & mobile: two-column hero row ≤900px */
-@media (max-width: 900px) {
-  .sport-landing-main {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    flex-wrap: nowrap !important;
-    gap: 16px !important;
-    padding: 28px 20px 40px !important;
-    overflow: hidden !important;
-    min-height: unset !important;
-  }
-  .htext {
-    float: none !important;
-    flex: 1 1 0 !important;
-    min-width: 0 !important;
-    margin: 0 !important;
-    font-size: clamp(22px, 5vw, 38px) !important;
-    text-align: left !important;
-    line-height: 1.2 !important;
-    width: auto !important;
-  }
-  .htext p {
-    line-height: 1.2 !important;
-    margin: 0 !important;
-    padding: 1px 0 !important;
-  }
-  .landing-cta-row {
-    justify-content: flex-start !important;
-    margin-top: 18px !important;
-    flex-direction: column !important;
-    gap: 10px !important;
-    width: 100% !important;
-  }
-  .landing-shop-btn,
-  .landing-signin-btn {
-    font-size: 13px !important;
-    padding: 10px 16px !important;
-    width: 100% !important;
-    justify-content: center !important;
-  }
-  /* Hero image: fixed right column */
-  a:has(> #orgshoe) {
-    display: block !important;
-    flex: 0 0 auto !important;
-    width: clamp(140px, 38vw, 320px) !important;
-    max-width: none !important;
-    margin: 0 !important;
-  }
-  #orgshoe {
-    float: none !important;
-    display: block !important;
-    width: 100% !important;
-    max-width: none !important;
-    height: auto !important;
-    aspect-ratio: unset !important;
-    border-radius: 20px !important;
-    margin: 0 !important;
-  }
-  .sport-landing-clear { display: none !important; }
-}
-
-/* Small phones ≤480px: stay side-by-side but tighter */
+/* Small phones ≤480px: stack vertically */
 @media (max-width: 480px) {
   .sport-landing-main {
-    padding: 20px 14px 32px !important;
-    gap: 12px !important;
+    flex-direction: column !important;
+    padding: 28px 16px 36px !important;
+    gap: 24px !important;
+    align-items: stretch !important;
+    min-height: unset !important;
+  }
+  .hero-text-col {
+    width: 100% !important;
+    padding-right: 0 !important;
+    align-items: center !important;
+    text-align: center !important;
   }
   .htext {
-    font-size: clamp(18px, 6vw, 26px) !important;
+    font-size: clamp(2rem, 9vw, 2.4rem) !important;
+    text-align: center !important;
   }
-  a:has(> #orgshoe) {
-    width: clamp(110px, 36vw, 180px) !important;
+  .hero-eyebrow {
+    text-align: center !important;
   }
-  #orgshoe {
-    border-radius: 14px !important;
+  .hero-subtitle {
+    text-align: center !important;
+  }
+  .landing-cta-row {
+    max-width: 100% !important;
+    align-items: stretch !important;
+  }
+  .hero-img-col {
+    width: 100% !important;
+    min-height: 200px !important;
+    max-height: 280px !important;
+  }
+  .hero-img-col a {
+    width: 70% !important;
+    max-width: 260px !important;
+    margin: 0 auto !important;
   }
 }
 
 /* Very small phones ≤375px */
 @media (max-width: 375px) {
   .sport-landing-main {
-    padding: 16px 12px 24px !important;
-    gap: 10px !important;
+    padding: 20px 12px 28px !important;
+    gap: 18px !important;
   }
   .htext {
-    font-size: 18px !important;
+    font-size: 1.75rem !important;
   }
-  a:has(> #orgshoe) {
-    width: clamp(100px, 35vw, 150px) !important;
+  .hero-img-col {
+    min-height: 160px !important;
   }
 }
 
