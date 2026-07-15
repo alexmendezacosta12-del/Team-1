@@ -331,7 +331,7 @@ const AuthModal = {
       <div class="auth-modal-content">
         <button class="auth-modal-close" aria-label="Close">&times;</button>
 
-        <div class="auth-brand">C L E R K S.</div>
+        <div class="auth-brand">CLERKS.</div>
         <p class="auth-brand-sub">Your account</p>
 
         <div class="auth-tabs">
@@ -459,15 +459,29 @@ const AuthModal = {
       }
     });
 
-    // Header sign-in button / user menu (sport + formal)
+    // Header sign-in / account button
     document.addEventListener('click', (e) => {
-      if (e.target.closest('#auth-signin-btn')) this.open('login');
-      if (e.target.closest('#f-auth-signin-btn')) this.open('login');
-
-      if (e.target.closest('#auth-signout-btn') || e.target.closest('#f-auth-signout-btn')) {
-        Auth.logout();
-        window.location.reload();
+      const btn = e.target.closest('#auth-signin-btn');
+      if (btn) {
+        if (btn.dataset.loggedIn === '1') {
+          e.stopPropagation();
+          this._toggleDropdown();
+        } else {
+          this.open('login');
+        }
+        return;
       }
+      // Close dropdown when clicking outside
+      const dd = document.getElementById('auth-account-dropdown');
+      if (dd && dd.classList.contains('auth-dropdown-open') && !e.target.closest('#auth-account-dropdown')) {
+        this._closeDropdown();
+      }
+      if (e.target.closest('#f-auth-signin-btn')) this.open('login');
+    });
+
+    // Escape key closes dropdown
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') this._closeDropdown();
     });
 
     // Formal discount bar click → open auth modal
@@ -559,43 +573,232 @@ const AuthModal = {
     window.location.reload();
   },
 
+  // ── Inject account dropdown (once) ──────────────────────────────────────────
+  _injectDropdown() {
+    if (document.getElementById('auth-account-dropdown')) return;
+    const dd = document.createElement('div');
+    dd.id = 'auth-account-dropdown';
+    dd.className = 'auth-dropdown';
+    dd.setAttribute('aria-hidden', 'true');
+    dd.innerHTML = `
+      <div class="auth-dd-header">
+        <div class="auth-dd-avatar" id="auth-dd-avatar">J</div>
+        <div>
+          <div class="auth-dd-name" id="auth-dd-name">Account</div>
+          <div class="auth-dd-email" id="auth-dd-email"></div>
+        </div>
+      </div>
+      <div class="auth-dd-divider"></div>
+      <div class="auth-dd-section-label">Orders</div>
+      <a href="sport-orders.html" class="auth-dd-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 7h8M8 12h8M8 17h4"/></svg>
+        My Orders
+      </a>
+      <div class="auth-dd-divider"></div>
+      <div class="auth-dd-section-label">Account</div>
+      <button class="auth-dd-item" id="auth-dd-account-info-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Account Information
+      </button>
+      <button class="auth-dd-item" id="auth-dd-change-pw-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Change Password
+      </button>
+      <div class="auth-dd-divider"></div>
+      <div class="auth-dd-section-label">Settings</div>
+      <button class="auth-dd-item auth-dd-logout" id="auth-dd-logout-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+        Sign Out
+      </button>
+    `;
+    document.body.appendChild(dd);
+
+    // Logout
+    dd.querySelector('#auth-dd-logout-btn').addEventListener('click', () => {
+      Auth.logout();
+      this._closeDropdown();
+      window.location.reload();
+    });
+
+    // Account info modal
+    dd.querySelector('#auth-dd-account-info-btn').addEventListener('click', () => {
+      this._closeDropdown();
+      this._openAccountInfo();
+    });
+
+    // Change password modal
+    dd.querySelector('#auth-dd-change-pw-btn').addEventListener('click', () => {
+      this._closeDropdown();
+      this._openChangePw();
+    });
+  },
+
+  _openAccountInfo() {
+    const user = Auth.currentUser();
+    if (!user) return;
+    const db = _getUserDb();
+    const full = db[user.email] || {};
+
+    let existing = document.getElementById('auth-account-info-modal');
+    if (existing) existing.remove();
+
+    const m = document.createElement('div');
+    m.id = 'auth-account-info-modal';
+    m.className = 'auth-modal active';
+    m.innerHTML = `
+      <div class="auth-modal-content">
+        <button class="auth-modal-close" aria-label="Close">&times;</button>
+        <div class="auth-brand">Account Information</div>
+        <p class="auth-brand-sub">Your Clerks UK profile</p>
+        <div class="auth-info-grid">
+          <div class="auth-info-row"><span class="auth-info-label">First Name</span><span class="auth-info-value">${user.firstName}</span></div>
+          <div class="auth-info-row"><span class="auth-info-label">Last Name</span><span class="auth-info-value">${user.lastName}</span></div>
+          <div class="auth-info-row"><span class="auth-info-label">Email</span><span class="auth-info-value">${user.email}</span></div>
+          <div class="auth-info-row"><span class="auth-info-label">Member since</span><span class="auth-info-value">${full.createdAt ? new Date(full.createdAt).toLocaleDateString('en-GB',{year:'numeric',month:'long'}) : '—'}</span></div>
+          <div class="auth-info-row"><span class="auth-info-label">Member discount</span><span class="auth-info-value" style="color:#22c55e;">10% off every order ✓</span></div>
+        </div>
+        <button class="auth-submit" style="margin-top:20px;" id="auth-info-close-btn">Close</button>
+      </div>`;
+    document.body.appendChild(m);
+    m.addEventListener('click', e => { if (e.target === m) m.remove(); });
+    m.querySelector('#auth-info-close-btn').addEventListener('click', () => m.remove());
+    m.querySelector('.auth-modal-close').addEventListener('click', () => m.remove());
+  },
+
+  _openChangePw() {
+    let existing = document.getElementById('auth-change-pw-modal');
+    if (existing) existing.remove();
+
+    const m = document.createElement('div');
+    m.id = 'auth-change-pw-modal';
+    m.className = 'auth-modal active';
+    m.innerHTML = `
+      <div class="auth-modal-content">
+        <button class="auth-modal-close" aria-label="Close">&times;</button>
+        <div class="auth-brand">Change Password</div>
+        <p class="auth-brand-sub">Update your sign-in password</p>
+        <form id="auth-change-pw-form" novalidate>
+          <div class="auth-form-group">
+            <label for="auth-cpw-current">Current Password</label>
+            <input type="password" id="auth-cpw-current" placeholder="••••••••" required autocomplete="current-password" />
+          </div>
+          <div class="auth-form-group">
+            <label for="auth-cpw-new">New Password</label>
+            <input type="password" id="auth-cpw-new" placeholder="Min. 8 characters" required autocomplete="new-password" />
+            <span class="auth-pw-hint">8–64 chars, uppercase, lowercase, number &amp; special character</span>
+          </div>
+          <div class="auth-form-group">
+            <label for="auth-cpw-confirm">Confirm New Password</label>
+            <input type="password" id="auth-cpw-confirm" placeholder="••••••••" required autocomplete="new-password" />
+          </div>
+          <p class="auth-error" id="auth-cpw-error" style="display:none;"></p>
+          <p class="auth-error" id="auth-cpw-success" style="display:none;color:#22c55e;background:rgba(34,197,94,0.08);"></p>
+          <button type="submit" class="auth-submit">Update Password</button>
+        </form>
+      </div>`;
+    document.body.appendChild(m);
+    m.addEventListener('click', e => { if (e.target === m) m.remove(); });
+    m.querySelector('.auth-modal-close').addEventListener('click', () => m.remove());
+
+    m.querySelector('#auth-change-pw-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const current = document.getElementById('auth-cpw-current').value;
+      const newPw = document.getElementById('auth-cpw-new').value;
+      const confirm = document.getElementById('auth-cpw-confirm').value;
+      const errEl = document.getElementById('auth-cpw-error');
+      const sucEl = document.getElementById('auth-cpw-success');
+      errEl.style.display = 'none'; sucEl.style.display = 'none';
+
+      const user = Auth.currentUser();
+      if (!user) { errEl.textContent = 'Not signed in.'; errEl.style.display = 'block'; return; }
+      const db = _getUserDb();
+      const rec = db[user.email];
+      if (!rec || rec.passwordHash !== btoa(unescape(encodeURIComponent(current)))) {
+        errEl.textContent = 'Current password is incorrect.'; errEl.style.display = 'block'; return;
+      }
+      const msg = AuthValidate.passwordMessage(newPw);
+      if (msg) { errEl.textContent = msg; errEl.style.display = 'block'; return; }
+      if (newPw !== confirm) { errEl.textContent = 'Passwords do not match.'; errEl.style.display = 'block'; return; }
+
+      rec.passwordHash = btoa(unescape(encodeURIComponent(newPw)));
+      _saveUserDb(db);
+      sucEl.textContent = 'Password updated successfully!'; sucEl.style.display = 'block';
+      setTimeout(() => m.remove(), 1800);
+    });
+  },
+
+  _openDropdown() {
+    const user = Auth.currentUser();
+    if (!user) return;
+    const dd = document.getElementById('auth-account-dropdown');
+    if (!dd) return;
+
+    // Update avatar/name/email
+    const initials = (user.firstName[0] + (user.lastName ? user.lastName[0] : '')).toUpperCase();
+    const avatarEl = dd.querySelector('#auth-dd-avatar');
+    const nameEl   = dd.querySelector('#auth-dd-name');
+    const emailEl  = dd.querySelector('#auth-dd-email');
+    if (avatarEl) avatarEl.textContent = initials;
+    if (nameEl)   nameEl.textContent   = user.firstName + ' ' + user.lastName;
+    if (emailEl)  emailEl.textContent  = user.email;
+
+    // Position relative to the button that triggered it
+    const btn = document.getElementById('auth-signin-btn') || document.getElementById('auth-signout-btn');
+    if (btn) {
+      const rect = btn.getBoundingClientRect();
+      dd.style.top  = (rect.bottom + 8 + window.scrollY) + 'px';
+      dd.style.right = (window.innerWidth - rect.right) + 'px';
+    }
+    dd.classList.add('auth-dropdown-open');
+    dd.setAttribute('aria-hidden', 'false');
+  },
+
+  _closeDropdown() {
+    const dd = document.getElementById('auth-account-dropdown');
+    if (dd) {
+      dd.classList.remove('auth-dropdown-open');
+      dd.setAttribute('aria-hidden', 'true');
+    }
+  },
+
+  _toggleDropdown() {
+    const dd = document.getElementById('auth-account-dropdown');
+    if (dd && dd.classList.contains('auth-dropdown-open')) {
+      this._closeDropdown();
+    } else {
+      this._openDropdown();
+    }
+  },
+
   // Update the header sign-in button to show user state
   _updateHeaderUI() {
     const user = Auth.currentUser();
+
+    // Inject dropdown if not present
+    this._injectDropdown();
 
     // Sport header button
     const sportBtn = document.getElementById('auth-signin-btn');
     if (sportBtn) {
       if (user) {
-        sportBtn.innerHTML = `<span class="auth-user-dot"></span> ${user.firstName}`;
-        sportBtn.title = 'Signed in — click to sign out';
-        sportBtn.id = 'auth-signout-btn';
+        const initials = (user.firstName[0] + (user.lastName ? user.lastName[0] : '')).toUpperCase();
+        sportBtn.innerHTML = `<span class="auth-avatar-pill">${initials}</span><span class="auth-btn-name">${user.firstName}</span>`;
+        sportBtn.title = `${user.firstName} ${user.lastName} — click for account`;
+        sportBtn.id = 'auth-signin-btn'; // keep same id so click handler still works
+        sportBtn.dataset.loggedIn = '1';
       } else {
         sportBtn.innerHTML = 'Sign In';
         sportBtn.title = 'Sign in for 10% off';
-      }
-    }
-
-    // Formal header button
-    const formalBtn = document.getElementById('f-auth-signin-btn');
-    if (formalBtn) {
-      if (user) {
-        formalBtn.innerHTML = `<span class="auth-user-dot"></span> ${user.firstName}`;
-        formalBtn.title = 'Signed in — click to sign out';
-        formalBtn.id = 'f-auth-signout-btn';
-      } else {
-        formalBtn.innerHTML = 'Sign In';
-        formalBtn.title = 'Sign in for 10% off';
+        sportBtn.dataset.loggedIn = '0';
       }
     }
 
     // Show/hide "My Orders" nav link based on sign-in state
-    // Sport pages use id="s-nav-orders-li", Formal pages use id="f-nav-orders-li"
     const sportOrdersLi  = document.getElementById('s-nav-orders-li');
     const formalOrdersLi = document.getElementById('f-nav-orders-li');
     const display = user ? '' : 'none';
-    if (sportOrdersLi)  sportOrdersLi.style.display  = display;
-    if (formalOrdersLi) formalOrdersLi.style.display = display;
+    if (sportOrdersLi)  sportOrdersLi.style.display  = user ? 'list-item' : 'none';
+    if (formalOrdersLi) formalOrdersLi.style.display = user ? 'list-item' : 'none';
 
     // Update discount banners
     this._updateDiscountBanners(user);

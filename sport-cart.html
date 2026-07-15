@@ -468,6 +468,17 @@
         this.setAttribute('aria-expanded', this.classList.contains('open'));
       });
     </script>
+    <!-- Search overlay -->
+    <div class="search-overlay" id="search-overlay">
+      <div class="search-overlay-box">
+        <div class="search-overlay-input-wrap">
+          <span class="search-overlay-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
+          <input type="text" class="search-overlay-input" id="search-overlay-input" placeholder="Search shoes, colours, styles…" autocomplete="off" />
+          <button class="search-overlay-close" id="search-overlay-close">&times;</button>
+        </div>
+        <p class="search-overlay-hint"><a href="Shop.html">Go to Sport Shop →</a></p>
+      </div>
+    </div>
     <script>
       document.addEventListener('click', function (e) {
         const link = e.target.closest('a[href]');
@@ -478,6 +489,16 @@
         document.body.classList.add('page-leaving');
         setTimeout(function () { window.location.href = href; }, 300);
       });
+      (function() {
+        var overlay = document.getElementById('search-overlay');
+        var input = document.getElementById('search-overlay-input');
+        var hdrSearch = document.getElementById('hdr-search-btn');
+        if (hdrSearch) hdrSearch.addEventListener('click', function() { overlay.classList.add('active'); setTimeout(function(){ input.focus(); },80); });
+        document.getElementById('search-overlay-close').addEventListener('click', function() { overlay.classList.remove('active'); });
+        overlay.addEventListener('click', function(e){ if(e.target===overlay) overlay.classList.remove('active'); });
+        document.addEventListener('keydown', function(e){ if(e.key==='Escape') overlay.classList.remove('active'); });
+        input.addEventListener('keydown', function(e){ if(e.key==='Enter'&&input.value.trim()) window.location.href='Shop.html?q='+encodeURIComponent(input.value.trim()); });
+      })();
     </script>
   </body>
 </html>

@@ -3710,3 +3710,555 @@ button, .btn-primary, .btn-secondary, .s-btn-primary, .s-btn-secondary,
     padding: 36px 20px;
   }
 }
+
+/* ============================================================
+   ACCOUNT DROPDOWN — signed-in user menu
+   ============================================================ */
+
+/* Sign-in button: avatar pill when logged in */
+.auth-avatar-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ff5f23;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.auth-btn-name {
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+/* Account info modal grid */
+.auth-info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 8px;
+}
+.auth-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(120, 134, 160, 0.15);
+  gap: 12px;
+}
+.auth-info-row:last-child { border-bottom: none; }
+.auth-info-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #7886a0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-family: "IBM Plex Sans", sans-serif;
+  flex-shrink: 0;
+}
+.auth-info-value {
+  font-size: 14px;
+  color: #ffffff;
+  font-family: "IBM Plex Sans", sans-serif;
+  text-align: right;
+  word-break: break-all;
+}
+
+/* Dropdown container */
+.auth-dropdown {
+  position: absolute;
+  top: 0;
+  right: 16px;
+  z-index: 3500;
+  width: 240px;
+  background: #0d1626;
+  border: 1px solid rgba(120, 134, 160, 0.2);
+  border-radius: 12px;
+  padding: 6px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.55), 0 4px 12px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  overflow: hidden;
+}
+.auth-dropdown-open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+/* Dropdown header (avatar + name + email) */
+.auth-dd-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 10px 10px;
+}
+.auth-dd-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #ff5f23;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: "IBM Plex Sans", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.auth-dd-name {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.3;
+}
+.auth-dd-email {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 11px;
+  color: #7886a0;
+  word-break: break-all;
+  line-height: 1.3;
+}
+
+/* Divider */
+.auth-dd-divider {
+  height: 1px;
+  background: rgba(120, 134, 160, 0.15);
+  margin: 4px 6px;
+}
+
+/* Section label */
+.auth-dd-section-label {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: #7886a0;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 6px 12px 2px;
+}
+
+/* Dropdown items */
+.auth-dd-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: 7px;
+  background: none;
+  border: none;
+  color: #c2c2c2;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+  text-align: left;
+}
+.auth-dd-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+.auth-dd-item svg {
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+.auth-dd-item:hover svg { opacity: 1; }
+
+/* Logout item — red accent */
+.auth-dd-logout {
+  color: #f87171;
+}
+.auth-dd-logout:hover {
+  background: rgba(248, 113, 113, 0.08);
+  color: #f87171;
+}
+.auth-dd-logout svg { opacity: 0.8; }
+
+/* ============================================================
+   SEARCH OVERLAY — universal search across all pages
+   ============================================================ */
+
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(9, 15, 26, 0.92);
+  z-index: 4500;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 80px;
+  backdrop-filter: blur(4px);
+}
+.search-overlay.active { display: flex; animation: authBgIn 0.2s ease; }
+
+.search-overlay-box {
+  width: min(600px, 90vw);
+}
+
+.search-overlay-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid #ff5f23;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.search-overlay-icon {
+  padding: 0 14px;
+  color: #7886a0;
+  flex-shrink: 0;
+}
+.search-overlay-input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 18px;
+  padding: 16px 12px 16px 0;
+}
+.search-overlay-input::placeholder { color: rgba(120, 134, 160, 0.7); }
+.search-overlay-close {
+  background: none;
+  border: none;
+  color: #7886a0;
+  font-size: 22px;
+  padding: 0 14px;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.search-overlay-close:hover { color: #ffffff; }
+
+.search-overlay-hint {
+  margin-top: 14px;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 13px;
+  color: #7886a0;
+  text-align: center;
+}
+.search-overlay-hint a {
+  color: #ff5f23;
+  text-decoration: none;
+  font-weight: 600;
+}
+.search-overlay-hint a:hover { text-decoration: underline; }
+
+/* ============================================================
+   VERIFIED REVIEW FORM — product detail page
+   ============================================================ */
+
+.pd-review-form-wrap {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(120, 134, 160, 0.2);
+  border-radius: 12px;
+  padding: 24px;
+  margin-top: 32px;
+}
+.pd-review-form-title {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 6px;
+}
+.pd-review-form-sub {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 13px;
+  color: #7886a0;
+  margin: 0 0 20px;
+}
+.pd-review-locked {
+  text-align: center;
+  padding: 24px 16px;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 13px;
+  color: #7886a0;
+  line-height: 1.6;
+}
+.pd-review-locked strong { color: #ff5f23; }
+.pd-star-picker {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.pd-star-pick {
+  background: none;
+  border: none;
+  font-size: 26px;
+  color: rgba(120, 134, 160, 0.35);
+  cursor: pointer;
+  padding: 2px;
+  transition: color 0.15s, transform 0.1s;
+  line-height: 1;
+}
+.pd-star-pick.lit { color: #ff5f23; }
+.pd-star-pick:hover { transform: scale(1.2); }
+.pd-review-textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(120, 134, 160, 0.3);
+  border-radius: 6px;
+  padding: 11px 14px;
+  color: #ffffff;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 14px;
+  resize: vertical;
+  min-height: 90px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+.pd-review-textarea:focus { border-color: #ff5f23; }
+.pd-review-textarea::placeholder { color: #7886a0; }
+.pd-review-submit {
+  margin-top: 12px;
+  background: #ff5f23;
+  border: none;
+  color: #fff;
+  padding: 11px 24px;
+  border-radius: 6px;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.pd-review-submit:hover { background: #e54d1a; }
+.pd-review-submit:disabled { opacity: 0.5; cursor: default; }
+.pd-review-error {
+  margin-top: 8px;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 12px;
+  color: #f87171;
+}
+
+/* Review card: verified badge */
+.pd-review-verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #22c55e;
+  font-family: "IBM Plex Sans", sans-serif;
+  margin-left: 8px;
+}
+.pd-review-verified::before {
+  content: '✓';
+  font-size: 10px;
+}
+
+/* ============================================================
+   MOBILE LAYOUT IMPROVEMENTS — comprehensive overhaul
+   All fixes are additive and override previous breakpoints
+   ============================================================ */
+
+/* ── Shop page: collapsible filter sidebar on mobile ── */
+.filter-toggle-btn {
+  display: none;
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(120, 134, 160, 0.2);
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  transition: background 0.2s;
+}
+.filter-toggle-btn:hover { background: rgba(255, 95, 35, 0.06); border-color: #ff5f23; }
+.filter-toggle-btn .ftb-icon { transition: transform 0.3s; }
+.filter-toggle-btn.open .ftb-icon { transform: rotate(180deg); }
+
+/* Hide filter sidebar content on mobile by default */
+@media (max-width: 768px) {
+  .filter-toggle-btn { display: flex; }
+  .filter-sidebar-collapsible {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+  .filter-sidebar-collapsible.open { max-height: 2000px; }
+  /* Shop container stacks on mobile */
+  .shop-container {
+    flex-direction: column;
+    gap: 0;
+    padding: 0 14px;
+    margin: 16px auto;
+  }
+  .filter-sidebar {
+    width: 100%;
+    position: static;
+    padding: 0;
+    background: none;
+    border-radius: 0;
+  }
+  /* Product grid: 2 columns on tablet, 1 on phones */
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .product-image { height: 180px; }
+  .product-info { padding: 14px; }
+  .product-name { font-size: 14px !important; }
+  .product-price, .product-price-member { font-size: 18px; }
+  .btn-view-sizes { padding: 8px 14px; font-size: 12px; }
+}
+
+@media (max-width: 480px) {
+  .product-grid { grid-template-columns: 1fr; gap: 12px; }
+  .product-image { height: 220px; }
+}
+
+/* ── Cart page mobile ── */
+@media (max-width: 640px) {
+  .cart-page { padding: 20px 14px 60px; }
+  .cart-page-layout { grid-template-columns: 1fr; gap: 20px; }
+  .cart-summary { padding: 18px 16px; }
+  .cpc-item {
+    grid-template-columns: 80px 1fr;
+    gap: 12px;
+    padding: 14px;
+  }
+  .cpc-img { width: 80px; height: 80px; }
+  .cpc-right {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+/* ── Wishlist grid mobile ── */
+@media (max-width: 600px) {
+  .wl-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .wl-page { padding: 20px 14px 60px; }
+  .wl-card-body { padding: 12px 14px; }
+  .wl-card-footer { flex-direction: column; gap: 8px; }
+  .wl-card-shop, .wl-card-remove { width: 100%; text-align: center; justify-content: center; }
+}
+@media (max-width: 380px) {
+  .wl-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Orders page mobile ── */
+@media (max-width: 600px) {
+  .so-page { padding: 20px 14px 60px; }
+  .so-order-head { flex-direction: column; gap: 6px; }
+  .so-order-meta { gap: 16px; }
+  .so-tracker-steps { flex-wrap: wrap; gap: 8px; }
+  .so-tracker-step-label { font-size: 9px; }
+}
+
+/* ── Product detail mobile ── */
+@media (max-width: 600px) {
+  .pd-page { padding: 16px 14px 60px; }
+  .pd-layout { gap: 20px; }
+  .pd-title { font-size: 22px; }
+  .pd-price, .pd-price-member { font-size: 22px; }
+  .pd-cta-row { flex-direction: column; gap: 10px; }
+  .pd-add-btn, .pd-fav-btn { width: 100%; }
+  .pd-thumb-row { gap: 8px; }
+  .pd-thumb { width: 60px; height: 60px; }
+  .pd-size-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .pd-size-btn { padding: 10px 6px; font-size: 13px; }
+}
+
+/* ── About page mobile ── */
+@media (max-width: 600px) {
+  .s-about-layout { flex-direction: column; gap: 24px; }
+  .s-about-image-col { flex: none; width: 100%; max-width: 100%; }
+  .s-about-stats { padding: 20px 14px; flex-direction: column; }
+  .s-about-heading { font-size: 22px; }
+  .s-page-title { font-size: 32px; }
+  .s-page-hero { padding-bottom: 28px; margin-bottom: 32px; }
+}
+
+/* ── Contact page mobile ── */
+@media (max-width: 600px) {
+  .s-contact-layout { grid-template-columns: 1fr; gap: 24px; }
+  .s-contact-form-wrap { padding: 18px 14px; }
+  .s-contact-form-row { grid-template-columns: 1fr; }
+  .s-contact-heading { font-size: 18px; }
+}
+
+/* ── Footer: never overlaps content ── */
+footer {
+  position: relative;
+  z-index: 1;
+  clear: both;
+}
+#footer {
+  padding: 16px 20px;
+  font-size: clamp(0.7rem, 1.8vw, 0.875rem);
+}
+
+/* ── Hero: prevent horizontal overflow on any screen ── */
+.sport-landing-main {
+  overflow: hidden;
+  width: 100%;
+}
+#orgshoe {
+  max-width: 100%;
+}
+
+/* ── All pages: prevent horizontal scroll ── */
+* { max-width: 100%; box-sizing: border-box; }
+/* Allow tables to scroll horizontally rather than break layout */
+.sg-table, .pd-size-table, .size-chart-table {
+  max-width: 100%;
+  display: block;
+  overflow-x: auto;
+}
+
+/* ── Header: never overflow on any screen ── */
+header {
+  min-width: 0;
+}
+header h1 {
+  min-width: 0;
+  flex-shrink: 1;
+}
+.navbar {
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* ── Icon button: consistent sizing & no overflow ── */
+.icon-btn {
+  flex-shrink: 0;
+}
+
+/* ── Auth button: cap width so it never pushes header icons off screen ── */
+.auth-header-btn {
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Size tables: scrollable on small screens ── */
+@media (max-width: 480px) {
+  .sg-content { padding: 24px 16px; }
+  .sg-table th, .sg-table td { padding: 8px 10px; font-size: 13px; }
+  .pd-size-modal-box { padding: 24px 16px; }
+}

@@ -62,6 +62,12 @@
     <main class="shop-container">
       <!-- Filter Sidebar -->
       <aside class="filter-sidebar">
+        <!-- Mobile toggle button -->
+        <button class="filter-toggle-btn" id="filter-toggle-btn" aria-expanded="false" aria-controls="filter-sidebar-collapsible">
+          <span>Filters</span>
+          <svg class="ftb-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="filter-sidebar-collapsible" id="filter-sidebar-collapsible">
         <div class="filter-header">
           <h2>Filters <span id="filter-count"></span></h2>
           <button id="clear-filters" class="btn-clear">Clear All</button>
@@ -231,6 +237,7 @@
 
           <div id="recommendation-results" style="display: none"></div>
         </div>
+        </div><!-- /.filter-sidebar-collapsible -->
       </aside>
 
       <!-- Product Grid Section -->
@@ -434,6 +441,24 @@
         document.getElementById('main-nav').classList.toggle('nav-open');
         this.setAttribute('aria-expanded', this.classList.contains('open'));
       });
+      // Filter sidebar toggle (mobile)
+      (function() {
+        var btn = document.getElementById('filter-toggle-btn');
+        var col = document.getElementById('filter-sidebar-collapsible');
+        if (btn && col) {
+          btn.addEventListener('click', function() {
+            var open = col.classList.toggle('open');
+            btn.classList.toggle('open', open);
+            btn.setAttribute('aria-expanded', open);
+          });
+        }
+        // Auto-open filters on desktop (≥769px)
+        function checkDesktop() {
+          if (window.innerWidth >= 769) { col && col.classList.add('open'); }
+        }
+        checkDesktop();
+        window.addEventListener('resize', checkDesktop);
+      })();
     </script>
     <script>
       document.addEventListener('click', function (e) {

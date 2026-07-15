@@ -250,8 +250,8 @@
       <div class="pd-reviews-section" id="reviews">
         <div class="pd-reviews-header">
           <div class="pd-reviews-score">
-            <div class="pd-score-num">4.5</div>
-            <div class="pd-stars" style="margin-bottom:6px;">
+            <div class="pd-score-num" id="pd-score-num">4.5</div>
+            <div class="pd-stars" id="pd-score-stars" style="margin-bottom:6px;">
               <span class="pd-star">★</span>
               <span class="pd-star">★</span>
               <span class="pd-star">★</span>
@@ -261,10 +261,19 @@
             <div class="pd-score-label">out of 5 stars</div>
           </div>
           <div class="pd-reviews-meta">
-            <div class="pd-reviews-count">3 Reviews</div>
+            <div class="pd-reviews-count" id="pd-reviews-count">3 Reviews</div>
           </div>
         </div>
         <div id="pd-reviews-list"></div>
+
+        <!-- Write a Review -->
+        <div class="pd-review-form-wrap" id="pd-review-form-wrap">
+          <h3 class="pd-review-form-title">Write a Review</h3>
+          <p class="pd-review-form-sub" id="pd-review-form-sub">Share your experience with other shoppers.</p>
+          <div id="pd-review-form-inner">
+            <!-- Populated by JS based on auth + purchase status -->
+          </div>
+        </div>
       </div>
     </main>
 
@@ -658,28 +667,169 @@
           });
         }
 
-        // Reviews
-        const reviewsData = sportReviews[product.id] || sportReviews[1];
-        const reviewsList = document.getElementById('pd-reviews-list');
-        reviewsData.forEach(r => {
-          const card = document.createElement('div');
-          card.className = 'pd-review-card';
-          card.innerHTML = `
-            <div class="pd-review-top">
-              <div>
-                <div class="pd-reviewer">${r.name}</div>
-                <div class="pd-stars" style="margin-top:4px;">${renderStars(r.stars)}</div>
+        // ── Reviews: render existing + verified-purchase review form ──────────
+        function renderReviewsSection(productId, reviewsArr) {
+          const reviewsList  = document.getElementById('pd-reviews-list');
+          const countEl      = document.getElementById('pd-reviews-count');
+          const scoreEl      = document.getElementById('pd-score-num');
+
+          reviewsList.innerHTML = '';
+          reviewsArr.forEach(r => {
+            const card = document.createElement('div');
+            card.className = 'pd-review-card';
+            card.innerHTML = `
+              <div class="pd-review-top">
+                <div>
+                  <div class="pd-reviewer">${r.name}${r.verified ? '<span class="pd-review-verified">Verified Purchase</span>' : ''}</div>
+                  <div class="pd-stars" style="margin-top:4px;">${renderStars(r.stars)}</div>
+                </div>
+                <div class="pd-review-date">${r.date}</div>
               </div>
-              <div class="pd-review-date">${r.date}</div>
+              <div class="pd-review-title">${r.title || ''}</div>
+              <div class="pd-review-body">${r.body}</div>
+            `;
+            reviewsList.appendChild(card);
+          });
+
+          if (countEl) countEl.textContent = reviewsArr.length + ' Review' + (reviewsArr.length !== 1 ? 's' : '');
+
+          // Recalculate score
+          if (reviewsArr.length > 0 && scoreEl) {
+            const avg = reviewsArr.reduce((s, r) => s + r.stars, 0) / reviewsArr.length;
+            scoreEl.textContent = avg.toFixed(1);
+          }
+        }
+
+        // ── Review form: check if user has purchased this product ──────────────
+        function renderReviewForm(productId) {
+          const inner = document.getElementById('pd-review-form-inner');
+          const sub   = document.getElementById('pd-review-form-sub');
+          if (!inner) return;
+
+          const user = (typeof Auth !== 'undefined') ? Auth.currentUser() : null;
+
+          if (!user) {
+            inner.innerHTML = `<div class="pd-review-locked">
+              <strong>Sign in to write a review.</strong><br>
+              You must be signed in to leave a review. Only customers who have purchased this product can submit one.
+            </div>`;
+            return;
+          }
+
+          // Check purchase history
+          const orders = (typeof OrderStore !== 'undefined') ? OrderStore.getOrders(user.email) : [];
+          const hasPurchased = orders.some(o =>
+            (o.items || []).some(item => item.productId === productId || item.name === product.name)
+          );
+
+          // Also check local user-written reviews
+          const reviewKey = 'clerks_reviews_' + productId;
+          const existingReviews = JSON.parse(localStorage.getItem(reviewKey) || '[]');
+          const alreadyReviewed = existingReviews.some(r => r.email === user.email);
+
+          if (!hasPurchased) {
+            inner.innerHTML = `<div class="pd-review-locked">
+              Only customers who have <strong>purchased this product</strong> can leave a review.<br>
+              <a href="Shop.html" style="color:#ff5f23;text-decoration:none;font-weight:600;">Browse the shop →</a>
+            </div>`;
+            return;
+          }
+
+          if (alreadyReviewed) {
+            inner.innerHTML = `<div class="pd-review-locked" style="color:#22c55e;">
+              ✓ You've already reviewed this product. Thank you for your feedback!
+            </div>`;
+            return;
+          }
+
+          // Show review form
+          if (sub) sub.textContent = 'You purchased this product — share your experience.';
+          let selectedStars = 0;
+          inner.innerHTML = `
+            <div class="pd-star-picker" id="pd-star-picker">
+              <button class="pd-star-pick" data-star="1">★</button>
+              <button class="pd-star-pick" data-star="2">★</button>
+              <button class="pd-star-pick" data-star="3">★</button>
+              <button class="pd-star-pick" data-star="4">★</button>
+              <button class="pd-star-pick" data-star="5">★</button>
             </div>
-            <div class="pd-review-title">${r.title}</div>
-            <div class="pd-review-body">${r.body}</div>
-            ${r.verified ? '<div class="pd-review-verified">✓ Verified Purchase</div>' : ''}
+            <textarea class="pd-review-textarea" id="pd-review-text" placeholder="What did you think? How was the fit, feel and quality?" maxlength="600"></textarea>
+            <div class="pd-review-error" id="pd-review-error"></div>
+            <button class="pd-review-submit" id="pd-review-submit-btn">Submit Review</button>
           `;
-          reviewsList.appendChild(card);
-        });
-      });
+
+          // Star picker
+          inner.querySelectorAll('.pd-star-pick').forEach(btn => {
+            btn.addEventListener('click', () => {
+              selectedStars = parseInt(btn.dataset.star);
+              inner.querySelectorAll('.pd-star-pick').forEach((b, i) => {
+                b.classList.toggle('lit', i < selectedStars);
+              });
+            });
+            btn.addEventListener('mouseover', () => {
+              const h = parseInt(btn.dataset.star);
+              inner.querySelectorAll('.pd-star-pick').forEach((b, i) => b.classList.toggle('lit', i < h));
+            });
+            btn.addEventListener('mouseleave', () => {
+              inner.querySelectorAll('.pd-star-pick').forEach((b, i) => b.classList.toggle('lit', i < selectedStars));
+            });
+          });
+
+          // Submit
+          document.getElementById('pd-review-submit-btn').addEventListener('click', () => {
+            const text = document.getElementById('pd-review-text').value.trim();
+            const errEl = document.getElementById('pd-review-error');
+            errEl.textContent = '';
+            if (!selectedStars) { errEl.textContent = 'Please select a star rating.'; return; }
+            if (text.length < 10) { errEl.textContent = 'Please write at least 10 characters.'; return; }
+
+            // Save review
+            const review = {
+              email: user.email,
+              name: user.firstName + ' ' + (user.lastName ? user.lastName[0] + '.' : ''),
+              stars: selectedStars,
+              date: new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' }),
+              title: text.substring(0, 60),
+              body: text,
+              verified: true,
+            };
+            const saved = JSON.parse(localStorage.getItem(reviewKey) || '[]');
+            saved.unshift(review);
+            localStorage.setItem(reviewKey, JSON.stringify(saved));
+
+            // Re-render reviews
+            const allReviews = [...saved, ...(sportReviews[productId] || sportReviews[1])];
+            renderReviewsSection(productId, allReviews);
+
+            inner.innerHTML = `<div class="pd-review-locked" style="color:#22c55e;">
+              ✓ Thank you! Your review has been submitted.
+            </div>`;
+          });
+        }
+
+        // Load user reviews from localStorage and render
+        const reviewKey = 'clerks_reviews_' + product.id;
+        const userReviews = JSON.parse(localStorage.getItem(reviewKey) || '[]');
+        const allReviews = [...userReviews, ...(sportReviews[product.id] || sportReviews[1])];
+        renderReviewsSection(product.id, allReviews);
+        renderReviewForm(product.id);
+
+      }); // end DOMContentLoaded
     </script>
+
+    <!-- Search overlay -->
+    <div class="search-overlay" id="search-overlay">
+      <div class="search-overlay-box">
+        <div class="search-overlay-input-wrap">
+          <span class="search-overlay-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          </span>
+          <input type="text" class="search-overlay-input" id="search-overlay-input" placeholder="Search shoes, colours, styles…" autocomplete="off" />
+          <button class="search-overlay-close" id="search-overlay-close">&times;</button>
+        </div>
+        <p class="search-overlay-hint">Press <kbd style="background:rgba(255,255,255,0.1);padding:2px 6px;border-radius:4px;">Enter</kbd> to browse &nbsp;·&nbsp; <a href="Shop.html">Go to Sport Shop →</a></p>
+      </div>
+    </div>
     <script>
       document.addEventListener('click', function (e) {
         const link = e.target.closest('a[href]');
@@ -690,6 +840,25 @@
         document.body.classList.add('page-leaving');
         setTimeout(function () { window.location.href = href; }, 300);
       });
+      // Search overlay
+      (function() {
+        var overlay = document.getElementById('search-overlay');
+        var input   = document.getElementById('search-overlay-input');
+        var closeBtn = document.getElementById('search-overlay-close');
+        var hdrSearch = document.getElementById('hdr-search-btn');
+        if (hdrSearch) hdrSearch.addEventListener('click', function() {
+          overlay.classList.add('active');
+          setTimeout(function(){ input.focus(); }, 80);
+        });
+        if (closeBtn) closeBtn.addEventListener('click', function() { overlay.classList.remove('active'); });
+        overlay.addEventListener('click', function(e){ if (e.target === overlay) overlay.classList.remove('active'); });
+        document.addEventListener('keydown', function(e){ if (e.key === 'Escape') overlay.classList.remove('active'); });
+        input.addEventListener('keydown', function(e){
+          if (e.key === 'Enter' && input.value.trim()) {
+            window.location.href = 'Shop.html?q=' + encodeURIComponent(input.value.trim());
+          }
+        });
+      })();
     </script>
   </body>
 </html>
